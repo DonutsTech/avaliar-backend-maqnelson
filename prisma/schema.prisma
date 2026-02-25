@@ -1,0 +1,129 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  ID        String   @id @default(uuid()) @db.Uuid
+  ROLE      String   @default("USER")
+  EMAIL     String   @unique
+  PASSWORD  String
+  TOKEN     String?
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+
+  @@map("user")
+}
+
+model Checkin {
+  ID        String   @id @default(uuid()) @db.Uuid
+  NAME      String
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+  SCHEMAS Schema[]
+  VERSIONCHECKINS VersionCheckin[]
+
+  @@map("checkin")
+}
+
+model Schema {
+  ID        String  @id @default(uuid()) @db.Uuid
+  TITLE     String
+  CHECKIN   Checkin @relation(fields: [IDCHECKIN], references: [ID])
+  IDCHECKIN String  @db.Uuid
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+  MODELS   Model[]
+
+  @@map("schema")
+}
+
+model Model {
+  ID            String  @id @default(uuid()) @db.Uuid
+  NAME          String
+  TITLE         String
+  QUESTION      String
+  ICONS         Boolean @default(false)
+  PHOTO         Boolean @default(false)
+  BONDPHOTO     Boolean @default(false)
+  LOCATION     Boolean @default(false)
+  VALUES        Boolean @default(false)
+  NOTES         Boolean @default(false)
+  SCHEMA        Schema  @relation(fields: [IDSCHEMA], references: [ID])
+  IDSCHEMA      String  @db.Uuid
+  CREATEDAT     DateTime @default(now())
+  UPDATEDAT     DateTime @updatedAt
+  INPUTS        Input[]
+
+  @@map("model")
+}
+
+model Input {
+  ID          String  @id @default(uuid()) @db.Uuid
+  TYPE        String
+  NAME        String
+  LABEL       String
+  VALUE       String
+  MIN         Int?
+  MAX         Int?
+  PLACEHOLDER String?
+  REQUIRED    Boolean @default(false)
+  MULTIPLE    Boolean @default(false)
+  BOND        Boolean @default(false)
+  BONDTYPE    String?
+  MODEL       Model  @relation(fields: [IDMODEL], references: [ID])
+  IDMODEL     String  @db.Uuid
+  CREATEDAT   DateTime @default(now())
+  UPDATEDAT   DateTime @updatedAt
+  EMUNS       Emun[]
+
+  @@map("input")
+}
+
+model Emun {
+  ID        String  @id @default(uuid()) @db.Uuid
+  NAME      String
+  INPUT     Input  @relation(fields: [IDINPUT], references: [ID])
+  IDINPUT   String  @db.Uuid
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+
+  @@map("enum")
+}
+
+model VersionCheckin {
+  ID        String   @id @default(uuid()) @db.Uuid
+  CHECKIN   Checkin  @relation(fields: [IDCHECKIN], references: [ID])
+  IDCHECKIN String   @db.Uuid
+  NAME      String
+  VERSION   Int
+  JSON_CHECKIN String
+  OBJECT_CHECKIN String
+  ATIVE    Boolean  @default(true)
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+  AVALIARS  Avaliar[]
+
+  @@map("checkin_avaliar")
+}
+
+model Avaliar {
+  ID        String   @id @default(uuid()) @db.Uuid
+  IDVERSIONCHECKIN String   @db.Uuid
+  VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
+  RESULT String
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+
+  @@map("avaliar")
+}
