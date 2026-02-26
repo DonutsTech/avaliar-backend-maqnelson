@@ -11,17 +11,25 @@ class UserModel {
     }
   }
 
-  async findAll() {
+  async findAll(params?: Prisma.UserFindManyArgs) {
     try {
-      return await prisma.user.findMany();
+      return await prisma.user.findMany(params);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findById(id: string) {
+  async findBy(find: Prisma.UserWhereInput) {
     try {
-      return await prisma.user.findUnique({ where: { ID: id } });
+      return await prisma.user.findFirst({ where: find });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
+
+  async count(find: Prisma.UserWhereInput) {
+    try {
+      return await prisma.user.count({ where: find });
     } catch (error) {
       handlePrismaError(error);
     }
