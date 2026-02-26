@@ -18,7 +18,6 @@ model User {
   ROLE      String   @default("USER")
   EMAIL     String   @unique
   PASSWORD  String
-  TOKEN     String?
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
 
