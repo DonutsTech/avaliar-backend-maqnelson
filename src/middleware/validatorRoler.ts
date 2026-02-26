@@ -1,14 +1,14 @@
 import type { NextFunction, Request, Response } from "express";
-import type { User } from "../generated/prisma/client";
-import { CustomError } from "../error";
 import { StatusCodes } from "http-status-codes";
+import { Role } from "../enums/role.enum";
+import type { User } from "../generated/prisma/client";
 
-export async function validatorRoler(request: Request, _response: Response, next: NextFunction): Promise<void> {
+export async function validatorRoler(request: Request, response: Response, next: NextFunction) {
   try {
     const { user } = request as Request & { user: User };
 
-    if (user.ROLE !== 'ADMIN') {
-      throw new CustomError('Acesso negado', StatusCodes.FORBIDDEN);
+    if (user.ROLE !== Role.ADMIN) {
+      return response.status(StatusCodes.FORBIDDEN).json({ message: 'Acesso negado' });
     }
 
     next();

@@ -1,25 +1,24 @@
 import type { NextFunction, Request, Response } from "express";
 import { StatusCodes } from "http-status-codes";
-import { CustomError } from "../error";
 import { authService } from "../services/auth";
 import { userService } from "../services/user";
 
 export async function isAuthenticate(
   request: Request,
-  _response: Response,
+  response: Response,
   next: NextFunction,
-): Promise<void> {
+) {
   try {
     const authHeader = request.headers.authorization;
 
     if (!authHeader) {
-      throw new CustomError('Token não fornecido', StatusCodes.UNAUTHORIZED);
+      return response.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token não fornecido' });
     }
 
     const [, token] = authHeader.split(' ');
 
     if (!token) {
-      throw new CustomError('Token não fornecido', StatusCodes.UNAUTHORIZED);
+      return response.status(StatusCodes.UNAUTHORIZED).json({ message: 'Token não fornecido' });
     }
 
     const checkToken = authService.checkingToken(token);
@@ -27,7 +26,7 @@ export async function isAuthenticate(
     const user = await userService.showId(checkToken.sub);
 
     if (!user) {
-      throw new CustomError('Usuário não encontrado', 404);
+      return response.status(StatusCodes.NOT_FOUND).json({ message: 'Usuário não encontrado' });
     }
 
     request.user = user;
