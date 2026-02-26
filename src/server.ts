@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import Express from 'express';
 import http from 'http';
 import { router } from './routers';
+import { initADM } from './utils/initAdmin';
 
 dotenv.config();
 
@@ -19,5 +20,6 @@ app.use(error);
 const server = http.createServer(app);
 
 server.listen(PORT, () => {
+    initADM();
     console.log(`Server is running on port ${PORT}`);
 });
