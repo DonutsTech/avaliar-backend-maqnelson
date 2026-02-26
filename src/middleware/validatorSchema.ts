@@ -2,6 +2,7 @@ import type { NextFunction, Request, RequestHandler, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import type { ObjectSchema } from 'joi';
 import { CustomError } from '../error';
+import schemas from '../schemas';
 
 const supportedMethods = ['post', 'put', 'patch', 'delete'];
 
