@@ -12,7 +12,7 @@ const validationOptions = {
   stripUnknown: false,
 };
 
-const schemaValidator = (path: string): RequestHandler => {
+export const schemaValidator = (path: string): RequestHandler => {
   const schema: ObjectSchema<any> | undefined = schemas[path];
 
   if (!schema) {

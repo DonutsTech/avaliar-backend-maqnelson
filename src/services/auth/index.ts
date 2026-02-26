@@ -1,6 +1,6 @@
 import bycrpt from 'bcryptjs';
 import { StatusCodes } from "http-status-codes";
-import { sign, verify } from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 import type { CreateTokenDto } from "../../@types/interface/createToken.dto";
 import type { Payload } from '../../@types/payload';
 import { CustomError } from "../../error";
@@ -9,14 +9,13 @@ import { userModel } from "../../models/user";
 
 class AuthService {
   createToken(user: User) {
-    return sign(
+    return jwt.sign(
       {
         ID: user.ID,
         ROLE: user.ROLE,
       },
       process.env.JWT_SECRET as string,
       {
-        subject: user.ID.toString(),
         expiresIn: "1h",
       }
     )
@@ -24,7 +23,7 @@ class AuthService {
 
   checkingToken(token: string) {
     try {
-      const decoded = verify(token, process.env.JWT_SECRET as string) as Payload;
+      const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as Payload;
       return decoded;
     } catch (error) {
       throw new CustomError("Invalid token", StatusCodes.UNAUTHORIZED);
