@@ -72,7 +72,7 @@ model Input {
   TYPE        String
   NAME        String
   LABEL       String
-  VALUE       String
+  VALUE       String @default("")
   MIN         Int?
   MAX         Int?
   PLACEHOLDER String?

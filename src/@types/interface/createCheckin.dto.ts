@@ -11,7 +11,7 @@ export interface CreateCheckinDto {
       BONDPHOTO: boolean;
       LOCATION: boolean;
       INPUTS: {
-        TYPE: "text" | "select" | "radio" | "checkout" | "file";
+        TYPE: string;
         NAME: string;
         LABEL: string;
         PLACEHOLDER: string;

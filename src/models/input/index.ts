@@ -19,9 +19,9 @@ class InputModel {
     }
   }
 
-  async findById(id: string) {
+  async findBy(find: Prisma.InputWhereInput) {
     try {
-      return await prisma.input.findUnique({ where: { ID: id } });
+      return await prisma.input.findFirst({ where: find });
     } catch (error) {
       handlePrismaError(error);
     }
@@ -38,6 +38,14 @@ class InputModel {
   async delete(id: string) {
     try {
       return await prisma.input.delete({ where: { ID: id } });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
+
+  async count(find: Prisma.InputWhereInput) {
+    try {
+      return await prisma.input.count({ where: find });
     } catch (error) {
       handlePrismaError(error);
     }

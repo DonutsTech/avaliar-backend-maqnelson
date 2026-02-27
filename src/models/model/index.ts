@@ -42,6 +42,14 @@ class ModelModel {
       handlePrismaError(error);
     }
   }
+
+  async count(find: Prisma.ModelWhereInput) {
+    try {
+      return await prisma.model.count({ where: find });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
 }
 
 export const modelModel = new ModelModel();

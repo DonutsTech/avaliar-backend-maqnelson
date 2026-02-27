@@ -42,6 +42,14 @@ class SchemaModel {
       handlePrismaError(error);
     }
   }
+
+  async count(find: Prisma.SchemaWhereInput) {
+    try {
+      return await prisma.schema.count({ where: find });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
 }
 
 export const schemaModel = new SchemaModel();

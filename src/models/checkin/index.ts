@@ -19,9 +19,12 @@ class CheckinModel {
     }
   }
 
-  async findById(id: string) {
+  async findBy(find?: Prisma.CheckinWhereInput, select?: Prisma.CheckinSelect) {
     try {
-      return await prisma.checkin.findUnique({ where: { ID: id } });
+      const args: any = {};
+      if (find !== undefined) args.where = find;
+      if (select !== undefined) args.select = select;
+      return await prisma.checkin.findFirst(args);
     } catch (error) {
       handlePrismaError(error);
     }
@@ -38,6 +41,14 @@ class CheckinModel {
   async delete(id: string) {
     try {
       return await prisma.checkin.delete({ where: { ID: id } });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
+
+  async count(find: Prisma.CheckinWhereInput) {
+    try {
+      return await prisma.checkin.count({ where: find });
     } catch (error) {
       handlePrismaError(error);
     }
