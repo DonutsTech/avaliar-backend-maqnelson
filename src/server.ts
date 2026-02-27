@@ -1,4 +1,3 @@
-import { error } from 'console';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import Express from 'express';
@@ -11,11 +10,10 @@ dotenv.config();
 const PORT = process.env.PORT || 3000;
 
 const app = Express();
-app.use(Express.json());
+app.use(Express.json({ limit: '10mb' }));
 
 app.use(cors());
 app.use(router);
-app.use(error);
 
 const server = http.createServer(app);
 

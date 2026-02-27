@@ -1,11 +1,14 @@
 import { StatusCodes } from "http-status-codes";
 import type { CreateCheckinDto } from "../../@types/interface/createCheckin.dto";
 import { CustomError } from "../../error";
+import type { Prisma } from "../../generated/prisma/client";
 import { checkinModel } from "../../models/checkin";
+import { formatCheckinForObject } from "../../utils/formatObj";
+import { emunService } from "../emun";
+import { inputService } from "../input";
 import { modelService } from "../model";
 import { schemaService } from "../schema";
-import { inputService } from "../input";
-import { emunService } from "../emun";
+import { versionCheckinService } from "../versionCheckin";
 
 class CheckinService {
   async createCheckin(body: CreateCheckinDto) {
@@ -49,7 +52,7 @@ class CheckinService {
                     MODELID: createModal.ID
                   });
 
-                  if (input.EMUNS.length > 0) {
+                  if (input.EMUNS && input.EMUNS.length > 0) {
                     for (const emun of input.EMUNS) {
                       const createEmun = await emunService.createEmun({
                         NAME: emun.NAME,
@@ -63,6 +66,21 @@ class CheckinService {
           }
         }
       }
+
+      const checkin = await checkinModel.findBy({ ID: createCheckin.ID }, { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } }) as Prisma.CheckinGetPayload<{ include: { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } } }>;
+
+      const formatObj = formatCheckinForObject(checkin);
+
+      const versionCheckin = await versionCheckinService.versionCheckin({
+        ATIVE: true,
+        JSON_CHECKIN: JSON.stringify(checkin),
+        OBJECT_CHECKIN: JSON.stringify(formatObj),
+        VERSION: 1,
+        IDCHECKIN: createCheckin.ID,
+        NAME: createCheckin.NAME
+      })
+
+      return { checkin, versionCheckin };
     } catch (error) {
       throw error;
     }

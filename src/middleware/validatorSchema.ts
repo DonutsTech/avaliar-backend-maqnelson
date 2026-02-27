@@ -31,7 +31,7 @@ export const schemaValidator = (path: string): RequestHandler => {
 
       if (error) {
         console.error('Validation error:', error.details);
-        throw new CustomError(`Os dados fornecidos no corpo da requisição são inválidos.`, StatusCodes.BAD_REQUEST);
+        throw new CustomError('Validation failed', StatusCodes.BAD_REQUEST);
       }
 
       req.body = value;

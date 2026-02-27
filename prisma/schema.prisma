@@ -30,7 +30,6 @@ model Checkin {
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
   SCHEMAS Schema[]
-  VERSIONCHECKINS VersionCheckin[]
 
   @@map("checkin")
 }
@@ -102,7 +101,6 @@ model Emun {
 
 model VersionCheckin {
   ID        String   @id @default(uuid()) @db.Uuid
-  CHECKIN   Checkin  @relation(fields: [IDCHECKIN], references: [ID])
   IDCHECKIN String   @db.Uuid
   NAME      String
   VERSION   Int
@@ -123,6 +121,26 @@ model Avaliar {
   RESULT String
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
+  STATUS String
+  CODVEND String
+  EMAILVEND String
+  CODCLI String
+  LJCLI String
+  CODPROS String
+  LJPROS String
+  PHOTOS   PHOTO[]   // Add this line to define the opposite relation
 
   @@map("avaliar")
+}
+
+model PHOTO {
+  ID        String   @id @default(uuid()) @db.Uuid
+  URL       String
+  TITLE     String
+  IDAVALIAR String   @db.Uuid
+  AVALIAR   Avaliar @relation(fields: [IDAVALIAR], references: [ID])
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+
+  @@map("photo")
 }
