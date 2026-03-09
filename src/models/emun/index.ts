@@ -42,6 +42,14 @@ class EmunModel {
       handlePrismaError(error);
     }
   }
+
+  async count(find: Prisma.EmunWhereInput) {
+    try {
+      return await prisma.emun.count({ where: find });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
 }
 
 export const emunModel = new EmunModel();

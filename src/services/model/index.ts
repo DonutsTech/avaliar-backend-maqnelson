@@ -11,9 +11,6 @@ class ModelService {
         NAME: body.NAME,
         TITLE: body.TITLE,
         QUESTION: body.QUESTION,
-        PHOTO: body.PHOTO,
-        BONDPHOTO: body.BONDPHOTO,
-        LOCATION: body.LOCATION,
         SCHEMA: { connect: { ID: body.SCHEMAID } }
       })
 
@@ -26,6 +23,15 @@ class ModelService {
   async existID(id: string) {
     if (!(await modelModel.count({ ID: id }))) {
       throw new Error('Modal não encontrado, por favor verifique o seu id');
+    }
+  }
+
+  async deleteModal(id: string) {
+    try {
+      await this.existID(id);
+      await modelModel.delete(id);
+    } catch (error) {
+      throw error;
     }
   }
 }

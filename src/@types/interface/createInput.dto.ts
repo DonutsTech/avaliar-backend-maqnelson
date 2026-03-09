@@ -2,12 +2,12 @@ export interface CreateInputDto {
   TYPE: string;
   NAME: string;
   LABEL: string;
+  VALUE: string;
   PLACEHOLDER: string;
   REQUIRED: boolean;
   MULTIPLE: boolean;
-  BOND: boolean;
-  MIN?: number | undefined;
-  MAX?: number | undefined;
+  MIN: number | undefined;
+  MAX: number | undefined;
   BONDTYPE: string;
   MODELID: string;
 }

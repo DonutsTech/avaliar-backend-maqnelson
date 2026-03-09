@@ -25,6 +25,15 @@ class SchemaService {
       throw new CustomError('Schema não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
     }
   }
+
+  async deleteSchema(id: string) {
+    try {
+      await this.existID(id);
+      await schemaModel.delete(id);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const schemaService = new SchemaService();

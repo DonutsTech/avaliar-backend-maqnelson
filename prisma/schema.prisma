@@ -51,12 +51,6 @@ model Model {
   NAME          String
   TITLE         String
   QUESTION      String
-  ICONS         Boolean @default(false)
-  PHOTO         Boolean @default(false)
-  BONDPHOTO     Boolean @default(false)
-  LOCATION     Boolean @default(false)
-  VALUES        Boolean @default(false)
-  NOTES         Boolean @default(false)
   SCHEMA        Schema  @relation(fields: [IDSCHEMA], references: [ID])
   IDSCHEMA      String  @db.Uuid
   CREATEDAT     DateTime @default(now())
@@ -71,14 +65,13 @@ model Input {
   TYPE        String
   NAME        String
   LABEL       String
+  PLACEHOLDER String?
   VALUE       String @default("")
   MIN         Int?
   MAX         Int?
-  PLACEHOLDER String?
   REQUIRED    Boolean @default(false)
   MULTIPLE    Boolean @default(false)
-  BOND        Boolean @default(false)
-  BONDTYPE    String?
+  BONDTYPE    String @default("")
   MODEL       Model  @relation(fields: [IDMODEL], references: [ID])
   IDMODEL     String  @db.Uuid
   CREATEDAT   DateTime @default(now())
@@ -91,6 +84,7 @@ model Input {
 model Emun {
   ID        String  @id @default(uuid()) @db.Uuid
   NAME      String
+  TITLE     String
   INPUT     Input  @relation(fields: [IDINPUT], references: [ID])
   IDINPUT   String  @db.Uuid
   CREATEDAT DateTime @default(now())
@@ -106,6 +100,8 @@ model VersionCheckin {
   VERSION   Int
   JSON_CHECKIN String
   OBJECT_CHECKIN String
+  VIDEO Boolean @default(false)
+  PHOTO String @default("")
   ATIVE    Boolean  @default(true)
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt

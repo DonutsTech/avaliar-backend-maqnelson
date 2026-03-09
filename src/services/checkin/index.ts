@@ -11,32 +11,37 @@ import { schemaService } from "../schema";
 import { versionCheckinService } from "../versionCheckin";
 
 class CheckinService {
-  async createCheckin(body: CreateCheckinDto) {
+  async checkin(ID: string) {
     try {
-      const createCheckin = await checkinModel.create({
-        NAME: body.NAME,
-      })
+      await this.existID(ID);
 
-      if (body.SCHEMAS.length > 0) {
+      const checkin = await checkinModel.findBy({ ID }, { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } }) as Prisma.CheckinGetPayload<{ include: { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } } }>;
+
+      return checkin;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async newsSchemaModalInputEmun(id: string, body: CreateCheckinDto) {
+    try {
+      if (Array.isArray(body.SCHEMAS) && body.SCHEMAS.length > 0) {
         for (const schema of body.SCHEMAS) {
           const createSchema = await schemaService.createSchema({
-            CHECKINID: createCheckin.ID,
+            CHECKINID: id,
             TITLE: schema.TITLE
           })
 
-          if (schema.MODELS.length > 0) {
+          if (Array.isArray(schema.MODELS) && schema.MODELS.length > 0) {
             for (const model of schema.MODELS) {
               const createModal = await modelService.createModal({
                 NAME: model.NAME,
                 TITLE: model.TITLE,
                 QUESTION: model.QUESTION,
-                PHOTO: model.PHOTO,
-                BONDPHOTO: model.BONDPHOTO,
-                LOCATION: model.LOCATION,
                 SCHEMAID: createSchema.ID
               });
 
-              if (model.INPUTS.length > 0) {
+              if (Array.isArray(model.INPUTS) && model.INPUTS.length > 0) {
                 for (const input of model.INPUTS) {
                   const createInput = await inputService.createInput({
                     TYPE: input.TYPE,
@@ -45,18 +50,19 @@ class CheckinService {
                     PLACEHOLDER: input.PLACEHOLDER,
                     REQUIRED: input.REQUIRED,
                     MULTIPLE: input.MULTIPLE,
-                    BOND: input.BOND,
+                    VALUE: input.VALUE,
                     MIN: input.MIN,
                     MAX: input.MAX,
                     BONDTYPE: input.BONDTYPE,
                     MODELID: createModal.ID
                   });
 
-                  if (input.EMUNS && input.EMUNS.length > 0) {
+                  if (Array.isArray(input.EMUNS) && input.EMUNS.length > 0) {
                     for (const emun of input.EMUNS) {
-                      const createEmun = await emunService.createEmun({
+                      await emunService.createEmun({
                         NAME: emun.NAME,
-                        INPUTID: createInput.ID
+                        INPUTID: createInput.ID,
+                        TITLE: emun.TITLE,
                       });
                     }
                   }
@@ -67,11 +73,24 @@ class CheckinService {
         }
       }
 
-      const checkin = await checkinModel.findBy({ ID: createCheckin.ID }, { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } }) as Prisma.CheckinGetPayload<{ include: { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } } }>;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async createCheckin(body: CreateCheckinDto) {
+    try {
+      const createCheckin = await checkinModel.create({
+        NAME: body.NAME,
+      })
+
+      await this.newsSchemaModalInputEmun(createCheckin.ID, body);
+
+      const checkin = await this.checkin(createCheckin.ID);
 
       const formatObj = formatCheckinForObject(checkin);
 
-      const versionCheckin = await versionCheckinService.versionCheckin({
+      const versionCheckin = await versionCheckinService.create({
         ATIVE: true,
         JSON_CHECKIN: JSON.stringify(checkin),
         OBJECT_CHECKIN: JSON.stringify(formatObj),
@@ -89,6 +108,74 @@ class CheckinService {
   async existID(id: string) {
     if (!(await checkinModel.count({ ID: id }))) {
       throw new CustomError('Check-in não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
+    }
+  }
+
+  async updateCheckin(id: string, body: CreateCheckinDto) {
+    try {
+      let checkin = await this.checkin(id);
+
+      await checkinModel.update(id, {
+        NAME: body.NAME,
+      })
+
+      if (Array.isArray(checkin.SCHEMAS) && checkin.SCHEMAS.length > 0) {
+        for (const schema of checkin.SCHEMAS) {
+          await schemaService.deleteSchema(schema.ID);
+
+          if (Array.isArray(schema.MODELS) && schema.MODELS.length > 0) {
+            for (const model of schema.MODELS) {
+              await modelService.deleteModal(model.ID);
+
+              if (Array.isArray(model.INPUTS) && model.INPUTS.length > 0) {
+                for (const input of model.INPUTS) {
+                  await inputService.deleteInput(input.ID);
+
+                  if (Array.isArray(input.EMUNS) && input.EMUNS.length > 0) {
+                    for (const emun of input.EMUNS) {
+                      await emunService.deleteEmun(emun.ID);
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+      await this.newsSchemaModalInputEmun(id, body);
+
+      checkin = await this.checkin(id);
+
+      const formatObj = formatCheckinForObject(checkin);
+
+      const versionCheckin = await versionCheckinService.findVersionCheckinByIdCheckin(id);
+
+      if (versionCheckin === null) {
+        throw new CustomError('VersionCheckin não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
+      }
+
+      await versionCheckinService.updateVersionCheckin(versionCheckin.ID, {
+        ATIVE: false,
+        JSON_CHECKIN: versionCheckin.JSON_CHECKIN,
+        OBJECT_CHECKIN: versionCheckin.OBJECT_CHECKIN,
+        VERSION: versionCheckin.VERSION,
+        IDCHECKIN: versionCheckin.IDCHECKIN,
+        NAME: versionCheckin.NAME,
+      });
+
+      const newVersionCheckin = await versionCheckinService.create({
+        ATIVE: true,
+        JSON_CHECKIN: JSON.stringify(checkin),
+        OBJECT_CHECKIN: JSON.stringify(formatObj),
+        VERSION: versionCheckin.VERSION + 1,
+        IDCHECKIN: id,
+        NAME: checkin.NAME
+      });
+
+      return { checkin, versionCheckin: newVersionCheckin };
+    } catch (error) {
+      throw error;
     }
   }
 }

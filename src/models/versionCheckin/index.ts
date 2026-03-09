@@ -11,17 +11,17 @@ class VersionCheckinModel {
     }
   }
 
-  async findAll() {
+  async findAll(find: Prisma.VersionCheckinFindManyArgs) {
     try {
-      return await prisma.versionCheckin.findMany();
+      return await prisma.versionCheckin.findMany({ ...find });
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findById(id: string) {
+  async findBy(where: Prisma.VersionCheckinWhereInput) {
     try {
-      return await prisma.versionCheckin.findUnique({ where: { ID: id } });
+      return await prisma.versionCheckin.findFirst({ where });
     } catch (error) {
       handlePrismaError(error);
     }
@@ -38,6 +38,14 @@ class VersionCheckinModel {
   async delete(id: string) {
     try {
       return await prisma.versionCheckin.delete({ where: { ID: id } });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
+
+  async count(find: Prisma.VersionCheckinWhereInput) {
+    try {
+      return await prisma.versionCheckin.count({ where: find });
     } catch (error) {
       handlePrismaError(error);
     }

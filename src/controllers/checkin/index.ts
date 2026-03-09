@@ -12,6 +12,17 @@ class CheckinController {
       next(error);
     }
   }
+
+  async updateCheckin(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params as { id: string };
+      const body: CreateCheckinDto = request.body;
+      const update = await checkinService.updateCheckin(id, body);
+      return response.status(200).json(update);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const checkinController = new CheckinController();
