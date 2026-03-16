@@ -14,9 +14,8 @@ export interface CreateCheckinDto {
         PLACEHOLDER: string;
         REQUIRED: boolean;
         MULTIPLE: boolean;
-        BOND: boolean;
-        MIN: number | undefined;
-        MAX: number | undefined;
+        MIN: number | null;
+        MAX: number | null;
         BONDTYPE: string;
         EMUNS: {
           TITLE: string;
