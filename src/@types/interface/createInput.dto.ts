@@ -6,8 +6,8 @@ export interface CreateInputDto {
   PLACEHOLDER: string;
   REQUIRED: boolean;
   MULTIPLE: boolean;
-  MIN: number | undefined;
-  MAX: number | undefined;
+  MIN: number | null;
+  MAX: number | null;
   BONDTYPE: string;
   MODELID: string;
 }
