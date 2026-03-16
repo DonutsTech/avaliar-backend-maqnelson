@@ -18,9 +18,9 @@ const createCheckin = Joi.object({
             PLACEHOLDER: Joi.string().allow("").max(250),
             REQUIRED: Joi.boolean().required(),
             MULTIPLE: Joi.boolean().required(),
-            MIN: Joi.number().allow(undefined).optional(),
-            MAX: Joi.number().allow(undefined).optional(),
-            BONDTYPE: Joi.string().valid('ICONS', 'PHOTO', 'BONDPHOTO', 'LOCATION', 'VALUES', 'NOTES', 'FORM', 'SINGLE', 'DUPLO', '').optional(),
+            MIN: Joi.number().allow(null).optional(),
+            MAX: Joi.number().allow(null).optional(),
+            BONDTYPE: Joi.string().valid('ICONS', 'PHOTO', 'BONDPHOTO', 'LOCATION', 'VALUES', 'NOTES', 'FORM', 'SINGLE LEFT', 'SINGLE RIGHT', 'DUPLO RIGHT', 'DUPLO LEFT', '').optional(),
             EMUNS: Joi.array().items(
               Joi.object({
                 TITLE: Joi.string().max(250).required(),
