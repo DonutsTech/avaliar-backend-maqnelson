@@ -14,6 +14,8 @@ class VersionCheckinService {
         VERSION: body.VERSION,
         IDCHECKIN: body.IDCHECKIN,
         NAME: body.NAME,
+        PHOTO: body.PHOTO,
+        VIDEO: body.VIDEO,
       })
 
       return createVersionCheckin;
