@@ -124,12 +124,12 @@ model Avaliar {
   LJCLI String
   CODPROS String
   LJPROS String
-  PHOTOS   PHOTO[]   // Add this line to define the opposite relation
+  PHOTOS   Photo[]   // Add this line to define the opposite relation
 
   @@map("avaliar")
 }
 
-model PHOTO {
+model Photo {
   ID        String   @id @default(uuid()) @db.Uuid
   URL       String
   TITLE     String
@@ -139,4 +139,14 @@ model PHOTO {
   UPDATEDAT DateTime @updatedAt
 
   @@map("photo")
+}
+
+model MarkWheels {
+  ID        Int      @id @default(autoincrement())
+  UUID      String   @db.Uuid
+  NAME      String
+  CREATEDAT DateTime @default(now())
+  UPDATEDAT DateTime @updatedAt
+
+  @@map("markwheels")
 }
