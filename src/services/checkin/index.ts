@@ -96,7 +96,9 @@ class CheckinService {
         OBJECT_CHECKIN: JSON.stringify(formatObj),
         VERSION: 1,
         IDCHECKIN: createCheckin.ID,
-        NAME: createCheckin.NAME
+        NAME: createCheckin.NAME,
+        PHOTO: '',
+        VIDEO: true,
       })
 
       return { checkin, versionCheckin };
@@ -121,25 +123,27 @@ class CheckinService {
 
       if (Array.isArray(checkin.SCHEMAS) && checkin.SCHEMAS.length > 0) {
         for (const schema of checkin.SCHEMAS) {
-          await schemaService.deleteSchema(schema.ID);
 
           if (Array.isArray(schema.MODELS) && schema.MODELS.length > 0) {
             for (const model of schema.MODELS) {
-              await modelService.deleteModal(model.ID);
 
               if (Array.isArray(model.INPUTS) && model.INPUTS.length > 0) {
                 for (const input of model.INPUTS) {
-                  await inputService.deleteInput(input.ID);
-
                   if (Array.isArray(input.EMUNS) && input.EMUNS.length > 0) {
                     for (const emun of input.EMUNS) {
                       await emunService.deleteEmun(emun.ID);
                     }
                   }
+
+                  await inputService.deleteInput(input.ID);
                 }
               }
+
+              await modelService.deleteModal(model.ID);
             }
           }
+
+          await schemaService.deleteSchema(schema.ID);
         }
       }
 
@@ -162,18 +166,30 @@ class CheckinService {
         VERSION: versionCheckin.VERSION,
         IDCHECKIN: versionCheckin.IDCHECKIN,
         NAME: versionCheckin.NAME,
+        PHOTO: versionCheckin.PHOTO,
+        VIDEO: versionCheckin.VIDEO,
       });
 
       const newVersionCheckin = await versionCheckinService.create({
         ATIVE: true,
         JSON_CHECKIN: JSON.stringify(checkin),
         OBJECT_CHECKIN: JSON.stringify(formatObj),
-        VERSION: versionCheckin.VERSION + 1,
+        VERSION: (versionCheckin.VERSION + 1),
         IDCHECKIN: id,
-        NAME: checkin.NAME
+        NAME: body.NAME,
+        PHOTO: '',
+        VIDEO: true,
       });
 
       return { checkin, versionCheckin: newVersionCheckin };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async existCheckinForName(name: string) {
+    try {
+      return await checkinModel.findBy({ NAME: name.toUpperCase() });
     } catch (error) {
       throw error;
     }
