@@ -17,8 +17,8 @@ class InputService {
         VALUE: body.VALUE,
         REQUIRED: body.REQUIRED,
         MULTIPLE: body.MULTIPLE,
-        ...(body.MIN !== undefined && { MIN: body.MIN }),
-        ...(body.MAX !== undefined && { MAX: body.MAX }),
+        ...(body.MIN !== null && { MIN: body.MIN }),
+        ...(body.MAX !== null && { MAX: body.MAX }),
         BONDTYPE: body.BONDTYPE,
         MODEL: { connect: { ID: body.MODELID } }
       })
