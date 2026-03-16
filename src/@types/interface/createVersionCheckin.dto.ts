@@ -5,4 +5,6 @@ export interface CreateVersionCheckinDto {
   OBJECT_CHECKIN: string;
   ATIVE: boolean;
   NAME: string;
+  PHOTO: string;
+  VIDEO: boolean;
 }
