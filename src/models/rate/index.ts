@@ -2,34 +2,34 @@ import { handlePrismaError } from "../../error";
 import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
-class MarkWheels {
-  async create(data: Prisma.MarkWheelsCreateInput) {
+class RateModel {
+  async create(data: Prisma.RateCreateInput) {
     try {
-      return await prisma.markWheels.create({ data });
+      return await prisma.rate.create({ data });
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findAll() {
+  async findAll(param: Prisma.RateFindManyArgs) {
     try {
-      return await prisma.markWheels.findMany();
+      return await prisma.rate.findMany(param);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(where: Prisma.MarkWheelsWhereInput) {
+  async findBy(where: Prisma.RateWhereInput) {
     try {
-      return await prisma.markWheels.findFirst({ where });
+      return await prisma.rate.findFirst({ where });
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async update(id: number, data: Prisma.MarkWheelsUpdateInput) {
+  async update(id: number, data: Prisma.RateUpdateInput) {
     try {
-      return await prisma.markWheels.update({ where: { ID: id }, data });
+      return await prisma.rate.update({ where: { ID: id }, data });
     } catch (error) {
       handlePrismaError(error);
     }
@@ -37,11 +37,11 @@ class MarkWheels {
 
   async delete(id: number) {
     try {
-      return await prisma.markWheels.delete({ where: { ID: id } });
+      return await prisma.rate.delete({ where: { ID: id } });
     } catch (error) {
       handlePrismaError(error);
     }
   }
 }
 
-export const markWheelsModel = new MarkWheels();
+export const rateModel = new RateModel();

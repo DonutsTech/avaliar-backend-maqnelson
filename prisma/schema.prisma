@@ -101,17 +101,18 @@ model VersionCheckin {
   JSON_CHECKIN String
   OBJECT_CHECKIN String
   VIDEO Boolean @default(false)
-  PHOTO String @default("")
+  PHOTO Boolean @default(false)
   ATIVE    Boolean  @default(true)
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
-  AVALIARS  Avaliar[]
+  RATES  Rate[]
 
-  @@map("checkin_avaliar")
+  @@map("version_checkin")
 }
 
-model Avaliar {
-  ID        String   @id @default(uuid()) @db.Uuid
+model Rate {
+  ID        Int   @id @default(autoincrement())
+  UUID      String   @unique
   IDVERSIONCHECKIN String   @db.Uuid
   VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
   RESULT String
@@ -124,27 +125,14 @@ model Avaliar {
   LJCLI String
   CODPROS String
   LJPROS String
-  PHOTOS   Photo[]   // Add this line to define the opposite relation
 
-  @@map("avaliar")
-}
-
-model Photo {
-  ID        String   @id @default(uuid()) @db.Uuid
-  URL       String
-  TITLE     String
-  IDAVALIAR String   @db.Uuid
-  AVALIAR   Avaliar @relation(fields: [IDAVALIAR], references: [ID])
-  CREATEDAT DateTime @default(now())
-  UPDATEDAT DateTime @updatedAt
-
-  @@map("photo")
+  @@map("rate")
 }
 
 model MarkWheels {
   ID        Int      @id @default(autoincrement())
-  UUID      String   @db.Uuid
-  NAME      String
+  UUID      String   @unique
+  NAME      String   @unique
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
 

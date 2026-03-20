@@ -97,7 +97,7 @@ class CheckinService {
         VERSION: 1,
         IDCHECKIN: createCheckin.ID,
         NAME: createCheckin.NAME,
-        PHOTO: '',
+        PHOTO: true,
         VIDEO: true,
       })
 
@@ -177,7 +177,7 @@ class CheckinService {
         VERSION: (versionCheckin.VERSION + 1),
         IDCHECKIN: id,
         NAME: body.NAME,
-        PHOTO: '',
+        PHOTO: true,
         VIDEO: true,
       });
 

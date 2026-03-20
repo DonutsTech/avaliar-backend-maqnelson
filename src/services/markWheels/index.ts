@@ -1,27 +1,32 @@
 import type { CreateMarkWheelsDto } from "../../@types/interface/createMarkWheels.dto";
 import { markWheelsModel } from "../../models/markWheels";
+import { uuid } from "../../utils/uuid";
+import { deletAccents } from "../../utils/word";
 
 class MarkWheelsService {
   async create(body: CreateMarkWheelsDto) {
     try {
-      const name = body.NAME.toUpperCase();
+      body.NAME = deletAccents(body.NAME.toUpperCase());
 
-      const existMarkWheels = await this.existMarkWheelsForName(name);
+      const existMarkWheels = await this.existMarkWheelsForName(body.NAME);
 
       if (existMarkWheels) {
         return existMarkWheels;
       }
 
-      const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUID);
+      if (body.UUID && body.UUID !== "") {
+        const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUID);
 
-      if (existMarkWheelsForUuid) {
-        return existMarkWheelsForUuid;
+        if (existMarkWheelsForUuid) {
+          return existMarkWheelsForUuid;
+        }
       }
 
-      const createMarkWheels = await markWheelsModel.create({
-        NAME: name,
-        UUID: body.UUID,
-      });
+      if (body.UUID === "") {
+        body.UUID = await uuid();
+      }
+
+      const createMarkWheels = await markWheelsModel.create(body);
 
       return createMarkWheels;
     } catch (error) {
@@ -31,7 +36,7 @@ class MarkWheelsService {
 
   async existMarkWheelsForName(name: string) {
     try {
-      return await markWheelsModel.findBy({ NAME: name.toUpperCase() });
+      return await markWheelsModel.findBy({ NAME: name });
     } catch (error) {
       throw error;
     }
@@ -47,7 +52,9 @@ class MarkWheelsService {
 
   async findAll() {
     try {
-      return await markWheelsModel.findAll();
+      const markWheel = await markWheelsModel.findAll();
+
+      return { markWheel };
     } catch (error) {
       throw error;
     }
