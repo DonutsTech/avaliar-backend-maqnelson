@@ -11,9 +11,9 @@ class CheckinModel {
     }
   }
 
-  async findAll() {
+  async findAll(param: Prisma.CheckinFindManyArgs) {
     try {
-      return await prisma.checkin.findMany();
+      return await prisma.checkin.findMany({ ...param });
     } catch (error) {
       handlePrismaError(error);
     }
@@ -24,7 +24,7 @@ class CheckinModel {
       const args: any = {};
       if (find !== undefined) args.where = find;
       if (select !== undefined) args.select = select;
-      return await prisma.checkin.findFirst(args);
+      return await prisma.checkin.findFirst({ ...args });
     } catch (error) {
       handlePrismaError(error);
     }

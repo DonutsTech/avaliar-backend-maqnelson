@@ -54,7 +54,7 @@ class CheckinService {
                     MIN: input.MIN,
                     MAX: input.MAX,
                     BONDTYPE: input.BONDTYPE,
-                    MODELID: createModal.ID
+                    MODELID: createModal.ID,
                   });
 
                   if (Array.isArray(input.EMUNS) && input.EMUNS.length > 0) {

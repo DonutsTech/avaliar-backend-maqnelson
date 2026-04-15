@@ -11,9 +11,9 @@ class InputModel {
     }
   }
 
-  async findAll() {
+  async findAll(param: Prisma.InputFindManyArgs) {
     try {
-      return await prisma.input.findMany();
+      return await prisma.input.findMany({ ...param });
     } catch (error) {
       handlePrismaError(error);
     }

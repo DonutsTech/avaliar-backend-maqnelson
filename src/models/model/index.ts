@@ -11,9 +11,9 @@ class ModelModel {
     }
   }
 
-  async findAll() {
+  async findAll(param: Prisma.ModelFindManyArgs) {
     try {
-      return await prisma.model.findMany();
+      return await prisma.model.findMany({ ...param });
     } catch (error) {
       handlePrismaError(error);
     }

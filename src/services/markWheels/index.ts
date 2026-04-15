@@ -52,7 +52,7 @@ class MarkWheelsService {
 
   async findAll() {
     try {
-      const markWheel = await markWheelsModel.findAll();
+      const markWheel = await markWheelsModel.findAll({});
 
       return { markWheel };
     } catch (error) {
