@@ -10,7 +10,6 @@ class MarkWheelsController {
       return response.status(201).json(create);
     } catch (error) {
       next(error);
-
     }
   }
 
