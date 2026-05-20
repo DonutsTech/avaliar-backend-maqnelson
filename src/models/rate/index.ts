@@ -42,6 +42,14 @@ class RateModel {
       handlePrismaError(error);
     }
   }
+
+  async count(where: Prisma.RateWhereInput): Promise<number> {
+    try {
+      return await prisma.rate.count({ where });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
 }
 
 export const rateModel = new RateModel();

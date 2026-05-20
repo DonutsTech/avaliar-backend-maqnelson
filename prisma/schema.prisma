@@ -117,6 +117,7 @@ model Rate {
   VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
   RESULT String
   STATUS String @default("EM ANDAMENTO")
+  MESSAGE String?
   TYPE String
   MARK String
   MODEL String
@@ -156,6 +157,7 @@ model Rate {
   INDICATOR Boolean?
   WHO String?
   OBSALL String?
+  SYNC Boolean @default(false)
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
   GALERYRATES GaleryRate[] @relation("RateGaleryByUuid")

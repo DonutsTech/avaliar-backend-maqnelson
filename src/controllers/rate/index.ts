@@ -1,13 +1,12 @@
 import type { NextFunction, Request, Response } from "express";
-import type { CreateRateDto } from "../../@types/interface/createRate.dto";
+import type { CreateRateCheckinDto } from "../../@types/interface/createRate.dto";
 import { rateService } from "../../services/rate";
 
 class RateController {
   async createRateCheckin(request: Request, response: Response, next: NextFunction) {
     try {
-      const body: CreateRateDto = request.body;
-      const param: { email: string } = request.query as any;
-      const create = await rateService.createRateCheckin(body, param.email);
+      const body: CreateRateCheckinDto = request.body;
+      const create = await rateService.createRateCheckin(body);
       return response.status(201).json(create);
     } catch (error) {
       next(error);
@@ -19,6 +18,26 @@ class RateController {
       const param: { email: string } = request.query as any;
       const filter = await rateService.filterRateCheckinEmailVend(param.email);
       return response.status(200).json(filter);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async updateRate(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params;
+      const data = request.body;
+      const update = await rateService.updateRate(Number(id), data);
+      return response.status(200).json(update);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async filterAll(request: Request, response: Response, next: NextFunction) {
+    try {
+      const rates = await rateService.filterAll();
+      return response.status(200).json(rates);
     } catch (error) {
       next(error);
     }
