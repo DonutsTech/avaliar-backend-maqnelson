@@ -3,7 +3,7 @@ import type { CreateTokenDto } from "../../@types/interface/createToken.dto";
 import { authService } from "../../services/auth";
 
 class AuthController {
-  async getToken(request: Request, response: Response, next: NextFunction) {
+  async postToken(request: Request, response: Response, next: NextFunction) {
     try {
       const query: CreateTokenDto = request.query as any;
 

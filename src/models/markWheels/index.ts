@@ -3,17 +3,17 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class MarkWheels {
-  async create(data: Prisma.MarkWheelsCreateInput): Promise<Prisma.MarkWheelsGetPayload<{ select: { NAME: true, UUID: true, ID: true } }>> {
+  async create(data: Prisma.MarkWheelsCreateInput) {
     try {
-      return await prisma.markWheels.create({ data, select: { NAME: true, UUID: true, ID: true } });
+      return await prisma.markWheels.create({ data });
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findAll(param: Prisma.MarkWheelsFindManyArgs): Promise<Prisma.MarkWheelsGetPayload<{ select: { NAME: true, UUID: true, ID: true } }>[] | null> {
+  async findAll(param: Prisma.MarkWheelsFindManyArgs) {
     try {
-      return await prisma.markWheels.findMany({ ...param, select: { NAME: true, UUID: true, ID: true } });
+      return await prisma.markWheels.findMany({ ...param });
     } catch (error) {
       handlePrismaError(error);
     }

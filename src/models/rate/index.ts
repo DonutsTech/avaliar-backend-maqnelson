@@ -3,33 +3,33 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class RateModel {
-  async create(data: Prisma.RateCreateInput): Promise<Prisma.RateGetPayload<{ select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } }>> {
+  async create<T extends Prisma.RateSelect = {}>(data: Prisma.RateCreateInput, select: Prisma.RateSelect = {} as any) {
     try {
-      return await prisma.rate.create({ data, select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } });
+      return (await prisma.rate.create({ data, select: select}) as Prisma.RateGetPayload<{ select: T }>);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findAll(param: Prisma.RateFindManyArgs): Promise<Prisma.RateGetPayload<{ select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } }>[] | null> {
+  async findAll<T extends Prisma.RateSelect = {}>(param: Prisma.RateFindManyArgs) {
     try {
-      return await prisma.rate.findMany({ ...param, select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } });
+      return (await prisma.rate.findMany(param) as Prisma.RateGetPayload<{ select: T }>[] | []);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(where: Prisma.RateWhereInput): Promise<Prisma.RateGetPayload<{ select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } }> | null> {
+  async findBy<T extends Prisma.RateSelect = {}>(param: Prisma.RateFindFirstArgs) {
     try {
-      return await prisma.rate.findFirst({ where, select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } });
+      return await prisma.rate.findFirst(param) as Prisma.RateGetPayload<{ select: T }> | null;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async update(id: number, data: Prisma.RateUpdateInput): Promise<Prisma.RateGetPayload<{ select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } }>> {
+  async update<T extends Prisma.RateSelect = {}>(id: number, data: Prisma.RateUpdateInput, select: Prisma.RateSelect = {} as any) {
     try {
-      return await prisma.rate.update({ where: { ID: id }, data, select: { CODCLI: true, CODPROS: true, CODVEND: true, EMAILVEND: true, ID: true, IDVERSIONCHECKIN: true, LJCLI: true, LJPROS: true, RESULT: true, STATUS: true, UUID: true, VERSIONCHECKIN: true } });
+      return await prisma.rate.update({ where: { ID: id }, data, select: select }) as Prisma.RateGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }

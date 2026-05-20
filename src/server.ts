@@ -1,28 +1,16 @@
-import cors from 'cors';
 import dotenv from 'dotenv';
-import Express from 'express';
 import http from 'http';
-import { StatusCodes } from 'http-status-codes';
-import { setErrors } from './middleware';
-import { router } from './routers';
+import path from 'path';
+import App from './config/app';
 import { initADM } from './utils/initAdmin';
 
-dotenv.config();
+dotenv.config({
+  path: path.resolve('.env'),
+});
 
 const PORT = parseInt(process.env.PORT || '3000', 10);
 
-const app = Express();
-app.use(Express.json({ limit: '10mb' }));
-
-app.use(cors());
-app.use(router);
-app.use((req, res, next) => {
-    res.status(StatusCodes.NOT_FOUND).json({
-        status: StatusCodes.NOT_FOUND,
-        message: "Rota não encontrada",
-    });
-});
-app.use(setErrors);
+const app = new App().express;
 
 const server = http.createServer(app);
 

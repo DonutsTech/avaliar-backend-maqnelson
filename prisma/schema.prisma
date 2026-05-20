@@ -112,7 +112,7 @@ model VersionCheckin {
 
 model Rate {
   ID        Int   @id @default(autoincrement())
-  UUID      String   @unique
+  UUIDAPP      String   @unique
   IDVERSIONCHECKIN String   @db.Uuid
   VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
   TYPE String
@@ -123,25 +123,64 @@ model Rate {
   RESULT String
   STATUS String
   CODVEND String
+  NAMEVEND String
   EMAILVEND String
   CODCLI String
   LJCLI String
   CODPROS String
   LJPROS String
   NAMECLI String
+  ADDRESSCLI String
+  PHONECLI String
+  EMAILCLI String
   DATE String
+  VALUE1YEAR String
+  VALUE2YEAR String
+  VALUE3YEAR String
+  VALUE4YEAR String
+  TAXA String
+  VALUEVIEW String
+  VALUERATE String
+  VALIDITY String
+  VALUESUG String
+  FILIAL String
+  CANAL String
+  RESSED Boolean
+  MODALITY String
+  VALUEBY String
+  VALUENEG String
+  STOKE Boolean
+  REASON Boolean
+  OBSREASON String
+  INDICATOR Boolean
+  WHO String
+  OBSALL String
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
+  GALERYRATES GaleryRate[]
 
   @@map("rate")
 }
 
 model MarkWheels {
   ID        Int      @id @default(autoincrement())
-  UUID      String   @unique
+  UUIDAPP   String   @unique
   NAME      String   @unique
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
 
   @@map("markwheels")
+}
+
+model GaleryRate {
+  ID          Int       @id @default(autoincrement())
+  UUIDAPP     String    @unique
+  NAME        String
+  URL         String
+  IDRATE      Int       @db.Integer
+  RATE        Rate      @relation(fields: [IDRATE], references: [ID])
+  CREATEDAT   DateTime  @default(now())
+  UPDATEDAT   DateTime  @updatedAt
+
+  @@map("galeryrate")
 }
