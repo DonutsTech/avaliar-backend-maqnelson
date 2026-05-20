@@ -11,17 +11,17 @@ class ModelModel {
     }
   }
 
-  async findAll(param: Prisma.ModelFindManyArgs) {
+  async findAll<T extends Prisma.ModelSelect = {}>(param: Prisma.ModelFindManyArgs) {
     try {
-      return await prisma.model.findMany({ ...param });
+      return await prisma.model.findMany(param) as Prisma.ModelGetPayload<{ select: T }>[] | [];
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findById(id: string) {
+  async findBy<T extends Prisma.ModelSelect = {}>(param: Prisma.ModelFindFirstArgs) {
     try {
-      return await prisma.model.findUnique({ where: { ID: id } });
+      return await prisma.model.findFirst(param) as Prisma.ModelGetPayload<{ select: T }> | null;
     } catch (error) {
       handlePrismaError(error);
     }

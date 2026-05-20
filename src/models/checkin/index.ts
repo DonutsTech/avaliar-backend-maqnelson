@@ -11,20 +11,17 @@ class CheckinModel {
     }
   }
 
-  async findAll(param: Prisma.CheckinFindManyArgs) {
+  async findMany<T extends Prisma.CheckinInclude = {}>(param: Prisma.CheckinFindManyArgs) {
     try {
-      return await prisma.checkin.findMany({ ...param });
+      return (await prisma.checkin.findMany(param) as Prisma.CheckinGetPayload<{ include: T }>[] | []);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(find?: Prisma.CheckinWhereInput, select?: Prisma.CheckinSelect) {
+  async findBy<T extends Prisma.CheckinInclude = {}>(params: Prisma.CheckinFindFirstArgs) {
     try {
-      const args: any = {};
-      if (find !== undefined) args.where = find;
-      if (select !== undefined) args.select = select;
-      return await prisma.checkin.findFirst({ ...args });
+      return (await prisma.checkin.findFirst(params) as Prisma.CheckinGetPayload<{ include: T }> | null);
     } catch (error) {
       handlePrismaError(error);
     }

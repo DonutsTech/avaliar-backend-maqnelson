@@ -11,17 +11,17 @@ class InputModel {
     }
   }
 
-  async findAll(param: Prisma.InputFindManyArgs) {
+  async findAll<T extends Prisma.InputSelect = {}>(param: Prisma.InputFindManyArgs) {
     try {
-      return await prisma.input.findMany({ ...param });
+      return await prisma.input.findMany(param) as Prisma.InputGetPayload<{ select: T }>[] | [];
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(find: Prisma.InputWhereInput) {
+  async findBy<T extends Prisma.InputSelect = {}>(param: Prisma.InputFindFirstArgs) {
     try {
-      return await prisma.input.findFirst({ where: find });
+      return await prisma.input.findFirst(param) as Prisma.InputGetPayload<{ select: T}> | null;
     } catch (error) {
       handlePrismaError(error);
     }

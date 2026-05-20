@@ -11,33 +11,33 @@ class MarkWheels {
     }
   }
 
-  async findAll(param: Prisma.MarkWheelsFindManyArgs) {
+  async findAll<T extends Prisma.MarkWheelsSelect = {}>(param: Prisma.MarkWheelsFindManyArgs) {
     try {
-      return await prisma.markWheels.findMany({ ...param });
+      return await prisma.markWheels.findMany(param) as Prisma.MarkWheelsGetPayload<{ select: T }>[] | [];
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(where: Prisma.MarkWheelsWhereInput): Promise<Prisma.MarkWheelsGetPayload<{ select: { NAME: true, UUID: true, ID: true } }> | null> {
+  async findBy<T extends Prisma.MarkWheelsSelect = {}>(param: Prisma.MarkWheelsFindFirstArgs) {
     try {
-      return await prisma.markWheels.findFirst({ where, select: { NAME: true, UUID: true, ID: true } });
+      return await prisma.markWheels.findFirst(param) as Prisma.MarkWheelsGetPayload<{ select: T }> | null;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async update(id: number, data: Prisma.MarkWheelsUpdateInput) {
+  async update<T extends Prisma.MarkWheelsSelect = {}>(id: number, data: Prisma.MarkWheelsUpdateInput, select: Prisma.MarkWheelsSelect = {}) {
     try {
-      return await prisma.markWheels.update({ where: { ID: id }, data, select: { UPDATEDAT: false, CREATEDAT: false } });
+      return await prisma.markWheels.update({ where: { ID: id }, data, select}) as Prisma.MarkWheelsGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async delete(id: number) {
+  async delete<T extends Prisma.MarkWheelsSelect = {}>(id: number, select: Prisma.MarkWheelsSelect = {}) {
     try {
-      return await prisma.markWheels.delete({ where: { ID: id }, select: { UPDATEDAT: false, CREATEDAT: false } });
+      return await prisma.markWheels.delete({ where: { ID: id }, select }) as Prisma.MarkWheelsGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }

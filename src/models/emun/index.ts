@@ -3,41 +3,41 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class EmunModel {
-  async create(data: Prisma.EmunCreateInput): Promise<Prisma.EmunGetPayload<{ select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } }>> {
+  async create<T extends Prisma.EmunSelect = {}>(data: Prisma.EmunCreateInput, select: Prisma.EmunSelect = {}) {
     try {
-      return await prisma.emun.create({ data, select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } });
+      return await prisma.emun.create({ data, select }) as Prisma.EmunGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findAll(param: Prisma.EmunFindManyArgs): Promise<Prisma.EmunGetPayload<{ select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } }>[] | null> {
+  async findAll<T extends Prisma.EmunSelect = {}>(param: Prisma.EmunFindManyArgs) {
     try {
-      return await prisma.emun.findMany({ ...param, select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } });
+      return await prisma.emun.findMany(param) as Prisma.EmunGetPayload<{ select: T }>[] | [];
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findById(id: string) {
+  async findBy<T extends Prisma.EmunSelect = {}>(param: Prisma.EmunFindFirstArgs) {
     try {
-      return await prisma.emun.findUnique({ where: { ID: id }, select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } });
+      return await prisma.emun.findFirst(param) as Prisma.EmunGetPayload<{ select: T }> | null;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async update(id: string, data: Prisma.EmunUpdateInput): Promise<Prisma.EmunGetPayload<{ select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } }>> {
+  async update<T extends Prisma.EmunSelect = {}>(id: string, data: Prisma.EmunUpdateInput, select: Prisma.EmunSelect = {}) {
     try {
-      return await prisma.emun.update({ where: { ID: id }, data, select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } });
+      return await prisma.emun.update({ where: { ID: id }, data, select }) as Prisma.EmunGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async delete(id: string): Promise<Prisma.EmunGetPayload<{ select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } }>> {
+  async delete<T extends Prisma.EmunSelect = {}>(id: string, select: Prisma.EmunSelect = {}) {
     try {
-      return await prisma.emun.delete({ where: { ID: id }, select: { ID: true, IDINPUT: true, NAME: true, TITLE: true } });
+      return await prisma.emun.delete({ where: { ID: id }, select }) as Prisma.EmunGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
