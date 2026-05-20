@@ -23,6 +23,25 @@ class CheckinController {
       next(error);
     }
   }
+
+  async getCheckins(request: Request, response: Response, next: NextFunction) {
+    try {
+      const checkins = await checkinService.checkinsAll();
+      return response.status(200).json(checkins);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getCheckinById(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params as { id: string };
+      const checkin = await checkinService.checkin(id);
+      return response.status(200).json(checkin);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const checkinController = new CheckinController();

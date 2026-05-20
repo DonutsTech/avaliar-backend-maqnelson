@@ -3,9 +3,9 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class RateModel {
-  async create<T extends Prisma.RateSelect = {}>(data: Prisma.RateCreateInput, select: Prisma.RateSelect = {} as any) {
+  async create<T extends Prisma.RateCreateArgs>(args: Prisma.SelectSubset<T, Prisma.RateCreateArgs>): Promise<Prisma.RateGetPayload<T>> {
     try {
-      return (await prisma.rate.create({ data, select: select}) as Prisma.RateGetPayload<{ select: T }>);
+      return await prisma.rate.create(args);
     } catch (error) {
       handlePrismaError(error);
     }

@@ -115,14 +115,15 @@ model Rate {
   UUIDAPP      String   @unique
   IDVERSIONCHECKIN String   @db.Uuid
   VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
+  RESULT String
+  STATUS String @default("EM ANDAMENTO")
   TYPE String
   MARK String
   MODEL String
   CHASSI String
   VALUE String
-  RESULT String
-  STATUS String
   CODVEND String
+  FILIAL String
   NAMEVEND String
   EMAILVEND String
   CODCLI String
@@ -134,30 +135,30 @@ model Rate {
   PHONECLI String
   EMAILCLI String
   DATE String
-  VALUE1YEAR String
-  VALUE2YEAR String
-  VALUE3YEAR String
-  VALUE4YEAR String
-  TAXA String
-  VALUEVIEW String
-  VALUERATE String
-  VALIDITY String
-  VALUESUG String
-  FILIAL String
-  CANAL String
-  RESSED Boolean
-  MODALITY String
-  VALUEBY String
-  VALUENEG String
-  STOKE Boolean
-  REASON Boolean
-  OBSREASON String
-  INDICATOR Boolean
-  WHO String
-  OBSALL String
+  VALUE1YEAR String?
+  VALUE2YEAR String?
+  VALUE3YEAR String?
+  VALUE4YEAR String?
+  TAXA String?
+  VALUEVIEW String?
+  VALUERATE String?
+  VALIDITY String?
+  VALUESUG String?
+  FILIAL_WEB String?
+  CANAL String?
+  RESSED Boolean?
+  MODALITY String?
+  VALUEBY String?
+  VALUENEG String?
+  STOKE Boolean?
+  REASON Boolean?
+  OBSREASON String?
+  INDICATOR Boolean?
+  WHO String?
+  OBSALL String?
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
-  GALERYRATES GaleryRate[]
+  GALERYRATES GaleryRate[] @relation("RateGaleryByUuid")
 
   @@map("rate")
 }
@@ -177,8 +178,8 @@ model GaleryRate {
   UUIDAPP     String    @unique
   NAME        String
   URL         String
-  IDRATE      Int       @db.Integer
-  RATE        Rate      @relation(fields: [IDRATE], references: [ID])
+  RATE_UUIDAPP String
+  RATE Rate @relation("RateGaleryByUuid", fields: [RATE_UUIDAPP], references: [UUIDAPP], onDelete: Cascade)
   CREATEDAT   DateTime  @default(now())
   UPDATEDAT   DateTime  @updatedAt
 

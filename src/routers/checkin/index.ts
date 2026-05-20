@@ -7,7 +7,7 @@ class CheckinRouter {
     router.post("/checkins", isAuthenticate, validatorRoler, schemaValidator("checkin/create"), checkinController.createCheckin);
     router.put("/checkins/:id", isAuthenticate, validatorRoler, schemaValidator("checkin/create"), checkinController.updateCheckin);
     router.get("/checkins", isAuthenticate, validatorRoler, checkinController.getCheckins);
-    router.delete("/checkins/:id", isAuthenticate, validatorRoler, checkinController.deleteCheckin);
+    router.get("/checkins/:id", isAuthenticate, validatorRoler, checkinController.getCheckinById);
   }
 }
 

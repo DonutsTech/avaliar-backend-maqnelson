@@ -4,8 +4,8 @@ import { isAuthenticate, schemaValidator } from "../../middleware";
 
 class RateCheckinRouter {
   public static create(router: Router): void {
-    router.post("/rate-checkin", isAuthenticate, schemaValidator("rateCheckin/create"), rateController.createRateCheckin);
-    router.get("/rate-checkin", isAuthenticate, rateController.filterRateCheckinEmailVend);
+    router.post("/rate", isAuthenticate, schemaValidator("rate/create"), rateController.createRate);
+    router.get("/rate", isAuthenticate, rateController.filterAll);
   }
 }
 

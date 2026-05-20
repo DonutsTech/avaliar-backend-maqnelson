@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const createRateVersion = Joi.object({
+const createRateCheckinVersion = Joi.object({
   UUID: Joi.string().allow("").required(),
   IDVERSIONCHECKIN: Joi.string().max(250).required(),
   RESULT: Joi.string().max(250).required(),
@@ -12,4 +12,4 @@ const createRateVersion = Joi.object({
   LJPROS: Joi.string().max(250).required(),
 });
 
-export default createRateVersion;
+export default createRateCheckinVersion;

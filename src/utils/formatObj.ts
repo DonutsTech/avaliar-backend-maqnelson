@@ -1,6 +1,7 @@
 import type { Prisma } from "../generated/prisma/client";
+import type { CheckinSelectInclude } from "../services/checkin";
 
-export const formatCheckinForObject = (checkin: Prisma.CheckinGetPayload<{ include: { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } } }>) => {
+export const formatCheckinForObject = (checkin: Prisma.CheckinGetPayload<{ select: CheckinSelectInclude }>) => {
   const newObj: { [key: string]: string } = {};
 
   for (const schema of checkin.SCHEMAS) {
@@ -11,15 +12,15 @@ export const formatCheckinForObject = (checkin: Prisma.CheckinGetPayload<{ inclu
     }
   }
 
-  newObj['frente'] = "";
-  newObj['esquerda'] = "";
-  newObj['direita'] = "";
-  newObj['pneus_dianteiros'] = "";
-  newObj['cabine'] = "";
-  newObj['horimetro'] = "";
-  newObj['chassis'] = "";
-  newObj['traseira'] = "";
-  newObj['pneus_traseiros'] = "";
+  newObj['photo_frente'] = "";
+  newObj['photo_esquerda'] = "";
+  newObj['photo_direita'] = "";
+  newObj['photo_pneus_dianteiros'] = "";
+  newObj['photo_cabine'] = "";
+  newObj['photo_horimetro'] = "";
+  newObj['photo_chassis'] = "";
+  newObj['photo_traseira'] = "";
+  newObj['photo_pneus_traseiros'] = "";
   newObj['video_all'] = "";
 
   return newObj;

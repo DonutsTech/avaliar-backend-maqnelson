@@ -10,14 +10,41 @@ import { modelService } from "../model";
 import { schemaService } from "../schema";
 import { versionCheckinService } from "../versionCheckin";
 
-type CheckinSelectInclude = {
-  SCHEMAS: {
-    include: {
+export type CheckinSelectInclude = {
+   SCHEMAS: {
+    select: {
+      ID: true,
+      TITLE: true,
+      IDCHECKIN: true,
       MODELS: {
-        include: {
+        select: {
+          ID: true,
+          NAME: true,
+          TITLE: true,
+          QUESTION: true,
+          IDSCHEMA: true,
           INPUTS: {
-            include: {
-              EMUNS: true
+            select: {
+              ID: true,
+              TYPE: true,
+              NAME: true,
+              LABEL: true,
+              VALUE: true,
+              PLACEHOLDER: true,
+              REQUIRED: true,
+              MULTIPLE: true,
+              MIN: true,
+              MAX: true,
+              BONDTYPE: true,
+              IDMODEL: true,
+              EMUNS: {
+                select: {
+                  ID: true,
+                  NAME: true,
+                  TITLE: true,
+                  IDINPUT: true,
+                }
+              }
             }
           }
         }
@@ -26,14 +53,41 @@ type CheckinSelectInclude = {
   }
 }
 
-const CHECKIN_SELECT_INCLUDE: Prisma.CheckinSelect = {
+export const CHECKIN_SELECT_INCLUDE: Prisma.CheckinSelect = {
   SCHEMAS: {
-    include: {
+    select: {
+      ID: true,
+      TITLE: true,
+      IDCHECKIN: true,
       MODELS: {
-        include: {
+        select: {
+          ID: true,
+          NAME: true,
+          TITLE: true,
+          QUESTION: true,
+          IDSCHEMA: true,
           INPUTS: {
-            include: {
-              EMUNS: true
+            select: {
+              ID: true,
+              TYPE: true,
+              NAME: true,
+              LABEL: true,
+              VALUE: true,
+              PLACEHOLDER: true,
+              REQUIRED: true,
+              MULTIPLE: true,
+              MIN: true,
+              MAX: true,
+              BONDTYPE: true,
+              IDMODEL: true,
+              EMUNS: {
+                select: {
+                  ID: true,
+                  NAME: true,
+                  TITLE: true,
+                  IDINPUT: true,
+                }
+              }
             }
           }
         }
@@ -41,32 +95,6 @@ const CHECKIN_SELECT_INCLUDE: Prisma.CheckinSelect = {
     }
   }
 }
-
-interface VersionCheckinSelectInclude {
-  ID: true;
-  NAME: true;
-  VERSION: true;
-  IDCHECKIN: true;
-  PHOTO: true;
-  VIDEO: true;
-  ATIVE: true;
-  JSON_CHECKIN: true;
-  OBJECT_CHECKIN: true;
-}
-
-const VERSION_CHECKIN_SELECT_INCLUDE: Prisma.VersionCheckinSelect = {
-  ID: true,
-  NAME: true,
-  VERSION: true,
-  IDCHECKIN: true,
-  PHOTO: true,
-  VIDEO: true,
-  ATIVE: true,
-  JSON_CHECKIN: true,
-  OBJECT_CHECKIN: true,
-}
-
-
 
 class CheckinService {
   async checkin(ID: string) {
@@ -78,6 +106,14 @@ class CheckinService {
       }
 
       return checkin;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async checkinsAll() {
+    try {
+      return await checkinModel.findMany<CheckinSelectInclude>({ select: CHECKIN_SELECT_INCLUDE });
     } catch (error) {
       throw error;
     }
