@@ -32,7 +32,7 @@ class AuthService {
 
   async token(body: CreateTokenDto): Promise<{ access_token: string }> {
     try {
-      const user = await userModel.findBy({ EMAIL: body.EMAIL });
+      const user = await userModel.findBy({ where: { EMAIL: body.EMAIL } });
 
       if (!user) {
         throw new CustomError("User not found", StatusCodes.NOT_FOUND);

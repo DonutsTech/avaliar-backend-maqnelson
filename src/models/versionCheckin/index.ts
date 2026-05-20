@@ -3,9 +3,11 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class VersionCheckinModel {
-  async create<T extends Prisma.VersionCheckinSelect = {}>(data: Prisma.VersionCheckinCreateInput, select: Prisma.VersionCheckinSelect = {}) {
+  async create<T extends Prisma.VersionCheckinCreateArgs>(
+    args: Prisma.SelectSubset<T, Prisma.VersionCheckinCreateArgs>
+  ): Promise<Prisma.VersionCheckinGetPayload<T>> {
     try {
-      return await prisma.versionCheckin.create({ data, select }) as Prisma.VersionCheckinGetPayload<{ select: T }>;
+      return await prisma.versionCheckin.create(args);
     } catch (error) {
       handlePrismaError(error);
     }

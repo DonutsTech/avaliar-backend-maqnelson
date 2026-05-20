@@ -10,12 +10,72 @@ import { modelService } from "../model";
 import { schemaService } from "../schema";
 import { versionCheckinService } from "../versionCheckin";
 
+type CheckinSelectInclude = {
+  SCHEMAS: {
+    include: {
+      MODELS: {
+        include: {
+          INPUTS: {
+            include: {
+              EMUNS: true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+const CHECKIN_SELECT_INCLUDE: Prisma.CheckinSelect = {
+  SCHEMAS: {
+    include: {
+      MODELS: {
+        include: {
+          INPUTS: {
+            include: {
+              EMUNS: true
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+interface VersionCheckinSelectInclude {
+  ID: true;
+  NAME: true;
+  VERSION: true;
+  IDCHECKIN: true;
+  PHOTO: true;
+  VIDEO: true;
+  ATIVE: true;
+  JSON_CHECKIN: true;
+  OBJECT_CHECKIN: true;
+}
+
+const VERSION_CHECKIN_SELECT_INCLUDE: Prisma.VersionCheckinSelect = {
+  ID: true,
+  NAME: true,
+  VERSION: true,
+  IDCHECKIN: true,
+  PHOTO: true,
+  VIDEO: true,
+  ATIVE: true,
+  JSON_CHECKIN: true,
+  OBJECT_CHECKIN: true,
+}
+
+
+
 class CheckinService {
   async checkin(ID: string) {
     try {
-      await this.existID(ID);
+      const checkin = await checkinModel.findBy<CheckinSelectInclude>({where: { ID }, select: CHECKIN_SELECT_INCLUDE });
 
-      const checkin = await checkinModel.findBy({ ID }, { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } }) as Prisma.CheckinGetPayload<{ include: { SCHEMAS: { include: { MODELS: { include: { INPUTS: { include: { EMUNS: true } } } } } } } }>;
+      if (!checkin) {
+        throw new CustomError('Check-in não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
+      }
 
       return checkin;
     } catch (error) {
@@ -189,7 +249,7 @@ class CheckinService {
 
   async existCheckinForName(name: string) {
     try {
-      return await checkinModel.findBy({ NAME: name.toUpperCase() });
+      return await checkinModel.findBy({ where: { NAME: name } });
     } catch (error) {
       throw error;
     }
