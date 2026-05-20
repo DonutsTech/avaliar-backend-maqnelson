@@ -11,17 +11,17 @@ class SchemaModel {
     }
   }
 
-  async findAll() {
+  async findAll(param: Prisma.SchemaFindManyArgs) {
     try {
-      return await prisma.schema.findMany();
+      return await prisma.schema.findMany(param);
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findById(id: string) {
+  async findBy(param: Prisma.SchemaFindFirstArgs) {
     try {
-      return await prisma.schema.findUnique({ where: { ID: id } });
+      return await prisma.schema.findFirst(param);
     } catch (error) {
       handlePrismaError(error);
     }

@@ -3,33 +3,33 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class VersionCheckinModel {
-  async create(data: Prisma.VersionCheckinCreateInput): Promise<Prisma.VersionCheckinGetPayload<{ select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } }>> {
+  async create<T extends Prisma.VersionCheckinSelect = {}>(data: Prisma.VersionCheckinCreateInput, select: Prisma.VersionCheckinSelect = {}) {
     try {
-      return await prisma.versionCheckin.create({ data, select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } });
+      return await prisma.versionCheckin.create({ data, select }) as Prisma.VersionCheckinGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findAll(find: Prisma.VersionCheckinFindManyArgs): Promise<Prisma.VersionCheckinGetPayload<{ select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } }>[] | null> {
+  async findAll<T extends Prisma.VersionCheckinSelect = {}>(param: Prisma.VersionCheckinFindManyArgs) {
     try {
-      return await prisma.versionCheckin.findMany({ select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true }, ...find });
+      return await prisma.versionCheckin.findMany(param) as Prisma.VersionCheckinGetPayload<{ select: T }>[] | [];
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async findBy(where: Prisma.VersionCheckinWhereInput): Promise<Prisma.VersionCheckinGetPayload<{ select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } }> | null> {
+  async findBy<T extends Prisma.VersionCheckinSelect = {}>(param: Prisma.VersionCheckinFindFirstArgs) {
     try {
-      return await prisma.versionCheckin.findFirst({ where, select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } });
+      return await prisma.versionCheckin.findFirst(param) as Prisma.VersionCheckinGetPayload<{ select: T }> | null;
     } catch (error) {
       handlePrismaError(error);
     }
   }
 
-  async update(id: string, data: Prisma.VersionCheckinUpdateInput): Promise<Prisma.VersionCheckinGetPayload<{ select: { ID: true, NAME: true, VERSION: true, IDCHECKIN: true, PHOTO: true, VIDEO: true, ATIVE: true, JSON_CHECKIN: true, OBJECT_CHECKIN: true } }>> {
+  async update<T extends Prisma.VersionCheckinSelect = {}>(id: string, data: Prisma.VersionCheckinUpdateInput, select: Prisma.VersionCheckinSelect = {}) {
     try {
-      return await prisma.versionCheckin.update({ where: { ID: id }, data });
+      return await prisma.versionCheckin.update({ where: { ID: id }, data, select }) as Prisma.VersionCheckinGetPayload<{ select: T }>;
     } catch (error) {
       handlePrismaError(error);
     }
