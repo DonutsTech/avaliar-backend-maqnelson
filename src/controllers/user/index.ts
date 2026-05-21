@@ -21,6 +21,16 @@ class UserController {
       next(error);
     }
   }
+
+  async getUserByEmail(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { email } = request.params as { email: string };
+      const user = await userService.getUserByEmail(email);
+      return response.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const userController = new UserController();

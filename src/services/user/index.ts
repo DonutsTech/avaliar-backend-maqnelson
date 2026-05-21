@@ -25,7 +25,7 @@ class UserService {
 
   async getUsers() {
     try {
-      const users = await userModel.findAll();
+      const users = await userModel.findAll({});
       return users;
     } catch (error) {
       throw error;
@@ -42,7 +42,33 @@ class UserService {
     try {
       await this.existId(id);
 
-      const user = await userModel.findBy({ ID: id });
+      const user = await userModel.findBy({ where: { ID: id } });
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async existEmail(email: string) : Promise<boolean> {
+    if (!(await userModel.count({ EMAIL: email }))) {
+      return true;
+    }
+
+    return false;
+  }
+
+  async getUserByEmail(email: string) {
+    try {
+      const existEmail = await this.existEmail(email);
+
+      if (existEmail) {
+        const user = await userModel.findBy({ where: { ROLE: 'USER' } });
+
+        return user;
+      }
+
+      const user = await userModel.findBy({ where: { EMAIL: email } });
 
       return user;
     } catch (error) {

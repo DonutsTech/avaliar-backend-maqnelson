@@ -290,6 +290,61 @@ class CheckinService {
       throw error;
     }
   }
+
+  async deleteCheckin(id: string) {
+    try {
+      await this.existID(id);
+
+      let checkin = await this.checkin(id);
+
+      if (Array.isArray(checkin.SCHEMAS) && checkin.SCHEMAS.length > 0) {
+        for (const schema of checkin.SCHEMAS) {
+
+          if (Array.isArray(schema.MODELS) && schema.MODELS.length > 0) {
+            for (const model of schema.MODELS) {
+
+              if (Array.isArray(model.INPUTS) && model.INPUTS.length > 0) {
+                for (const input of model.INPUTS) {
+                  if (Array.isArray(input.EMUNS) && input.EMUNS.length > 0) {
+                    for (const emun of input.EMUNS) {
+                      await emunService.deleteEmun(emun.ID);
+                    }
+                  }
+
+                  await inputService.deleteInput(input.ID);
+                }
+              }
+
+              await modelService.deleteModal(model.ID);
+            }
+          }
+
+          await schemaService.deleteSchema(schema.ID);
+        }
+      }
+
+      const versionCheckin = await versionCheckinService.findVersionCheckinByIdCheckin(id);
+
+      if (versionCheckin === null) {
+        throw new CustomError('VersionCheckin não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
+      }
+
+      await versionCheckinService.updateVersionCheckin(versionCheckin.ID, {
+        ATIVE: false,
+        JSON_CHECKIN: versionCheckin.JSON_CHECKIN,
+        OBJECT_CHECKIN: versionCheckin.OBJECT_CHECKIN,
+        VERSION: versionCheckin.VERSION,
+        IDCHECKIN: versionCheckin.IDCHECKIN,
+        NAME: versionCheckin.NAME,
+        PHOTO: versionCheckin.PHOTO,
+        VIDEO: versionCheckin.VIDEO,
+      });
+
+      await checkinModel.delete(id);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const checkinService = new CheckinService();

@@ -42,6 +42,16 @@ class CheckinController {
       next(error);
     }
   }
+
+  async deleteCheckin(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params as { id: string };
+      await checkinService.deleteCheckin(id);
+      return response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const checkinController = new CheckinController();
