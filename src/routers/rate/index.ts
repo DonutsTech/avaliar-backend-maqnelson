@@ -5,7 +5,7 @@ import { isAuthenticate, schemaValidator, validatorRole } from "../../middleware
 class RateCheckinRouter {
   public static create(router: Router): void {
     router.put("/rate/:id", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA']), schemaValidator("rate/update"), rateController.updateRate);
-    router.get("/rate", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA']), rateController.filterAll);
+    router.get("/rate", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR']), rateController.filterAll);
   }
 }
 

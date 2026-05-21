@@ -10,6 +10,5 @@ class GaleryRateService {
       router.post("/galery/pdf", isAuthenticate, schemaValidator("galeryRate/create"), documentUpload.single('') , galeryRateController.createGaleryRate);
       router.get("/galery/:id", isAuthenticate, galeryRateController.getAllGaleryRate);
       router.delete("/galery/:id", isAuthenticate, galeryRateController.deleteGaleryRate);
-
   }
 }
