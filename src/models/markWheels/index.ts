@@ -35,9 +35,9 @@ class MarkWheels {
     }
   }
 
-  async delete<T extends Prisma.MarkWheelsSelect = {}>(id: number, select: Prisma.MarkWheelsSelect = {}) {
+  async delete(id: number, select: Prisma.MarkWheelsSelect = {}) {
     try {
-      return await prisma.markWheels.delete({ where: { ID: id }, select }) as Prisma.MarkWheelsGetPayload<{ select: T }>;
+      return await prisma.markWheels.delete({ where: { ID: id }, select });
     } catch (error) {
       handlePrismaError(error);
     }

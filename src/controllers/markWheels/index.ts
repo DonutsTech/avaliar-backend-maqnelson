@@ -21,6 +21,16 @@ class MarkWheelsController {
       next(error);
     }
   }
+
+  async delete(request: Request, response: Response, next: NextFunction) {
+    try {
+      const { id } = request.params as { id: string };
+      await markWheelsService.delete(id);
+      return response.status(204).send();
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const markWheelsController = new MarkWheelsController();
