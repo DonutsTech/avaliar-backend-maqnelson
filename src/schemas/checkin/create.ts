@@ -7,14 +7,14 @@ const createCheckin = Joi.object({
     MODELS: Joi.array().items(
       Joi.object({
         NAME: Joi.string().valid('simple', 'set', 'obs', 'wheel').required(),
-        TITLE: Joi.string().allow("").max(250).optional(),
-        QUESTION: Joi.string().allow("").max(250).optional(),
+        TITLE: Joi.string().allow("").max(250).required(),
+        QUESTION: Joi.string().allow("").max(250).required(),
         INPUTS: Joi.array().items(
           Joi.object({
             TYPE: Joi.string().valid('text', 'number', 'phone', 'email', 'currency', 'cpfcnpj', 'cpf', 'picker', 'radio', 'file', 'select').required(),
             NAME: Joi.string().max(250).required(),
-            LABEL: Joi.string().allow("").max(250),
-            VALUE: Joi.string().allow("").max(250),
+            LABEL: Joi.string().allow("").max(250).required(),
+            VALUE: Joi.string().allow("").max(250).required(),
             PLACEHOLDER: Joi.string().allow("").max(250),
             REQUIRED: Joi.boolean().required(),
             MULTIPLE: Joi.boolean().required(),
@@ -27,7 +27,7 @@ const createCheckin = Joi.object({
                 NAME: Joi.string().max(250).required(),
               })
             ).optional(),
-          }).optional()
+          })
         ).optional(),
       })
     ).optional(),

@@ -3,9 +3,9 @@ import type { Prisma } from "../../generated/prisma/client";
 import { prisma } from "../../prisma";
 
 class EmunModel {
-  async create<T extends Prisma.EmunSelect = {}>(data: Prisma.EmunCreateInput, select: Prisma.EmunSelect = {}) {
+  async create(data: Prisma.EmunCreateInput) {
     try {
-      return await prisma.emun.create({ data, select }) as Prisma.EmunGetPayload<{ select: T }>;
+      return await prisma.emun.create({ data });
     } catch (error) {
       handlePrismaError(error);
     }
