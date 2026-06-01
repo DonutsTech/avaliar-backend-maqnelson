@@ -3,8 +3,8 @@ import { documentUpload, imageUpload, videoUpload } from "../../config/multerCon
 import { galeryRateController } from "../../controllers/galeryRate";
 import { isAuthenticate, schemaValidator, validatorRole } from "../../middleware";
 
-class GaleryRateService {
-  public async create(router: Router): Promise<void> {
+class GaleryRateRouter {
+  public static create(router: Router): void {
     router.post("/galery/image", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), imageUpload.single('image') , galeryRateController.createGaleryRate);
     router.post("/galery/video", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), videoUpload.single('video') , galeryRateController.createGaleryRate);
     router.post("/galery/pdf", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), documentUpload.single('') , galeryRateController.createGaleryRate);
@@ -12,3 +12,6 @@ class GaleryRateService {
     router.delete("/galery/:id", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), galeryRateController.deleteGaleryRate);
   }
 }
+
+
+export default GaleryRateRouter;

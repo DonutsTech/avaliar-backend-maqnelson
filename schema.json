@@ -11,7 +11,7 @@
           "INPUTS": [
             {
               "TYPE": "text",
-              "NAME": "tipo_veiculo",
+              "NAME": "type_veiculo",
               "LABEL": "Tipo",
               "VALUE": "TRATOR",
               "PLACEHOLDER": "",
@@ -31,7 +31,7 @@
           "INPUTS": [
             {
               "TYPE": "select",
-              "NAME": "marca_veiculo",
+              "NAME": "mark_veiculo",
               "LABEL": "Marca",
               "VALUE": "",
               "PLACEHOLDER": "",
@@ -56,7 +56,7 @@
           "INPUTS": [
             {
               "TYPE": "select",
-              "NAME": "modelo_veiculo",
+              "NAME": "model_veiculo",
               "LABEL": "Modelo",
               "VALUE": "",
               "PLACEHOLDER": "",
@@ -121,7 +121,7 @@
           "INPUTS": [
             {
               "TYPE": "currency",
-              "NAME": "valor_esperado_pelo_cliente_veiculo",
+              "NAME": "value_veiculo",
               "LABEL": "Valor Esperado Pelo Cliente",
               "VALUE": "",
               "PLACEHOLDER": "Ex: 100,00",
@@ -168,7 +168,7 @@
             },
             {
               "TYPE": "file",
-              "NAME": "chassi",
+              "NAME": "photo_chassi",
               "LABEL": "Foto Chassi",
               "VALUE": "",
               "PLACEHOLDER": "Foto Chassi",

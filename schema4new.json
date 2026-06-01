@@ -1,0 +1,3528 @@
+{
+  "NAME": "DISTRIBUIDOR NUTR",
+  "SCHEMAS": [
+    {
+      "TITLE": "Veiculo",
+      "MODELS": [
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "type_veiculo",
+              "LABEL": "Tipo",
+              "VALUE": "DISTRIBUIDOR NUTR",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MAX": null,
+              "MIN": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "select",
+              "NAME": "mark_veiculo",
+              "LABEL": "Marca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": [
+                {
+                  "NAME": "marca",
+                  "TITLE": "Marca"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "select",
+              "NAME": "model_veiculo",
+              "LABEL": "Modelo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": [
+                {
+                  "NAME": "modelo",
+                  "TITLE": "Modelo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "chassi_serie_veiculo",
+              "LABEL": "Chassi | Serie",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "number",
+              "NAME": "horimetro_motor_veiculo",
+              "LABEL": "Horimetro motor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "number",
+              "NAME": "horimetro_distribuicao_veiculo",
+              "LABEL": "Horimetro distribuicao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "currency",
+              "NAME": "value_veiculo",
+              "LABEL": "Valor esperado pelo cliente",
+              "VALUE": "",
+              "PLACEHOLDER": "Ex: 100,00",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Estrutura Geral",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Chassi",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "chassi_estrutura_geral",
+              "LABEL": "Chassi",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "corrosao severa",
+                  "TITLE": "corrosao severa"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_chassi_estrutura_geral",
+              "LABEL": "Foto Chassi",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "BONDPHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_chassi_estrutura_geral",
+              "LABEL": "Observacoes Chassi",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Capo",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "capo_estrutura_geral",
+              "LABEL": "Capo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_capo_estrutura_geral",
+              "LABEL": "Foto Capo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_capo_estrutura_geral",
+              "LABEL": "Observacoes Capo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Grade dianteira",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "grade_dianteira_estrutura_geral",
+              "LABEL": "Grade dianteira",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_grade_dianteira_estrutura_geral",
+              "LABEL": "Foto Grade dianteira",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_grade_dianteira_estrutura_geral",
+              "LABEL": "Observacoes Grade dianteira",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Para-lamas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "para_lamas_estrutura_geral",
+              "LABEL": "Para-lamas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_para_lamas_estrutura_geral",
+              "LABEL": "Foto Para-lamas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_para_lamas_estrutura_geral",
+              "LABEL": "Observacoes Para-lamas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Cabine",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "cabine_estrutura_geral",
+              "LABEL": "Cabine",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_cabine_estrutura_geral",
+              "LABEL": "Foto Cabine",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_cabine_estrutura_geral",
+              "LABEL": "Observacoes Cabine",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Escada",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "escada_estrutura_geral",
+              "LABEL": "Escada",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_escada_estrutura_geral",
+              "LABEL": "Foto Escada",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_escada_estrutura_geral",
+              "LABEL": "Observacoes Escada",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Pintura geral e adesivos",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "pintura_geral_e_adesivos_estrutura_geral",
+              "LABEL": "Pintura geral e adesivos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_pintura_geral_e_adesivos_estrutura_geral",
+              "LABEL": "Foto Pintura geral e adesivos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_pintura_geral_e_adesivos_estrutura_geral",
+              "LABEL": "Observacoes Pintura geral e adesivos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Escapamento",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "escapamento_estrutura_geral",
+              "LABEL": "Escapamento",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_escapamento_estrutura_geral",
+              "LABEL": "Foto Escapamento",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_escapamento_estrutura_geral",
+              "LABEL": "Observacoes Escapamento",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Caixa de inox",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "caixa_de_inox_estrutura_geral",
+              "LABEL": "Caixa de inox",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_caixa_de_inox_estrutura_geral",
+              "LABEL": "Foto Caixa de inox",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_caixa_de_inox_estrutura_geral",
+              "LABEL": "Observacoes Caixa de inox",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Lanca quantos metros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "lanca_quantos_metros_estrutura_geral",
+              "LABEL": "Lanca quantos metros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "30 metros",
+                  "TITLE": "30 metros"
+                },
+                {
+                  "NAME": "36 metros",
+                  "TITLE": "36 metros"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_lanca_quantos_metros_estrutura_geral",
+              "LABEL": "Foto Lanca quantos metros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Estrutura Geral",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_estrutura_geral",
+              "LABEL": "Observacoes sobre Estrutura Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_estrutura_geral",
+              "LABEL": "(Observacao) Estrutura Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Rodados e Pneus",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Pneus dianteiros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "marca_pneus_dianteiros_rodados_e_pneus",
+              "LABEL": "Marca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "number",
+              "NAME": "medida_pneus_dianteiros_rodados_e_pneus",
+              "LABEL": "Medida",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "radio",
+              "NAME": "vida_util_pneus_dianteiros_rodados_e_pneus",
+              "LABEL": "Vida util",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "Liso",
+                  "TITLE": "Liso"
+                },
+                {
+                  "NAME": "50%",
+                  "TITLE": "50%"
+                },
+                {
+                  "NAME": "100%",
+                  "TITLE": "100%"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_pneus_dianteiros_rodados_e_pneus",
+              "LABEL": "Foto Pneus dianteiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Pneus traseiros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "marca_pneus_traseiros_rodados_e_pneus",
+              "LABEL": "Marca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "number",
+              "NAME": "medida_pneus_traseiros_rodados_e_pneus",
+              "LABEL": "Medida",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "radio",
+              "NAME": "vida_util_pneus_traseiros_rodados_e_pneus",
+              "LABEL": "Vida util",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "Liso",
+                  "TITLE": "Liso"
+                },
+                {
+                  "NAME": "50%",
+                  "TITLE": "50%"
+                },
+                {
+                  "NAME": "100%",
+                  "TITLE": "100%"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_pneus_traseiros_rodados_e_pneus",
+              "LABEL": "Foto Pneus traseiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Rodas / Aros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "rodas_aros_rodados_e_pneus",
+              "LABEL": "Rodas / Aros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_rodas_aros_rodados_e_pneus",
+              "LABEL": "Foto Rodas / Aros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_rodas_aros_rodados_e_pneus",
+              "LABEL": "Observacoes Rodas / Aros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Contrapesos dianteiros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "number",
+              "NAME": "quantidade_contrapesos_dianteiros_rodados_e_pneus",
+              "LABEL": "Qtd",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_contrapesos_dianteiros_rodados_e_pneus",
+              "LABEL": "Foto Contrapesos dianteiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Capas dos motores de rodas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "capas_dos_motores_de_rodas_rodados_e_pneus",
+              "LABEL": "Capas dos motores de rodas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_capas_dos_motores_de_rodas_rodados_e_pneus",
+              "LABEL": "Foto Capas dos motores de rodas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Rodados e Pneus",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_rodados_e_pneus",
+              "LABEL": "Observacoes sobre Rodados e Pneus",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_rodados_e_pneus",
+              "LABEL": "(Observacao) Rodados e Pneus",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Sistema Hidraulico",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Conexoes hidraulicas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "conexoes_hidraulicas_sistema_hidraulico",
+              "LABEL": "Conexoes hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "sem vazamentos",
+                  "TITLE": "sem vazamentos"
+                },
+                {
+                  "NAME": "com vazamentos",
+                  "TITLE": "com vazamentos"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "local_conexoes_hidraulicas_sistema_hidraulico",
+              "LABEL": "Onde esta o vazamento ?",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "LOCATION",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_conexoes_hidraulicas_sistema_hidraulico",
+              "LABEL": "Foto Conexoes hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Mangueiras hidraulicas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "mangueiras_hidraulicas_sistema_hidraulico",
+              "LABEL": "Mangueiras hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "sem vazamentos",
+                  "TITLE": "sem vazamentos"
+                },
+                {
+                  "NAME": "com vazamentos",
+                  "TITLE": "com vazamentos"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "local_mangueiras_hidraulicas_sistema_hidraulico",
+              "LABEL": "Onde esta o vazamento ?",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "LOCATION",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_mangueiras_hidraulicas_sistema_hidraulico",
+              "LABEL": "Foto Mangueiras hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Acionamento das esteiras",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "acionamento_das_esteiras_sistema_hidraulico",
+              "LABEL": "Acionamento das esteiras",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "funcionando",
+                  "TITLE": "funcionando"
+                },
+                {
+                  "NAME": "nao funciona",
+                  "TITLE": "nao funciona"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_acionamento_das_esteiras_sistema_hidraulico",
+              "LABEL": "Foto Acionamento das esteiras",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_acionamento_das_esteiras_sistema_hidraulico",
+              "LABEL": "Observacoes Acionamento das esteiras",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Acionamento dos pratos",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "acionamento_dos_pratos_sistema_hidraulico",
+              "LABEL": "Acionamento dos pratos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "funcionando",
+                  "TITLE": "funcionando"
+                },
+                {
+                  "NAME": "nao funciona",
+                  "TITLE": "nao funciona"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_acionamento_dos_pratos_sistema_hidraulico",
+              "LABEL": "Foto Acionamento dos pratos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_acionamento_dos_pratos_sistema_hidraulico",
+              "LABEL": "Observacoes Acionamento dos pratos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Sistema Hidraulico",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_sistema_hidraulico",
+              "LABEL": "Observacoes sobre Sistema Hidraulico",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_sistema_hidraulico",
+              "LABEL": "(Observacao) Sistema Hidraulico",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Cabine e Conforto",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Vidros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "vidros_cabine_e_conforto",
+              "LABEL": "Vidros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_vidros_cabine_e_conforto",
+              "LABEL": "Foto Vidros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_vidros_cabine_e_conforto",
+              "LABEL": "Observacoes Vidros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Volante",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "volante_cabine_e_conforto",
+              "LABEL": "Volante",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_volante_cabine_e_conforto",
+              "LABEL": "Foto Volante",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Alavanca de trocas de marchas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "alavanca_de_trocas_de_marchas_cabine_e_conforto",
+              "LABEL": "Alavanca de trocas de marchas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_alavanca_de_trocas_de_marchas_cabine_e_conforto",
+              "LABEL": "Foto Alavanca de trocas de marchas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "obs_alavanca_de_trocas_de_marchas_cabine_e_conforto",
+              "LABEL": "Avarias",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Retrovisores",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "retrovisores_cabine_e_conforto",
+              "LABEL": "Retrovisores",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_retrovisores_cabine_e_conforto",
+              "LABEL": "Foto Retrovisores",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Limpadores de para-brisa",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "limpadores_de_para_brisa_cabine_e_conforto",
+              "LABEL": "Limpadores de para-brisa",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_limpadores_de_para_brisa_cabine_e_conforto",
+              "LABEL": "Foto Limpadores de para-brisa",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Bancos e cintos de seguranca",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "bancos_e_cintos_de_seguranca_cabine_e_conforto",
+              "LABEL": "Bancos e cintos de seguranca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_bancos_e_cintos_de_seguranca_cabine_e_conforto",
+              "LABEL": "Foto Bancos e cintos de seguranca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Ar-condicionado / Aquecedor",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "ar_condicionado_aquecedor_cabine_e_conforto",
+              "LABEL": "Ar-condicionado / Aquecedor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "funcionando",
+                  "TITLE": "funcionando"
+                },
+                {
+                  "NAME": "nao funciona",
+                  "TITLE": "nao funciona"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_ar_condicionado_aquecedor_cabine_e_conforto",
+              "LABEL": "Foto Ar-condicionado / Aquecedor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Protecoes plasticas e forro do teto",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "protecoes_plasticas_e_forro_do_teto_cabine_e_conforto",
+              "LABEL": "Protecoes plasticas e forro do teto",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_protecoes_plasticas_e_forro_do_teto_cabine_e_conforto",
+              "LABEL": "Foto Protecoes plasticas e forro do teto",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Cabine e Conforto",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_cabine_e_conforto",
+              "LABEL": "Observacoes sobre Cabine e Conforto",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_cabine_e_conforto",
+              "LABEL": "(Observacao) Cabine e Conforto",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Sistema Eletrico e Iluminacao",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Bateria",
+          "QUESTION": "Com carga ?",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "bateria_sistema_eletrico_iluminacao",
+              "LABEL": "Bateria",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "com carga",
+                  "TITLE": "com carga"
+                },
+                {
+                  "NAME": "sem carga",
+                  "TITLE": "sem carga"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "numero_serie_bateria_sistema_eletrico_iluminacao",
+              "LABEL": "Numero serie",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_bateria_sistema_eletrico_iluminacao",
+              "LABEL": "Foto Bateria",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Farois dianteiros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "farois_dianteiros_sistema_eletrico_e_iluminacao",
+              "LABEL": "Farois dianteiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_farois_dianteiros_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Farois dianteiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Farois traseiros",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "farois_traseiros_sistema_eletrico_e_iluminacao",
+              "LABEL": "Farois traseiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_farois_traseiros_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Farois traseiros",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Lanternas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "lanternas_sistema_eletrico_e_iluminacao",
+              "LABEL": "Lanternas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_lanternas_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Lanternas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Giroflex",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "giroflex_sistema_eletrico_e_iluminacao",
+              "LABEL": "Giroflex",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_giroflex_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Giroflex",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Fiacao em Geral",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "fiacao_em_geral_sistema_eletrico_e_iluminacao",
+              "LABEL": "Fiacao em Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_fiacao_em_geral_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Fiacao em Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Chave Geral",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "chave_geral_sistema_eletrico_e_iluminacao",
+              "LABEL": "Chave Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_chave_geral_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Chave Geral",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Painel de instrumentos",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "painel_de_instrumentos_sistema_eletrico_e_iluminacao",
+              "LABEL": "Painel de instrumentos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_painel_de_instrumentos_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Painel de instrumentos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Botoes e acionadores eletricos",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "botoes_e_acionadores_eletricos_sistema_eletrico_e_iluminacao",
+              "LABEL": "Botoes e acionadores eletricos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_botoes_e_acionadores_eletricos_sistema_eletrico_e_iluminacao",
+              "LABEL": "Foto Botoes e acionadores eletricos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Sistema Eletrico e Iluminacao",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_sistema_eletrico_e_iluminacao",
+              "LABEL": "Observacoes sobre Sistema Eletrico e Iluminacao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_sistema_eletrico_e_iluminacao",
+              "LABEL": "(Observacao) Sistema Eletrico e Iluminacao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Tecnologia e Acessorios",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Antena GPS",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "antena_gps_tecnologia_acessorios",
+              "LABEL": "Antena GPS",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "marca_antena_gps_tecnologia_acessorios",
+              "LABEL": "Marca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "modelo_antena_gps_tecnologia_acessorios",
+              "LABEL": "Modelo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "numero_serie_antena_gps_tecnologia_acessorios",
+              "LABEL": "Numero serie",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_antena_gps_tecnologia_acessorios",
+              "LABEL": "Foto Antena GPS",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Monitor",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "monitor_tecnologia_acessorios",
+              "LABEL": "Monitor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "marca_monitor_tecnologia_acessorios",
+              "LABEL": "Marca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "modelo_monitor_tecnologia_acessorios",
+              "LABEL": "Modelo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "text",
+              "NAME": "numero_serie_monitor_tecnologia_acessorios",
+              "LABEL": "Numero serie",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_monitor_tecnologia_acessorios",
+              "LABEL": "Foto Monitor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Receptor RTK",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "receptor_rtk_tecnologia_e_acessorios",
+              "LABEL": "Receptor RTK",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_receptor_rtk_tecnologia_e_acessorios",
+              "LABEL": "Foto Receptor RTK",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "JD Link",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "jd_link_tecnologia_e_acessorios",
+              "LABEL": "JD Link",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_jd_link_tecnologia_e_acessorios",
+              "LABEL": "Foto JD Link",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Chicotes",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "chicotes_tecnologia_e_acessorios",
+              "LABEL": "Chicotes",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_chicotes_tecnologia_e_acessorios",
+              "LABEL": "Foto Chicotes",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Radio AM/FM",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "radio_am_fm_tecnologia_e_acessorios",
+              "LABEL": "Radio AM/FM",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_radio_am_fm_tecnologia_e_acessorios",
+              "LABEL": "Foto Radio AM/FM",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Chaves (minimo 1)",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "chaves_minimo_1_tecnologia_e_acessorios",
+              "LABEL": "Chaves (minimo 1)",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_chaves_minimo_1_tecnologia_e_acessorios",
+              "LABEL": "Foto Chaves (minimo 1)",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Manual do operador",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "manual_do_operador_tecnologia_e_acessorios",
+              "LABEL": "Manual do operador",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_manual_do_operador_tecnologia_e_acessorios",
+              "LABEL": "Foto Manual do operador",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Tecnologia e Acessorios",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_tecnologia_e_acessorios",
+              "LABEL": "Observacoes sobre Tecnologia e Acessorios",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_tecnologia_e_acessorios",
+              "LABEL": "(Observacao) Tecnologia e Acessorios",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Motor, Transmissao e Tracao",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Nivel de oleo do motor",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "nivel_de_oleo_do_motor_motor_transmissao_e_tracao",
+              "LABEL": "Nivel de oleo do motor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "normal",
+                  "TITLE": "normal"
+                },
+                {
+                  "NAME": "baixo",
+                  "TITLE": "baixo"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_nivel_de_oleo_do_motor_motor_transmissao_e_tracao",
+              "LABEL": "Foto Nivel de oleo do motor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Nivel de oleo hidraulico",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "nivel_de_oleo_hidraulico_motor_transmissao_e_tracao",
+              "LABEL": "Nivel de oleo hidraulico",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "normal",
+                  "TITLE": "normal"
+                },
+                {
+                  "NAME": "baixo",
+                  "TITLE": "baixo"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_nivel_de_oleo_hidraulico_motor_transmissao_e_tracao",
+              "LABEL": "Foto Nivel de oleo hidraulico",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Liquido Radiador",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "liquido_radiador_motor_transmissao_e_tracao",
+              "LABEL": "Liquido Radiador",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "normal",
+                  "TITLE": "normal"
+                },
+                {
+                  "NAME": "baixo",
+                  "TITLE": "baixo"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_liquido_radiador_motor_transmissao_e_tracao",
+              "LABEL": "Foto Liquido Radiador",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Correias / Tensores",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "correias_tensores_motor_transmissao_e_tracao",
+              "LABEL": "Correias / Tensores",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_correias_tensores_motor_transmissao_e_tracao",
+              "LABEL": "Foto Correias / Tensores",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Vazamento / Barulho anormal",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "vazamento_barulho_anormal_motor_transmissao_e_tracao",
+              "LABEL": "Vazamento / Barulho anormal",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "sim",
+                  "TITLE": "sim"
+                },
+                {
+                  "NAME": "nao",
+                  "TITLE": "nao"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_vazamento_barulho_anormal_motor_transmissao_e_tracao",
+              "LABEL": "Foto Vazamento / Barulho anormal",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Troca marchas normal",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "troca_marchas_normal_motor_transmissao_e_tracao",
+              "LABEL": "Troca marchas normal",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "sim",
+                  "TITLE": "sim"
+                },
+                {
+                  "NAME": "nao",
+                  "TITLE": "nao"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_troca_marchas_normal_motor_transmissao_e_tracao",
+              "LABEL": "Foto Troca marchas normal",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Motores de rodas vazando",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "motores_de_rodas_vazando_motor_transmissao_e_tracao",
+              "LABEL": "Motores de rodas vazando",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "sim",
+                  "TITLE": "sim"
+                },
+                {
+                  "NAME": "nao",
+                  "TITLE": "nao"
+                }
+              ]
+            },
+            {
+              "TYPE": "text",
+              "NAME": "qual_motores_de_rodas_vazando_motor_transmissao_e_tracao",
+              "LABEL": "Qual",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_motores_de_rodas_vazando_motor_transmissao_e_tracao",
+              "LABEL": "Foto Motores de rodas vazando",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Motor, Transmissao e Tracao",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_motor_transmissao_e_tracao",
+              "LABEL": "Observacoes sobre Motor, Transmissao e Tracao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_motor_transmissao_e_tracao",
+              "LABEL": "(Observacao) Motor, Transmissao e Tracao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Sistema de Distribuicao",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Caixa de distribuicao",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "caixa_de_distribuicao_sistema_de_distribuicao",
+              "LABEL": "Caixa de distribuicao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_caixa_de_distribuicao_sistema_de_distribuicao",
+              "LABEL": "Foto Caixa de distribuicao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Correias / Correntes do distribuidor",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "correias_correntes_do_distribuidor_sistema_de_distribuicao",
+              "LABEL": "Correias / Correntes do distribuidor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_correias_correntes_do_distribuidor_sistema_de_distribuicao",
+              "LABEL": "Foto Correias / Correntes do distribuidor",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Pratos",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "pratos_sistema_de_distribuicao",
+              "LABEL": "Pratos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_pratos_sistema_de_distribuicao",
+              "LABEL": "Foto Pratos",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Sistema porta dupla",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "sistema_porta_dupla_sistema_de_distribuicao",
+              "LABEL": "Sistema porta dupla",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_sistema_porta_dupla_sistema_de_distribuicao",
+              "LABEL": "Foto Sistema porta dupla",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Bombas hidraulicas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "bombas_hidraulicas_sistema_de_distribuicao",
+              "LABEL": "Bombas hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "intacto",
+                  "TITLE": "intacto"
+                },
+                {
+                  "NAME": "com avaria",
+                  "TITLE": "com avaria"
+                },
+                {
+                  "NAME": "faltante",
+                  "TITLE": "faltante"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_bombas_hidraulicas_sistema_de_distribuicao",
+              "LABEL": "Foto Bombas hidraulicas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Sistema de Distribuicao",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_sistema_de_distribuicao",
+              "LABEL": "Observacoes sobre Sistema de Distribuicao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_sistema_de_distribuicao",
+              "LABEL": "(Observacao) Sistema de Distribuicao",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Seguranca",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Extintor de incendio",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "extintor_de_incendio_seguranca",
+              "LABEL": "Extintor de incendio",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_extintor_de_incendio_seguranca",
+              "LABEL": "Foto Extintor de incendio",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Kit de ferramentas",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "radio",
+              "NAME": "kit_de_ferramentas_seguranca",
+              "LABEL": "Kit de ferramentas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "BONDTYPE": "ICONS",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": [
+                {
+                  "NAME": "possui",
+                  "TITLE": "possui"
+                },
+                {
+                  "NAME": "nao possui",
+                  "TITLE": "nao possui"
+                }
+              ]
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_kit_de_ferramentas_seguranca",
+              "LABEL": "Foto Kit de ferramentas",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Freios (funcionamento)",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "freios_funcionamento_seguranca",
+              "LABEL": "Freios (funcionamento)",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "FORM",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_freios_funcionamento_seguranca",
+              "LABEL": "Foto Freios (funcionamento)",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Alguma anormalidade",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "alguma_anormalidade_seguranca",
+              "LABEL": "Alguma anormalidade",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_alguma_anormalidade_seguranca",
+              "LABEL": "Foto Alguma anormalidade",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "obs",
+          "TITLE": "",
+          "QUESTION": "Observacoes gerais sobre Seguranca",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "obsgeral_seguranca",
+              "LABEL": "Observacoes sobre Seguranca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            },
+            {
+              "TYPE": "file",
+              "NAME": "photo_obsgeral_seguranca",
+              "LABEL": "(Observacao) Seguranca",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": false,
+              "MULTIPLE": false,
+              "BONDTYPE": "PHOTO",
+              "MIN": null,
+              "MAX": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "TITLE": "Parecer (Positivos e Negativos)",
+      "MODELS": [
+        {
+          "NAME": "set",
+          "TITLE": "Positivo",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "positivo_parecer",
+              "LABEL": "Observacoes: Positivo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MAX": null,
+              "MIN": null,
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "set",
+          "TITLE": "Negativo",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "text",
+              "NAME": "negativo_parecer",
+              "LABEL": "Observacoes: Negativo",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": true,
+              "BONDTYPE": "NOTES",
+              "MAX": null,
+              "MIN": null,
+              "EMUNS": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

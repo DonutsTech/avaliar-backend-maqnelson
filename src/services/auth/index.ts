@@ -11,8 +11,7 @@ class AuthService {
   createToken(user: User) {
     return jwt.sign(
       {
-        ID: user.ID,
-        ROLE: user.ROLE,
+        sub: user.ID,
       },
       process.env.JWT_SECRET as string,
       {

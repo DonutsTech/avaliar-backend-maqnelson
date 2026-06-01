@@ -6,6 +6,7 @@ import MarkWheelRouter from "./markWheel";
 import RateCheckinRouter from "./rateCheckin";
 import UserRouter from "./user";
 import VersionCheckinRouter from "./versionCheckin";
+import GaleryRateRouter from "./galeryRate";
 
 const applyRouters = (router: Router, routers: IRouter[]): void => {
   routers.forEach(route => route.create(router));
@@ -18,7 +19,8 @@ export const applyRoutersToApp = (router: Router): void => {
     MarkWheelRouter,
     CheckinRouter,
     RateCheckinRouter,
-    VersionCheckinRouter
+    GaleryRateRouter,
+    VersionCheckinRouter,
   ];
   applyRouters(router, routers);
 }
