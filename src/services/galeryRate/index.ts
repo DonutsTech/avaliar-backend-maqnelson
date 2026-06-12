@@ -1,17 +1,18 @@
+import { CustomError } from "../../error";
 import { prisma } from "../../prisma";
 
 class GaleryRateService {
-  async createGaleryRate(file: Express.Multer.File, body: CreateGalery) {
+  async createGaleryRate(files: Express.Multer.File[] | undefined, body: CreateGalery[]) {
     try {
-      const createGaleryRate = await prisma.galeryRate.create({
-        data: {
-          UUIDAPP: body.UUIDAPP,
-          NAME: body.NAME,
-          RATE_UUIDAPP: body.RATE_UUIDAPP,
-          URL: file.path
-        }
-      })
-      return createGaleryRate;
+      if ((files && files.length === 0) || !files) {
+        throw new CustomError("Arquivo faltande", 400);
+      }
+
+      for (const item of body) {
+        const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.startsWith(item.UUIDAPP));
+
+        console.log(fileUpload);
+      }
     } catch (error) {
       throw error;
     }

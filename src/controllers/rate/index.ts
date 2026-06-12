@@ -15,8 +15,8 @@ class RateController {
 
   async filterRateCheckinEmailVend(request: Request, response: Response, next: NextFunction) {
     try {
-      const param: { email: string } = request.query as any;
-      const filter = await rateService.filterRateCheckinEmailVend(param.email);
+      const param: { cEmail: string } = request.query as any;
+      const filter = await rateService.filterRateCheckinEmailVend(param.cEmail);
       return response.status(200).json(filter);
     } catch (error) {
       next(error);

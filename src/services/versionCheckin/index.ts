@@ -13,8 +13,8 @@ type VersionCheckinSelectInclude = {
   ATIVE: true,
   JSON_CHECKIN: true,
   OBJECT_CHECKIN: true,
-  CREATEDAT: true,
-  UPDATEDAT: true,
+  CREATEDAT: false,
+  UPDATEDAT: false,
 }
 
 const VERSION_CHECKIN_SELECT: Prisma.VersionCheckinSelect = {
@@ -27,8 +27,8 @@ const VERSION_CHECKIN_SELECT: Prisma.VersionCheckinSelect = {
   ATIVE: true,
   JSON_CHECKIN: true,
   OBJECT_CHECKIN: true,
-  CREATEDAT: true,
-  UPDATEDAT: true,
+  CREATEDAT: false,
+  UPDATEDAT: false,
 }
 
 class VersionCheckinService {
@@ -61,6 +61,7 @@ class VersionCheckinService {
         where: {
           ATIVE: true,
         },
+        select: VERSION_CHECKIN_SELECT
       });
 
       return { checkin: versionCheckin };
@@ -75,7 +76,8 @@ class VersionCheckinService {
         where: {
           IDCHECKIN: idCheckin,
           ATIVE: true,
-        }
+        },
+        select: VERSION_CHECKIN_SELECT
       });
 
       return versionCheckin;

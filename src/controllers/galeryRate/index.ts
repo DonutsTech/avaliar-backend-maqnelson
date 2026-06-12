@@ -4,14 +4,10 @@ import { galeryRateService } from "../../services/galeryRate";
 class GaleryRateController {
   async createGaleryRate(request: Request, response: Response, next: NextFunction) {
     try {
-      const body = request.body as CreateGalery;
-      const file = request.file as Express.Multer.File;
+      const body = request.body as CreateGalery[];
+      const files = request.files as Express.Multer.File[] | undefined;
 
-      if (!file) {
-        return response.status(400).json({ error: "File is required" });
-      }
-
-      const createGaleryRate = await galeryRateService.createGaleryRate(file, body);
+      const createGaleryRate = await galeryRateService.createGaleryRate(files, body);
       return response.status(201).json(createGaleryRate);
 
     } catch (error) {
