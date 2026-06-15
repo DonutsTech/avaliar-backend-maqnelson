@@ -1,20 +1,137 @@
+import { join } from "path";
+import type { GaleryRatePrisma } from "../../@types/interface/galeryRate";
+import { uploadFile } from "../../config/file";
 import { CustomError } from "../../error";
+import { galeryRateModel } from "../../models/galeryRate";
 import { prisma } from "../../prisma";
+import { rateService } from "../rate";
+
+interface CreateGalery {
+  UUIDAPP: string;
+  NAME: string;
+  URL: string;
+  RATE: {
+    ID: number;
+  };
+  RATE_UUIDAPP: string;
+}
+
+const selectGalery: GaleryRatePrisma  = {
+  UUIDAPP: true,
+  NAME: true,
+  URL: true,
+  RATE_UUIDAPP: true,
+  RATE: {
+    select: {
+      ID: true,
+    }
+  }
+}
 
 class GaleryRateService {
-  async createGaleryRate(files: Express.Multer.File[] | undefined, body: CreateGalery[]) {
+  async existGaleryRateForUuid(uuid: string): Promise<CreateGalery | null> {
+    const galeryRate = await galeryRateModel.findBy<GaleryRatePrisma>({
+      where: { UUIDAPP: uuid },
+      select: selectGalery,
+    });
+
+    return galeryRate;
+  }
+
+  async createGaleryRate(files: Express.Multer.File[] | undefined, body: string, email: string): Promise<{
+    sucess: boolean;
+    message: string;
+    data: CreateGalery[] | [];
+  }> {
+    console.log("Iniciando criação de galeria com os seguintes dados:");
+    console.log("Files:", files);
+    console.log("Body:", body);
+    console.log("Email:", email);
     try {
       if ((files && files.length === 0) || !files) {
-        throw new CustomError("Arquivo faltande", 400);
+        return {
+          sucess: false,
+          message: "Nenhum arquivo enviado",
+          data: [],
+        };
       }
 
-      for (const item of body) {
-        const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.startsWith(item.UUIDAPP));
+      const galery = JSON.parse((body as any).metadata) as CreateGalery[];
 
-        console.log(fileUpload);
+      if (!galery || galery.length === 0 || files.length !== galery.length) {
+        return {
+          sucess: false,
+          message: "Dados de galeria ou arquivos estão faltando ou não correspondem",
+          data: [],
+        };
       }
+
+      const gallery = [];
+
+      for (const item of galery) {
+        const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.split('_')[0] === item.UUIDAPP);
+
+        if (!fileUpload) {
+          throw new CustomError(`Arquivo para UUIDAPP ${item.UUIDAPP} não encontrado`, 400);
+        }
+
+        const path =  join(__dirname, '..', '..', '..', 'uploads', 'photo', fileUpload.originalname);
+
+        await uploadFile(fileUpload, path);
+
+        const existingGaleryRate = await this.existGaleryRateForUuid(item.UUIDAPP);
+
+        const existingRate = await rateService.existRateForUuid(item.RATE_UUIDAPP);
+
+        if (existingGaleryRate) {
+          gallery.push(existingGaleryRate);
+          continue;
+        }
+
+        if (!existingRate) {
+          const galleryRate = await prisma.galeryRate.create({
+            data: {
+              UUIDAPP: item.UUIDAPP,
+              NAME: item.NAME,
+              URL: path,
+              RATE: { create: { UUIDAPP: item.RATE_UUIDAPP, EMAILVEND: email } },
+            },
+            select: selectGalery
+          });
+
+          gallery.push(galleryRate);
+
+          continue;
+        }
+
+        if (existingRate) {
+          const galleryRate = await prisma.galeryRate.create({
+            data: {
+              UUIDAPP: item.UUIDAPP,
+              NAME: item.NAME,
+              URL: path,
+              RATE: { connect: { UUIDAPP: item.RATE_UUIDAPP, EMAILVEND: email } },
+            },
+            select: selectGalery
+          });
+
+          gallery.push(galleryRate);
+
+          continue;
+        }
+      }
+
+      return {
+        sucess: true,
+        message: "Galeria criada com sucesso",
+        data: gallery
+      };
     } catch (error) {
-      throw error;
+      return {
+        sucess: false,
+        message: "Erro ao criar galeria: " + (error instanceof Error ? error.message : String(error)),
+        data: [],
+      };
     }
   }
 

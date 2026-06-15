@@ -113,29 +113,29 @@ model VersionCheckin {
 model Rate {
   ID        Int   @id @default(autoincrement())
   UUIDAPP      String   @unique
-  IDVERSIONCHECKIN String   @db.Uuid
-  VERSIONCHECKIN VersionCheckin @relation(fields: [IDVERSIONCHECKIN], references: [ID])
-  RESULT String
+  IDVERSIONCHECKIN String?   @db.Uuid
+  VERSIONCHECKIN VersionCheckin? @relation(fields: [IDVERSIONCHECKIN], references: [ID])
+  RESULT String?
   STATUS String @default("EM ANDAMENTO")
   MESSAGE String?
-  TYPE String
-  MARK String
-  MODEL String
-  CHASSI String
-  VALUE String
-  CODVEND String
-  FILIAL String
-  NAMEVEND String
-  EMAILVEND String
-  CODCLI String
-  LJCLI String
-  CODPROS String
-  LJPROS String
-  NAMECLI String
-  ADDRESSCLI String
-  PHONECLI String
-  EMAILCLI String
-  DATE String
+  TYPE String?
+  MARK String?
+  MODEL String?
+  CHASSI String?
+  VALUE String?
+  CODVEND String?
+  FILIAL String?
+  NAMEVEND String?
+  EMAILVEND String?
+  CODCLI String?
+  LJCLI String?
+  CODPROS String?
+  LJPROS String?
+  NAMECLI String?
+  ADDRESSCLI String?
+  PHONECLI String?
+  EMAILCLI String?
+  DATE String?
   VALUE1YEAR String?
   VALUE2YEAR String?
   VALUE3YEAR String?

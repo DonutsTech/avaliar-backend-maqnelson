@@ -4,12 +4,14 @@ import { galeryRateService } from "../../services/galeryRate";
 class GaleryRateController {
   async createGaleryRate(request: Request, response: Response, next: NextFunction) {
     try {
-      const body = request.body as CreateGalery[];
+      console.log("Request received for creating galery rate");
+      const body = request.body as string;
       const files = request.files as Express.Multer.File[] | undefined;
+       const param: { cEmail: string } = request.query as any;
 
-      const createGaleryRate = await galeryRateService.createGaleryRate(files, body);
+      const createGaleryRate = await galeryRateService.createGaleryRate(files, body, param.cEmail);
+
       return response.status(201).json(createGaleryRate);
-
     } catch (error) {
       next(error);
     }

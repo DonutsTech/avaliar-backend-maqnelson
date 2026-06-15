@@ -185,6 +185,7 @@ class RateService {
       throw error;
     }
   }
+
   async createRateCheckin(body: CreateRateCheckinDto) {
     try {
       await versionCheckinService.existID(body.IDVERSIONCHECKIN);
@@ -283,6 +284,23 @@ class RateService {
       const rate = await rateModel.update<RateSelect>(id, data, RATE_SELECT);
 
       return rate;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async existRateForUuid(uuid: string): Promise<boolean> {
+    try {
+      const rate = await rateModel.findBy<RateSelect>({
+        where: { UUIDAPP: uuid },
+        select: RATE_SELECT,
+      });
+
+      if (!rate) {
+        return false;
+      }
+
+      return true;
     } catch (error) {
       throw error;
     }

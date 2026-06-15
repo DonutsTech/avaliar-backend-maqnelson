@@ -5,7 +5,7 @@ import { isAuthenticate, schemaValidator, validatorRole } from "../../middleware
 
 class GaleryRateRouter {
   public static create(router: Router): void {
-    router.post("/galery/image", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), imageUpload.array('photos') , galeryRateController.createGaleryRate);
+    router.post("/galery/image", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), imageUpload.array('photos') , galeryRateController.createGaleryRate);
     router.post("/galery/video", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), videoUpload.single('video') , galeryRateController.createGaleryRate);
     router.post("/galery/pdf", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galeryRate/create"), documentUpload.single('') , galeryRateController.createGaleryRate);
     router.get("/galery/:id", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), galeryRateController.getAllGaleryRate);
