@@ -5,7 +5,7 @@ import { rateService } from "../../services/rate";
 class RateController {
   async createRateCheckin(request: Request, response: Response, next: NextFunction) {
     try {
-      const body: CreateRateCheckinDto = request.body;
+      const body: { rate: CreateRateCheckinDto[] } = request.body;
       const create = await rateService.createRateCheckin(body);
       return response.status(201).json(create);
     } catch (error) {

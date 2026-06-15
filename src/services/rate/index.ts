@@ -186,44 +186,55 @@ class RateService {
     }
   }
 
-  async createRateCheckin(body: CreateRateCheckinDto) {
+  async createRateCheckin(body: { rate: CreateRateCheckinDto[] }) {
     try {
-      await versionCheckinService.existID(body.IDVERSIONCHECKIN);
+      const newArray = [];
 
-      const existUuid = await rateModel.findBy({ where: { UUIDAPP: body.UUIDAPP } });
+      for (const item of body.rate) {
+        await versionCheckinService.existID(item.IDVERSIONCHECKIN);
 
-      if (existUuid) {
-        return existUuid;
+        const existUuid = await rateModel.findBy<RateCheckinSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_CHECKIN_SELECT });
+
+        if (existUuid) {
+          const updateRate = await this.updateRate(existUuid.ID, item);
+
+          newArray.push(updateRate);
+          continue;
+        }
+
+        if (!existUuid) {
+          const createRate = await rateModel.create({
+            data: {
+              UUIDAPP: item.UUIDAPP,
+              CODVEND: item.CODVEND,
+              FILIAL: item.FILIAL,
+              NAMEVEND: item.NAMEVEND,
+              EMAILVEND: item.EMAILVEND,
+              RESULT: item.RESULT,
+              TYPE: item.TYPE,
+              MARK: item.MARK,
+              MODEL: item.MODEL,
+              CHASSI: item.CHASSI,
+              VALUE: item.VALUE,
+              DATE: item.DATE,
+              CODCLI: item.CODCLI,
+              LJCLI: item.LJCLI,
+              CODPROS: item.CODPROS,
+              LJPROS: item.LJPROS,
+              NAMECLI: item.NAMECLI,
+              ADDRESSCLI: item.ADDRESSCLI,
+              PHONECLI: item.PHONECLI,
+              EMAILCLI: item.EMAILCLI,
+              VERSIONCHECKIN: {connect: { ID: item.IDVERSIONCHECKIN }},
+            },
+            select: RATE_CHECKIN_SELECT,
+          });
+
+          newArray.push(createRate);
+        }
       }
 
-      const rate = await rateModel.create({
-        data: {
-          UUIDAPP: body.UUIDAPP,
-          CODVEND: body.CODVEND,
-          FILIAL: body.FILIAL,
-          NAMEVEND: body.NAMEVEND,
-          EMAILVEND: body.EMAILVEND,
-          RESULT: body.RESULT,
-          TYPE: body.TYPE,
-          MARK: body.MARK,
-          MODEL: body.MODEL,
-          CHASSI: body.CHASSI,
-          VALUE: body.VALUE,
-          DATE: body.DATE,
-          CODCLI: body.CODCLI,
-          LJCLI: body.LJCLI,
-          CODPROS: body.CODPROS,
-          LJPROS: body.LJPROS,
-          NAMECLI: body.NAMECLI,
-          ADDRESSCLI: body.ADDRESSCLI,
-          PHONECLI: body.PHONECLI,
-          EMAILCLI: body.EMAILCLI,
-          VERSIONCHECKIN: {connect: { ID: body.IDVERSIONCHECKIN }},
-        },
-        select: RATE_CHECKIN_SELECT,
-      });
-
-      return rate;
+      return { rate: newArray };
     } catch (error) {
       throw error;
     }
@@ -281,7 +292,7 @@ class RateService {
     try {
       await this.existById(id);
 
-      const rate = await rateModel.update<RateSelect>(id, data, RATE_SELECT);
+      const rate = await rateModel.update<RateCheckinSelect>(id, data, RATE_SELECT);
 
       return rate;
     } catch (error) {
