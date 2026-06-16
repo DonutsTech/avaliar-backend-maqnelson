@@ -1,10 +1,10 @@
-import type { CreateMarkWheelsDto } from "../../@types/interface/createMarkWheels.dto";
+import type { CreateMarkWheels } from "../../@types/interface/markWheels";
 import { markWheelsModel } from "../../models/markWheels";
 import { uuid } from "../../utils/uuid";
 import { deletAccents } from "../../utils/word";
 
 class MarkWheelsService {
-  async create(body: CreateMarkWheelsDto) {
+  async create(body: CreateMarkWheels) {
     try {
       body.NAME = deletAccents(body.NAME.toUpperCase());
 

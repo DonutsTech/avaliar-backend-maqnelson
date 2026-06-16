@@ -1,9 +1,8 @@
-import type { CreateRateCheckinDto, UpdateRateDto } from "../../@types/interface/createRate.dto";
+import type { CreateRateForm, RateForminSelect, RateSelect, UpdateRate } from "../../@types/interface/rate";
 import type { Prisma } from "../../generated/prisma/browser";
 import { rateModel } from "../../models/rate";
-import { versionCheckinService } from "../versionCheckin";
 
-type RateCheckinSelect = {
+const RATE_FORM_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
   ID: true,
   ADDRESSCLI: true,
@@ -28,93 +27,6 @@ type RateCheckinSelect = {
   VALUE: true,
   STATUS: true,
 }
-
-const RATE_CHECKIN_SELECT: Prisma.RateSelect = {
-  UUIDAPP: true,
-  ID: true,
-  ADDRESSCLI: true,
-  CHASSI: true,
-  CODCLI: true,
-  CODPROS: true,
-  CODVEND: true,
-  DATE: true,
-  EMAILCLI: true,
-  EMAILVEND: true,
-  FILIAL: true,
-  IDVERSIONCHECKIN: true,
-  LJCLI: true,
-  LJPROS: true,
-  MARK: true,
-  MODEL: true,
-  NAMECLI: true,
-  NAMEVEND: true,
-  PHONECLI: true,
-  RESULT: true,
-  TYPE: true,
-  VALUE: true,
-  STATUS: true,
-}
-
-type RateSelect = {
-  UUIDAPP: true,
-  ID: true,
-  ADDRESSCLI: true,
-  CHASSI: true,
-  CODCLI: true,
-  CODPROS: true,
-  CODVEND: true,
-  DATE: true,
-  EMAILCLI: true,
-  EMAILVEND: true,
-  FILIAL: true,
-  IDVERSIONCHECKIN: true,
-  LJCLI: true,
-  LJPROS: true,
-  MARK: true,
-  MODEL: true,
-  NAMECLI: true,
-  NAMEVEND: true,
-  PHONECLI: true,
-  RESULT: true,
-  TYPE: true,
-  VALUE: true,
-  STATUS: true,
-  VALUE1YEAR: true,
-  VALUE2YEAR: true,
-  VALUE3YEAR: true,
-  VALUE4YEAR: true,
-  TAXA: true,
-  VALUEVIEW: true,
-  VALUERATE: true,
-  VALIDITY: true,
-  VALUESUG: true,
-  FILIAL_WEB: true,
-  CANAL: true,
-  RESSED: true,
-  MODALITY: true,
-  VALUEBY: true,
-  VALUENEG: true,
-  STOKE: true,
-  REASON: true,
-  OBSREASON: true,
-  INDICATOR: true,
-  WHO: true,
-  OBSALL: true,
-  GALERYRATES: {
-    select: {
-      ID: true,
-      URL: true,
-    },
-  },
-  CREATEDAT: true,
-  UPDATEDAT: true,
-  VERSIONCHECKIN: {
-    select: {
-      JSON_CHECKIN: true,
-    }
-  }
-}
-
 const RATE_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
   ID: true,
@@ -186,14 +98,14 @@ class RateService {
     }
   }
 
-  async createRateCheckin(body: { rate: CreateRateCheckinDto[] }) {
+  async createRateCheckin(body: { rate: CreateRateForm[] }) {
     try {
       const newArray = [];
 
       for (const item of body.rate) {
-        await versionCheckinService.existID(item.IDVERSIONCHECKIN);
+        await versionFormService.existID(item.IDVERSIONCHECKIN);
 
-        const existUuid = await rateModel.findBy<RateCheckinSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_CHECKIN_SELECT });
+        const existUuid = await rateModel.findBy<RateForminSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_FORM_SELECT });
 
         if (existUuid) {
           const updateRate = await this.updateRate(existUuid.ID, item);
@@ -227,7 +139,7 @@ class RateService {
               EMAILCLI: item.EMAILCLI,
               VERSIONCHECKIN: {connect: { ID: item.IDVERSIONCHECKIN }},
             },
-            select: RATE_CHECKIN_SELECT,
+            select: RATE_FORM_SELECT,
           });
 
           newArray.push(createRate);
@@ -240,14 +152,14 @@ class RateService {
     }
   }
 
-  async filterRateCheckinEmailVend(email: string) {
+  async filterRateForminEmailVend(email: string) {
     try {
-      const recusados = await rateModel.findAll<RateCheckinSelect>({
+      const recusados = await rateModel.findAll<RateForminSelect>({
         where: {
           EMAILVEND: email,
           STATUS: "RECUSADO",
         },
-        select: RATE_CHECKIN_SELECT,
+        select: RATE_FORM_SELECT,
       });
 
       const faltantes = 10 - recusados.length;
@@ -256,7 +168,7 @@ class RateService {
         return { rate: recusados };
       }
 
-      const outros = await rateModel.findAll<RateCheckinSelect>({
+      const outros = await rateModel.findAll<RateForminSelect>({
         where: {
           EMAILVEND: email,
           NOT: {
@@ -267,7 +179,7 @@ class RateService {
           CREATEDAT: "desc",
         },
         take: faltantes,
-        select: RATE_CHECKIN_SELECT,
+        select: RATE_FORM_SELECT,
       });
 
       return { rate: [...recusados, ...outros] };
@@ -288,11 +200,11 @@ class RateService {
     }
   }
 
-  async updateRate(id: number, data: UpdateRateDto) {
+  async updateRate(id: number, data: UpdateRate) {
     try {
       await this.existById(id);
 
-      const rate = await rateModel.update<RateCheckinSelect>(id, data, RATE_SELECT);
+      const rate = await rateModel.update<RateForminSelect>(id, data, RATE_SELECT);
 
       return rate;
     } catch (error) {

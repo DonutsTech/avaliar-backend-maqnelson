@@ -2,7 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import type { CreateSchemaDto } from "../../@types/interface/createSchema.dto";
 import { CustomError } from "../../error";
 import { schemaModel } from "../../models/schema";
-import { checkinService } from "../checkin";
+import { checkinService } from "../form";
 
 class SchemaService {
   async createSchema(body: CreateSchemaDto) {
