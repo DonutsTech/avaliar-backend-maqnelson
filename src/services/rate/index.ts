@@ -1,6 +1,7 @@
 import type { CreateRateForm, RateForminSelect, RateSelect, UpdateRate } from "../../@types/interface/rate";
 import type { Prisma } from "../../generated/prisma/browser";
 import { rateModel } from "../../models/rate";
+import { versionForminService } from "../versionForm";
 
 const RATE_FORM_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
@@ -103,7 +104,7 @@ class RateService {
       const newArray = [];
 
       for (const item of body.rate) {
-        await versionFormService.existID(item.IDVERSIONCHECKIN);
+        await versionForminService.existID(item.IDVERSIONCHECKIN);
 
         const existUuid = await rateModel.findBy<RateForminSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_FORM_SELECT });
 

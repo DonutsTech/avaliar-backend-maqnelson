@@ -24,7 +24,7 @@ class FormController {
     }
   }
 
-  async getForm(request: Request, response: Response, next: NextFunction) {
+  async getForm(_request: Request, response: Response, next: NextFunction) {
     try {
       const resp = await formService.getAll();
       return response.status(200).json(resp);
@@ -36,7 +36,7 @@ class FormController {
   async getFormById(request: Request, response: Response, next: NextFunction) {
     try {
       const { id } = request.params as { id: string };
-      const form = await formService.(id);
+      const form = await formService.form(id);
       return response.status(200).json(form);
     } catch (error) {
       next(error);

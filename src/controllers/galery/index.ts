@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import { galeryService } from "../../services/galery";
 
 class GaleryController {
   async createGalery(request: Request, response: Response, next: NextFunction) {
@@ -7,7 +8,7 @@ class GaleryController {
       const files = request.files as Express.Multer.File[] | undefined;
        const param: { cEmail: string } = request.query as any;
 
-      const createGalery = await galeryService.createGalery(files, body, param.cEmail);
+      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail);
 
       return response.status(201).json(createGalery);
     } catch (error) {
@@ -18,7 +19,7 @@ class GaleryController {
   async getAllGalery(request: Request, response: Response, next: NextFunction) {
     try {
       const { id } = request.params as { id: string };
-      const getAllGalery = await galeryService.getAllGalery(id);
+      const getAllGalery = await galeryService.getAllGaleryForRate(id);
       return response.status(200).json(getAllGalery);
     } catch (error) {
       next(error);
