@@ -1,6 +1,6 @@
 import { join } from "path";
 import type { CreateGalery, GaleryPrisma } from "../../@types/interface/galery";
-import { uploadFile } from "../../config/file";
+import { deleteFile, uploadFile } from "../../config/file";
 import { CustomError } from "../../error";
 import { galeryModel } from "../../models/galery";
 import { prisma } from "../../prisma";
@@ -26,6 +26,34 @@ class GaleryService {
     });
 
     return galeryRate;
+  }
+
+  async createFileGaleryForRate(file: Express.Multer.File, type: 'photo' | 'video' | 'document'): Promise<string> {
+    try {
+      const path =  join(__dirname, '..', '..', '..', 'uploads', type, file.originalname);
+
+      await uploadFile(file, path);
+
+      return `${process.env.BANCKEND_URL}/uploads/${type}/${file.originalname}`;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async deleteFileGaleryForRate(url: string, type: 'photo' | 'video' | 'document') {
+    try {
+      const arrayPath = url.split('/')
+      const fileName = arrayPath[arrayPath.length - 1];
+
+      if (!fileName) {
+        throw new CustomError("Nome do arquivo não encontrado no caminho fornecido", 400);
+      }
+
+      const path =  join(__dirname, '..', '..', '..', 'uploads', type, fileName);
+      await deleteFile(path);
+    } catch (error) {
+      throw error;
+    }
   }
 
   async createGaleryForRate(files: Express.Multer.File[] | undefined, body: string, email: string): Promise<{
@@ -57,20 +85,37 @@ class GaleryService {
       for (const item of galery) {
         const existingGaleryRate = await this.existGaleryRateForUuid(item.UUIDAPP);
 
-        if (existingGaleryRate) {
+        if (existingGaleryRate && existingGaleryRate.URL === item.URL) {
           gallery.push(existingGaleryRate);
           continue;
         }
 
         const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.split('_')[0] === item.UUIDAPP);
 
+        if (existingGaleryRate && existingGaleryRate.URL !== item.URL && fileUpload) {
+          await this.deleteFileGaleryForRate(existingGaleryRate.URL, 'photo');
+          const file =  await this.createFileGaleryForRate(fileUpload, 'photo');
+
+          const updateGaleryRate = await prisma.galeryRate.update({
+            where: {
+              UUIDAPP: item.UUIDAPP
+            },
+            data: {
+              NAME: item.NAME,
+              URL: file,
+            },
+            select: selectGalery
+          });
+
+          gallery.push(updateGaleryRate);
+          continue;
+        }
+
         if (!fileUpload) {
           throw new CustomError(`Arquivo para UUIDAPP ${item.UUIDAPP} não encontrado`, 400);
         }
 
-        const path =  join(__dirname, '..', '..', '..', 'uploads', 'photo', fileUpload.originalname);
-
-        await uploadFile(fileUpload, path);
+        const file =  await this.createFileGaleryForRate(fileUpload, 'photo');
 
         const existingRate = await rateService.existRateForUuid(item.RATE_UUIDAPP);
 
@@ -79,7 +124,7 @@ class GaleryService {
             data: {
               UUIDAPP: item.UUIDAPP,
               NAME: item.NAME,
-              URL: `${process.env.BANCKEND_URL}/uploads/photo/${fileUpload.originalname}`,
+              URL: file,
               RATE: { create: { UUIDAPP: item.RATE_UUIDAPP, EMAILVEND: email } },
             },
             select: selectGalery
@@ -95,7 +140,7 @@ class GaleryService {
             data: {
               UUIDAPP: item.UUIDAPP,
               NAME: item.NAME,
-              URL: path,
+              URL: `${process.env.BANCKEND_URL}/uploads/photo/${fileUpload.originalname}`,
               RATE: { connect: { UUIDAPP: item.RATE_UUIDAPP, EMAILVEND: email } },
             },
             select: selectGalery

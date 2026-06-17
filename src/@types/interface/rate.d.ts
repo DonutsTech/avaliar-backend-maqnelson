@@ -1,4 +1,5 @@
 export interface CreateRateForm {
+  ID: number;
   UUIDAPP: string;
   IDVERSIONCHECKIN: string;
   CODVEND: string;
@@ -22,9 +23,11 @@ export interface CreateRateForm {
   EMAILCLI: string;
   MESSAGE: string;
   STATUS: string;
+  PHOTO: string;
 }
 
 export interface CreateRate {
+  ID: number;
   UUIDAPP: string;
   IDVERSIONCHECKIN: string;
   RESULT: string;
@@ -48,6 +51,7 @@ export interface CreateRate {
   PHONECLI: string;
   EMAILCLI: string;
   DATE: string;
+  PHOTO: string;
   VALUE1YEAR?: string;
   VALUE2YEAR?: string;
   VALUE3YEAR?: string;
@@ -97,6 +101,7 @@ export type RateForminSelect = {
   TYPE: true,
   VALUE: true,
   STATUS: true,
+  PHOTO: true,
 }
 
 export type RateSelect = {
@@ -144,6 +149,7 @@ export type RateSelect = {
   INDICATOR: true,
   WHO: true,
   OBSALL: true,
+  PHOTO: true,
   GALERYRATES: {
     select: {
       ID: true,

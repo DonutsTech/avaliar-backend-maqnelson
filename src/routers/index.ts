@@ -4,6 +4,7 @@ import AuthRouter from "./auth";
 import FormRouter from "./form";
 import GaleryRateRouter from "./galery";
 import MarkWheelRouter from "./markWheel";
+import RateRouter from "./rate";
 import UserRouter from "./user";
 import VersionForminRouter from "./versionForm";
 
@@ -18,6 +19,7 @@ export const applyRoutersToApp = (router: Router): void => {
     MarkWheelRouter,
     GaleryRateRouter,
     FormRouter,
+    RateRouter,
     VersionForminRouter,
   ];
   applyRouters(router, routers);

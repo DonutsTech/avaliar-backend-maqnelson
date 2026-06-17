@@ -136,6 +136,7 @@ model Rate {
   PHONECLI String?
   EMAILCLI String?
   DATE String?
+  PHOTO String?
   VALUE1YEAR String?
   VALUE2YEAR String?
   VALUE3YEAR String?

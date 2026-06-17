@@ -1,4 +1,4 @@
-import type { CreateRateForm, RateForminSelect, RateSelect, UpdateRate } from "../../@types/interface/rate";
+import type { CreateRateForm, RateForminSelect, RateSelect } from "../../@types/interface/rate";
 import type { Prisma } from "../../generated/prisma/browser";
 import { rateModel } from "../../models/rate";
 import { versionForminService } from "../versionForm";
@@ -99,7 +99,7 @@ class RateService {
     }
   }
 
-  async createRateCheckin(body: { rate: CreateRateForm[] }) {
+  async createRate(body: { rate: CreateRateForm[] }) {
     try {
       const newArray = [];
 
@@ -109,7 +109,7 @@ class RateService {
         const existUuid = await rateModel.findBy<RateForminSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_FORM_SELECT });
 
         if (existUuid) {
-          const updateRate = await this.updateRate(existUuid.ID, item);
+        const updateRate = await this.updateRate(existUuid.ID, { ...item, STATUS: "EM ANDAMENTO" });
 
           newArray.push(updateRate);
           continue;
@@ -147,14 +147,15 @@ class RateService {
         }
       }
 
-      return { rate: newArray };
+      return { rate: newArray, success: true };
     } catch (error) {
-      throw error;
+      return { rate: [], success: false };
     }
   }
 
   async filterRateForminEmailVend(email: string) {
     try {
+      console.log(email);
       const recusados = await rateModel.findAll<RateForminSelect>({
         where: {
           EMAILVEND: email,
@@ -201,11 +202,34 @@ class RateService {
     }
   }
 
-  async updateRate(id: number, data: UpdateRate) {
+  async updateRate(id: number, data: CreateRateForm) {
     try {
       await this.existById(id);
 
-      const rate = await rateModel.update<RateForminSelect>(id, data, RATE_SELECT);
+      const rate = await rateModel.update<RateForminSelect>(id, {
+        UUIDAPP: data.UUIDAPP,
+        CODVEND: data.CODVEND,
+        FILIAL: data.FILIAL,
+        NAMEVEND: data.NAMEVEND,
+        EMAILVEND: data.EMAILVEND,
+        RESULT: data.RESULT,
+        TYPE: data.TYPE,
+        MARK: data.MARK,
+        MODEL: data.MODEL,
+        CHASSI: data.CHASSI,
+        VALUE: data.VALUE,
+        DATE: data.DATE,
+        CODCLI: data.CODCLI,
+        LJCLI: data.LJCLI,
+        CODPROS: data.CODPROS,
+        LJPROS: data.LJPROS,
+        NAMECLI: data.NAMECLI,
+        ADDRESSCLI: data.ADDRESSCLI,
+        PHONECLI: data.PHONECLI,
+        EMAILCLI: data.EMAILCLI,
+        STATUS: data.STATUS,
+        VERSIONCHECKIN: {connect: { ID: data.IDVERSIONCHECKIN }},
+      }, RATE_FORM_SELECT);
 
       return rate;
     } catch (error) {

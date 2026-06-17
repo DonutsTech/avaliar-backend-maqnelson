@@ -6,7 +6,7 @@ class RateController {
   async createRateForm(request: Request, response: Response, next: NextFunction) {
     try {
       const body: { rate: CreateRateForm[] } = request.body;
-      const create = await rateService.createRateCheckin(body);
+      const create = await rateService.createRate(body);
       return response.status(201).json(create);
     } catch (error) {
       next(error);
@@ -16,7 +16,7 @@ class RateController {
   async filterRateForminEmailVend(request: Request, response: Response, next: NextFunction) {
     try {
       const param: { cEmail: string } = request.query as any;
-      const filter = await rateService.filterRateFormEmailVend(param.cEmail);
+      const filter = await rateService.filterRateForminEmailVend(param.cEmail);
       return response.status(200).json(filter);
     } catch (error) {
       next(error);
@@ -34,7 +34,7 @@ class RateController {
     }
   }
 
-  async filterAll(request: Request, response: Response, next: NextFunction) {
+  async filterAll(_request: Request, response: Response, next: NextFunction) {
     try {
       const rates = await rateService.filterAll();
       return response.status(200).json(rates);

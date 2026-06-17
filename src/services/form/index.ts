@@ -8,6 +8,7 @@ import { emunService } from "../emun";
 import { inputService } from "../input";
 import { modelService } from "../model";
 import { schemaService } from "../schema";
+import { versionForminService } from "../versionForm";
 
 export const FORM_SELECT_INCLUDE: Prisma.CheckinSelect = {
   SCHEMAS: {
@@ -142,7 +143,7 @@ class FormService {
 
       const formatObj = formatForminForObject(form);
 
-      const versionForm = await versionFormService.create({
+      const versionForm = await versionForminService.create({
         ATIVE: true,
         JSON_CHECKIN: JSON.stringify(form),
         OBJECT_CHECKIN: JSON.stringify(formatObj),
@@ -205,13 +206,13 @@ class FormService {
 
       const formatObj = formatForminForObject(form);
 
-      const versionForm = await versionFormService.findVersionCheckinByIdCheckin(id);
+      const versionForm = await versionForminService.findVersionForminByIdCheckin(id);
 
       if (versionForm === null) {
         throw new CustomError('VersionCheckin não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
       }
 
-      await versionFormService.updateVersionForm(versionForm.ID, {
+      await versionForminService.updateVersionCheckin(versionForm.ID, {
         ATIVE: false,
         JSON_CHECKIN: versionForm.JSON_CHECKIN,
         OBJECT_CHECKIN: versionForm.OBJECT_CHECKIN,
@@ -222,7 +223,7 @@ class FormService {
         VIDEO: versionForm.VIDEO,
       });
 
-      const newVersionForm = await versionFormService.create({
+      const newVersionForm = await versionForminService.create({
         ATIVE: true,
         JSON_CHECKIN: JSON.stringify(form),
         OBJECT_CHECKIN: JSON.stringify(formatObj),
@@ -279,13 +280,13 @@ class FormService {
         }
       }
 
-      const versionForm = await versionFormService.findVersionFormByIdForm(id);
+      const versionForm = await versionForminService.findVersionForminByIdCheckin(id);
 
       if (versionForm === null) {
         throw new CustomError('VersionCheckin não encontrado, por favor verifique o seu id', StatusCodes.NOT_FOUND);
       }
 
-      await versionFormService.updateVersionCheckin(versionForm.ID, {
+      await versionForminService.updateVersionCheckin(versionForm.ID, {
         ATIVE: false,
         JSON_CHECKIN: versionForm.JSON_CHECKIN,
         OBJECT_CHECKIN: versionForm.OBJECT_CHECKIN,
