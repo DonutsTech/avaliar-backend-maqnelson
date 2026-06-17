@@ -49,14 +49,14 @@ class GaleryService {
         throw new CustomError("Nome do arquivo não encontrado no caminho fornecido", 400);
       }
 
-      const path =  join(__dirname, '..', '..', '..', 'uploads', type, fileName);
+      const path =  join(__dirname, '..', '..', 'uploads', type, fileName);
       await deleteFile(path);
     } catch (error) {
       throw error;
     }
   }
 
-  async createGaleryForRate(files: Express.Multer.File[] | undefined, body: string, email: string): Promise<{
+  async createGaleryForRate(files: Express.Multer.File[] | undefined, body: string, email: string, type: 'photo' | 'video'): Promise<{
     success: boolean;
     message: string;
     data: CreateGalery[] | [];
@@ -92,9 +92,9 @@ class GaleryService {
 
         const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.split('_')[0] === item.UUIDAPP);
 
-        if (existingGaleryRate && existingGaleryRate.URL !== item.URL && fileUpload) {
-          await this.deleteFileGaleryForRate(existingGaleryRate.URL, 'photo');
-          const file =  await this.createFileGaleryForRate(fileUpload, 'photo');
+        if (existingGaleryRate && fileUpload && existingGaleryRate.URL !== item.URL) {
+          await this.deleteFileGaleryForRate(existingGaleryRate.URL, type);
+          const file =  await this.createFileGaleryForRate(fileUpload, type);
 
           const updateGaleryRate = await prisma.galeryRate.update({
             where: {
@@ -115,7 +115,7 @@ class GaleryService {
           throw new CustomError(`Arquivo para UUIDAPP ${item.UUIDAPP} não encontrado`, 400);
         }
 
-        const file =  await this.createFileGaleryForRate(fileUpload, 'photo');
+        const file =  await this.createFileGaleryForRate(fileUpload, type);
 
         const existingRate = await rateService.existRateForUuid(item.RATE_UUIDAPP);
 
@@ -140,7 +140,7 @@ class GaleryService {
             data: {
               UUIDAPP: item.UUIDAPP,
               NAME: item.NAME,
-              URL: `${process.env.BANCKEND_URL}/uploads/photo/${fileUpload.originalname}`,
+              URL: file,
               RATE: { connect: { UUIDAPP: item.RATE_UUIDAPP, EMAILVEND: email } },
             },
             select: selectGalery

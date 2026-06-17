@@ -156,6 +156,7 @@ export type RateSelect = {
       URL: true,
     },
   },
+  MESSAGE: true,
   CREATEDAT: true,
   UPDATEDAT: true,
   VERSIONCHECKIN: {

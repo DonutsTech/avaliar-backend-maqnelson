@@ -2,13 +2,27 @@ import type { NextFunction, Request, Response } from "express";
 import { galeryService } from "../../services/galery";
 
 class GaleryController {
-  async createGalery(request: Request, response: Response, next: NextFunction) {
+  async createGaleryPhoto(request: Request, response: Response, next: NextFunction) {
     try {
       const body = request.body as string;
       const files = request.files as Express.Multer.File[] | undefined;
-       const param: { cEmail: string } = request.query as any;
+      const param: { cEmail: string } = request.query as any;
 
-      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail);
+      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail, 'photo');
+
+      return response.status(201).json(createGalery);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async createGaleryVideo(request: Request, response: Response, next: NextFunction) {
+    try {
+      const body = request.body as string;
+      const files = request.files as Express.Multer.File[] | undefined;
+      const param: { cEmail: string } = request.query as any;
+
+      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail, 'video');
 
       return response.status(201).json(createGalery);
     } catch (error) {

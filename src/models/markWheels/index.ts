@@ -42,6 +42,14 @@ class MarkWheels {
       handlePrismaError(error);
     }
   }
+
+  async count(where: Prisma.MarkWheelsWhereInput) {
+    try {
+      return await prisma.markWheels.count({ where });
+    } catch (error) {
+      handlePrismaError(error);
+    }
+  }
 }
 
 export const markWheelsModel = new MarkWheels();

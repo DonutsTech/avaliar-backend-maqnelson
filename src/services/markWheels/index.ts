@@ -4,6 +4,14 @@ import { uuid } from "../../utils/uuid";
 import { deletAccents } from "../../utils/word";
 
 class MarkWheelsService {
+  async countMarkWheels() {
+    try {
+      return await markWheelsModel.count({});
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async create(body: CreateMarkWheels) {
     try {
       body.NAME = deletAccents(body.NAME.toUpperCase());

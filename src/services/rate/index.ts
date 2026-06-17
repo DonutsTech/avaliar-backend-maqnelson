@@ -156,12 +156,12 @@ class RateService {
   async filterRateForminEmailVend(email: string) {
     try {
       console.log(email);
-      const recusados = await rateModel.findAll<RateForminSelect>({
+      const recusados = await rateModel.findAll<RateSelect>({
         where: {
           EMAILVEND: email,
           STATUS: "RECUSADO",
         },
-        select: RATE_FORM_SELECT,
+        select: RATE_SELECT,
       });
 
       const faltantes = 10 - recusados.length;
@@ -170,7 +170,7 @@ class RateService {
         return { rate: recusados };
       }
 
-      const outros = await rateModel.findAll<RateForminSelect>({
+      const outros = await rateModel.findAll<RateSelect>({
         where: {
           EMAILVEND: email,
           NOT: {
@@ -181,7 +181,7 @@ class RateService {
           CREATEDAT: "desc",
         },
         take: faltantes,
-        select: RATE_FORM_SELECT,
+        select: RATE_SELECT,
       });
 
       return { rate: [...recusados, ...outros] };
