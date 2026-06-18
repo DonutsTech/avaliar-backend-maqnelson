@@ -8,7 +8,7 @@ class GaleryController {
       const files = request.files as Express.Multer.File[] | undefined;
       const param: { cEmail: string } = request.query as any;
 
-      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail, 'photo');
+      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail);
 
       return response.status(201).json(createGalery);
     } catch (error) {
@@ -22,7 +22,7 @@ class GaleryController {
       const files = request.files as Express.Multer.File[] | undefined;
       const param: { cEmail: string } = request.query as any;
 
-      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail, 'video');
+      const createGalery = await galeryService.createGaleryForRate(files, body, param.cEmail);
 
       return response.status(201).json(createGalery);
     } catch (error) {

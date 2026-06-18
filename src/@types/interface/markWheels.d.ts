@@ -1,4 +1,4 @@
 export interface CreateMarkWheels {
   NAME: string;
-  UUID: string;
+  UUIDAPP: string;
 }

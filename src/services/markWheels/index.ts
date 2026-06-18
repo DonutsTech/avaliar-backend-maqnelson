@@ -22,21 +22,21 @@ class MarkWheelsService {
         return existMarkWheels;
       }
 
-      if (body.UUID && body.UUID !== "") {
-        const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUID);
+      if (body.UUIDAPP && body.UUIDAPP !== "") {
+        const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUIDAPP);
 
         if (existMarkWheelsForUuid) {
           return existMarkWheelsForUuid;
         }
       }
 
-      if (body.UUID === "") {
-        body.UUID = await uuid();
+      if (body.UUIDAPP === "") {
+        body.UUIDAPP = await uuid();
       }
 
       const createMarkWheels = await markWheelsModel.create({
         NAME: body.NAME,
-        UUIDAPP: body.UUID
+        UUIDAPP: body.UUIDAPP
       });
 
       return createMarkWheels;

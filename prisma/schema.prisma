@@ -117,37 +117,37 @@ model Rate {
   VERSIONCHECKIN VersionCheckin? @relation(fields: [IDVERSIONCHECKIN], references: [ID])
   RESULT String?
   STATUS String @default("EM ANDAMENTO")
-  MESSAGE String?
-  TYPE String?
-  MARK String?
-  MODEL String?
-  CHASSI String?
-  VALUE String?
-  CODVEND String?
-  FILIAL String?
-  NAMEVEND String?
-  EMAILVEND String?
-  CODCLI String?
-  LJCLI String?
-  CODPROS String?
-  LJPROS String?
-  NAMECLI String?
-  ADDRESSCLI String?
-  PHONECLI String?
-  EMAILCLI String?
-  DATE String?
-  PHOTO String?
-  VALUE1YEAR String?
-  VALUE2YEAR String?
-  VALUE3YEAR String?
-  VALUE4YEAR String?
-  TAXA String?
-  VALUEVIEW String?
-  VALUERATE String?
-  VALIDITY String?
-  VALUESUG String?
-  FILIAL_WEB String?
-  CANAL String?
+  MESSAGE String? @default("")
+  TYPE String? @default("")
+  MARK String? @default("")
+  MODEL String? @default("")
+  CHASSI String? @default("")
+  VALUE String? @default("")
+  CODVEND String? @default("")
+  FILIAL String? @default("")
+  NAMEVEND String? @default("")
+  EMAILVEND String? @default("")
+  CODCLI String? @default("")
+  LJCLI String? @default("")
+  CODPROS String? @default("")
+  LJPROS String? @default("")
+  NAMECLI String? @default("")
+  ADDRESSCLI String? @default("")
+  PHONECLI String? @default("")
+  EMAILCLI String? @default("")
+  DATE String? @default("")
+  PHOTO String? @default("")
+  VALUE1YEAR String? @default("")
+  VALUE2YEAR String? @default("")
+  VALUE3YEAR String? @default("")
+  VALUE4YEAR String? @default("")
+  TAXA String? @default("")
+  VALUEVIEW String? @default("")
+  VALUERATE String? @default("")
+  VALIDITY String? @default("")
+  VALUESUG String? @default("")
+  FILIAL_WEB String? @default("")
+  CANAL String? @default("")
   RESSED Boolean?
   MODALITY String?
   VALUEBY String?

@@ -1,6 +1,6 @@
-import { join } from "path";
+import { StatusCodes } from "http-status-codes";
 import type { CreateGalery, GaleryPrisma } from "../../@types/interface/galery";
-import { deleteFile, uploadFile } from "../../config/file";
+import { deleteFileFromS3, uploadFileToS3 } from "../../config/S3";
 import { CustomError } from "../../error";
 import { galeryModel } from "../../models/galery";
 import { prisma } from "../../prisma";
@@ -28,40 +28,27 @@ class GaleryService {
     return galeryRate;
   }
 
-  async createFileGaleryForRate(file: Express.Multer.File, type: 'photo' | 'video' | 'document'): Promise<string> {
+  async createGalery(file: Express.Multer.File): Promise<string> {
     try {
-      const path =  join(__dirname, '..', '..', '..', 'uploads', type, file.originalname);
+      const uploadResult = await uploadFileToS3(file);
 
-      await uploadFile(file, path);
-
-      return `${process.env.BANCKEND_URL}/uploads/${type}/${file.originalname}`;
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async deleteFileGaleryForRate(url: string, type: 'photo' | 'video' | 'document') {
-    try {
-      const arrayPath = url.split('/')
-      const fileName = arrayPath[arrayPath.length - 1];
-
-      if (!fileName) {
-        throw new CustomError("Nome do arquivo não encontrado no caminho fornecido", 400);
+      if (uploadResult === '') {
+        throw new CustomError('Erro ao fazer upload do vídeo', StatusCodes.INTERNAL_SERVER_ERROR);
       }
 
-      const path =  join(__dirname, '..', '..', 'uploads', type, fileName);
-      await deleteFile(path);
+      return uploadResult;
     } catch (error) {
       throw error;
     }
   }
 
-  async createGaleryForRate(files: Express.Multer.File[] | undefined, body: string, email: string, type: 'photo' | 'video'): Promise<{
+  async createGaleryForRate(files: Express.Multer.File[] | undefined, body: string, email: string): Promise<{
     success: boolean;
     message: string;
     data: CreateGalery[] | [];
   }> {
     try {
+      console.log('Received files:', files);
       if ((files && files.length === 0) || !files) {
         return {
           success: false,
@@ -92,9 +79,15 @@ class GaleryService {
 
         const fileUpload: Express.Multer.File | undefined = files.find(f => f.originalname.split('_')[0] === item.UUIDAPP);
 
+        if (!fileUpload) {
+          throw new CustomError(`Arquivo para UUIDAPP ${item.UUIDAPP} não encontrado`, 400);
+        }
+
+        const file = await this.createGalery(fileUpload);
+        console.log('File uploaded to S3:', file);
+
         if (existingGaleryRate && fileUpload && existingGaleryRate.URL !== item.URL) {
-          await this.deleteFileGaleryForRate(existingGaleryRate.URL, type);
-          const file =  await this.createFileGaleryForRate(fileUpload, type);
+          await deleteFileFromS3(existingGaleryRate.URL);
 
           const updateGaleryRate = await prisma.galeryRate.update({
             where: {
@@ -110,12 +103,6 @@ class GaleryService {
           gallery.push(updateGaleryRate);
           continue;
         }
-
-        if (!fileUpload) {
-          throw new CustomError(`Arquivo para UUIDAPP ${item.UUIDAPP} não encontrado`, 400);
-        }
-
-        const file =  await this.createFileGaleryForRate(fileUpload, type);
 
         const existingRate = await rateService.existRateForUuid(item.RATE_UUIDAPP);
 
