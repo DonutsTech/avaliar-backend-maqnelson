@@ -1,8 +1,8 @@
-import { v4 as uuidv4 } from "uuid";
+import crypto from 'crypto';
 
 export async function uuid(): Promise<string> {
   const timestamp = Date.now();
-  const uuid = uuidv4();
+  const uuid = crypto.randomUUID();
 
   return `${timestamp}-${uuid}`;
 }
