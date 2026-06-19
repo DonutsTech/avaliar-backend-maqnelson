@@ -9,3 +9,5 @@ node_modules
 /src/uploads/document
 /src/uploads/photo
 /src/uploads/video
+
+/src/generated/prisma
