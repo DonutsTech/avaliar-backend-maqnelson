@@ -112,10 +112,10 @@ model VersionCheckin {
 
 model Rate {
   ID        Int   @id @default(autoincrement())
-  UUIDAPP      String   @unique
-  IDVERSIONCHECKIN String?   @db.Uuid
+  UUIDAPP      String @unique
+  IDVERSIONCHECKIN String? @db.Uuid
   VERSIONCHECKIN VersionCheckin? @relation(fields: [IDVERSIONCHECKIN], references: [ID])
-  RESULT String?
+  RESULT String? @default("")
   STATUS String @default("EM ANDAMENTO")
   MESSAGE String? @default("")
   TYPE String? @default("")
@@ -148,16 +148,16 @@ model Rate {
   VALUESUG String? @default("")
   FILIAL_WEB String? @default("")
   CANAL String? @default("")
-  RESSED Boolean?
-  MODALITY String?
-  VALUEBY String?
-  VALUENEG String?
-  STOKE Boolean?
-  REASON Boolean?
-  OBSREASON String?
-  INDICATOR Boolean?
-  WHO String?
-  OBSALL String?
+  RESSED Boolean? @default(false)
+  MODALITY String? @default("")
+  VALUEBY String? @default("")
+  VALUENEG String? @default("")
+  STOKE Boolean? @default(false)
+  REASON Boolean? @default(false)
+  OBSREASON String? @default("")
+  INDICATOR Boolean? @default(false)
+  WHO String? @default("")
+  OBSALL String? @default("")
   SYNC Boolean @default(false)
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
