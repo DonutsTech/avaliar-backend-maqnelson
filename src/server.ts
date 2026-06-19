@@ -15,6 +15,6 @@ const app = new App().express;
 const server = http.createServer(app);
 
 server.listen(PORT, '0.0.0.0', () => {
-    initADM();
-    console.log(`Server is running on port ${PORT}`);
+  initADM();
+  console.log(`Server is running on port ${PORT}`);
 });
