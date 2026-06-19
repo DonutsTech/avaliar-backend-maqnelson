@@ -5,3 +5,7 @@ node_modules
 /src/generated/prisma
 /dist
 /prisma/migrations
+
+/src/uploads/document
+/src/uploads/photo
+/src/uploads/video

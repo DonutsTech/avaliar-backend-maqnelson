@@ -1,11 +1,11 @@
 import { StatusCodes } from "http-status-codes";
-import type { CreateInputDto } from "../../@types/interface/createInput.dto";
+import type { CreateInput } from "../../@types/interface/input";
 import { CustomError } from "../../error";
 import { inputModel } from "../../models/input";
 import { modelService } from "../model";
 
 class InputService {
-  async createInput(body: CreateInputDto) {
+  async createInput(body: CreateInput) {
     try {
       await modelService.existID(body.MODELID);
 

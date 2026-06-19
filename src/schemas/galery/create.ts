@@ -1,0 +1,10 @@
+import Joi from "joi";
+
+const createGalery = Joi.object({
+  UUIDAPP: Joi.string().required(),
+  NAME: Joi.string().max(250).required(),
+  RATE_UUIDAPP: Joi.string().required(),
+  URL:  Joi.string().required(),
+});
+
+export default createGalery;

@@ -1,12 +1,12 @@
 import type { Router } from "express";
 import type { IRouter } from "../@types/interface/router";
 import AuthRouter from "./auth";
-import CheckinRouter from "./checkin";
+import FormRouter from "./form";
+import GaleryRateRouter from "./galery";
 import MarkWheelRouter from "./markWheel";
-import RateCheckinRouter from "./rateCheckin";
+import RateRouter from "./rate";
 import UserRouter from "./user";
-import VersionCheckinRouter from "./versionCheckin";
-import GaleryRateRouter from "./galeryRate";
+import VersionForminRouter from "./versionForm";
 
 const applyRouters = (router: Router, routers: IRouter[]): void => {
   routers.forEach(route => route.create(router));
@@ -17,10 +17,10 @@ export const applyRoutersToApp = (router: Router): void => {
     UserRouter,
     AuthRouter,
     MarkWheelRouter,
-    CheckinRouter,
-    RateCheckinRouter,
     GaleryRateRouter,
-    VersionCheckinRouter,
+    FormRouter,
+    RateRouter,
+    VersionForminRouter,
   ];
   applyRouters(router, routers);
 }

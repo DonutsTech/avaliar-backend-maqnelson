@@ -1,13 +1,13 @@
 import { StatusCodes } from "http-status-codes";
-import type { CreateSchemaDto } from "../../@types/interface/createSchema.dto";
+import type { CreateSchema } from "../../@types/interface/schema";
 import { CustomError } from "../../error";
 import { schemaModel } from "../../models/schema";
-import { checkinService } from "../checkin";
+import { formService } from "../form";
 
 class SchemaService {
-  async createSchema(body: CreateSchemaDto) {
+  async createSchema(body: CreateSchema) {
     try {
-      await checkinService.existID(body.CHECKINID);
+      await formService.existID(body.CHECKINID);
 
       const createSchema = await schemaModel.create({
         TITLE: body.TITLE,

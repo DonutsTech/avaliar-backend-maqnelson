@@ -6,7 +6,7 @@ class MarkWheelRouter {
   public static create(router: Router): void {
     router.get("/mark-wheel", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), markWheelsController.findAll);
     router.post("/mark-wheel", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("markWheels/create"), markWheelsController.create);
-    router.delete("/mark-wheel/:id", isAuthenticate, validatorRole(['ADMIN']), markWheelsController.delete);
+    router.delete("/adm/mark-wheel/:id", isAuthenticate, validatorRole(['ADMIN']), markWheelsController.delete);
   }
 }
 

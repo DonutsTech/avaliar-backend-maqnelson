@@ -1,18 +1,18 @@
 import type { ObjectSchema } from "joi";
-import createCheckin from "./checkin/create";
-import createGaleryRate from "./galeryRate/create";
+import createForm from "./form/create";
+import createGaleryRate from "./galery/create";
 import createMarkWheels from "./markWheels/create";
+import createRate from "./rate/create";
 import updateRate from "./rate/update";
-import createRateCheckinVersion from "./rateCheckin/create";
 import createUser from "./user/create";
 
 const schemas: { [key: string]: ObjectSchema } = {
   "user/create": createUser,
-  "checkin/create": createCheckin,
+  "form/create": createForm,
   "markWheels/create": createMarkWheels,
-  "rateCheckin/create": createRateCheckinVersion,
+  "rate/create": createRate,
   "rate/update": updateRate,
-  "galeryRate/create": createGaleryRate,
+  "galery/create": createGaleryRate,
 };
 
 export default schemas;

@@ -1,10 +1,10 @@
+import type { FormSelectInclude } from "../@types/interface/form";
 import type { Prisma } from "../generated/prisma/client";
-import type { CheckinSelectInclude } from "../services/checkin";
 
-export const formatCheckinForObject = (checkin: Prisma.CheckinGetPayload<{ select: CheckinSelectInclude }>) => {
+export const formatForminForObject = (data: Prisma.CheckinGetPayload<{ select: FormSelectInclude }>) => {
   const newObj: { [key: string]: string } = {};
 
-  for (const schema of checkin.SCHEMAS) {
+  for (const schema of data.SCHEMAS) {
     for (const model of schema.MODELS) {
       for (const input of model.INPUTS) {
         newObj[input.NAME] = input.VALUE;

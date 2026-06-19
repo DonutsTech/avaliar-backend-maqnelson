@@ -1,11 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
-import type { CreateTokenDto } from "../../@types/interface/createToken.dto";
+import type { CreateToken } from "../../@types/interface/token";
 import { authService } from "../../services/auth";
 
 class AuthController {
   async postToken(request: Request, response: Response, next: NextFunction) {
     try {
-      const query: CreateTokenDto = request.query as any;
+      const query: CreateToken = request.query as any;
 
       const result = await authService.token(query);
 

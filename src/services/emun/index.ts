@@ -1,9 +1,9 @@
-import type { CreateEmunDto } from "../../@types/interface/createEmun.dto";
+import type { CreateEmun } from "../../@types/interface/emun";
 import { emunModel } from "../../models/emun";
 import { inputService } from "../input";
 
 class EmunService {
-  async createEmun(body: CreateEmunDto) {
+  async createEmun(body: CreateEmun) {
     try {
       await inputService.existID(body.INPUTID);
 
