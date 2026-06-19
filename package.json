@@ -4,8 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/server.ts",
-    "db:deploy": "npx prisma migrate deploy && npx prisma generate"
+     "dev": "tsx watch src/server.ts",
+    "db:deploy": "yarn prisma migrate deploy && yarn prisma generate",
+    "db:push": "yarn prisma db push && yarn prisma generate",
+    "dev:full": "yarn run db:push && yarn run dev",
+    "lint": "eslint src/**/*.{js,ts} --fix",
+    "lint:check": "eslint src/**/*.{js,ts}",
+    "format": "prettier --write src/**/*.{js,ts,json}",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "prod": "pm2 start ecosystem.config.cjs"
   },
   "type": "module",
   "devDependencies": {
