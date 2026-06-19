@@ -1,11 +1,11 @@
 import bycrpt from 'bcryptjs';
 import { StatusCodes } from 'http-status-codes';
-import type { CreateUserDto } from "../../@types/interface/createUser.dto";
 import { CustomError } from '../../error';
 import { userModel } from "../../models/user";
+import type { CreateUser } from '../../@types/interface/user';
 
 class UserService {
-  async createUser(body: CreateUserDto) {
+  async createUser(body: CreateUser) {
     try {
       const { ROLE, EMAIL, PASSWORD } = body;
 

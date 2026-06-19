@@ -1,7 +1,7 @@
 import bycrpt from 'bcryptjs';
 import { StatusCodes } from "http-status-codes";
 import jwt from 'jsonwebtoken';
-import type { CreateTokenDto } from "../../@types/interface/createToken.dto";
+import type { CreateToken } from '../../@types/interface/token';
 import type { Payload } from '../../@types/payload';
 import { CustomError } from "../../error";
 import type { User } from "../../generated/prisma/client";
@@ -29,7 +29,7 @@ class AuthService {
     }
   }
 
-  async token(body: CreateTokenDto): Promise<{ access_token: string }> {
+  async token(body: CreateToken): Promise<{ access_token: string }> {
     try {
       const user = await userModel.findBy({ where: { EMAIL: body.EMAIL } });
 

@@ -1,9 +1,9 @@
-import type { CreateModelDto } from "../../@types/interface/createModel.dto";
+import type { CreateModel } from "../../@types/interface/model";
 import { modelModel } from "../../models/model";
 import { schemaService } from "../schema";
 
 class ModelService {
-  async createModal(body: CreateModelDto) {
+  async createModal(body: CreateModel) {
     try {
       await schemaService.existID(body.SCHEMAID);
 

@@ -1,0 +1,167 @@
+export interface CreateRateForm {
+  ID: number;
+  UUIDAPP: string;
+  IDVERSIONCHECKIN: string;
+  CODVEND: string;
+  FILIAL: string;
+  NAMEVEND: string;
+  EMAILVEND: string;
+  RESULT: string;
+  TYPE: string;
+  MARK: string;
+  MODEL: string;
+  CHASSI: string;
+  VALUE: string;
+  DATE: string;
+  CODCLI: string;
+  LJCLI: string;
+  CODPROS: string;
+  LJPROS: string;
+  NAMECLI: string;
+  ADDRESSCLI: string;
+  PHONECLI: string;
+  EMAILCLI: string;
+  MESSAGE: string;
+  STATUS: string;
+  PHOTO: string;
+}
+
+export interface CreateRate {
+  ID: number;
+  UUIDAPP: string;
+  IDVERSIONCHECKIN: string;
+  RESULT: string;
+  STATUS: string;
+  MESSAGE?: string;
+  TYPE: string;
+  MARK: string;
+  MODEL: string;
+  CHASSI: string;
+  VALUE: string;
+  CODVEND: string;
+  FILIAL: string;
+  NAMEVEND: string;
+  EMAILVEND: string;
+  CODCLI: string;
+  LJCLI: string;
+  CODPROS: string;
+  LJPROS: string;
+  NAMECLI: string;
+  ADDRESSCLI: string;
+  PHONECLI: string;
+  EMAILCLI: string;
+  DATE: string;
+  PHOTO: string;
+  VALUE1YEAR?: string;
+  VALUE2YEAR?: string;
+  VALUE3YEAR?: string;
+  VALUE4YEAR?: string;
+  TAXA?: string;
+  VALUEVIEW?: string;
+  VALUERATE?: string;
+  VALIDITY?: string;
+  VALUESUG?: string;
+  FILIAL_WEB?: string;
+  CANAL?: string;
+  RESSED?: boolean;
+  MODALITY?: string;
+  VALUEBY?: string;
+  VALUENEG?: string;
+  STOKE?: boolean;
+  REASON?: boolean;
+  OBSREASON?: string;
+  INDICATOR?: boolean;
+  WHO?: string;
+  OBSALL?: string;
+}
+
+export type UpdateRate = Partial<CreateRate>;
+
+export type RateForminSelect = {
+  UUIDAPP: true,
+  ID: true,
+  ADDRESSCLI: true,
+  CHASSI: true,
+  CODCLI: true,
+  CODPROS: true,
+  CODVEND: true,
+  DATE: true,
+  EMAILCLI: true,
+  EMAILVEND: true,
+  FILIAL: true,
+  IDVERSIONCHECKIN: true,
+  LJCLI: true,
+  LJPROS: true,
+  MARK: true,
+  MODEL: true,
+  NAMECLI: true,
+  NAMEVEND: true,
+  PHONECLI: true,
+  RESULT: true,
+  TYPE: true,
+  VALUE: true,
+  STATUS: true,
+  PHOTO: true,
+}
+
+export type RateSelect = {
+  UUIDAPP: true,
+  ID: true,
+  ADDRESSCLI: true,
+  CHASSI: true,
+  CODCLI: true,
+  CODPROS: true,
+  CODVEND: true,
+  DATE: true,
+  EMAILCLI: true,
+  EMAILVEND: true,
+  FILIAL: true,
+  IDVERSIONCHECKIN: true,
+  LJCLI: true,
+  LJPROS: true,
+  MARK: true,
+  MODEL: true,
+  NAMECLI: true,
+  NAMEVEND: true,
+  PHONECLI: true,
+  RESULT: true,
+  TYPE: true,
+  VALUE: true,
+  STATUS: true,
+  VALUE1YEAR: true,
+  VALUE2YEAR: true,
+  VALUE3YEAR: true,
+  VALUE4YEAR: true,
+  TAXA: true,
+  VALUEVIEW: true,
+  VALUERATE: true,
+  VALIDITY: true,
+  VALUESUG: true,
+  FILIAL_WEB: true,
+  CANAL: true,
+  RESSED: true,
+  MODALITY: true,
+  VALUEBY: true,
+  VALUENEG: true,
+  STOKE: true,
+  REASON: true,
+  OBSREASON: true,
+  INDICATOR: true,
+  WHO: true,
+  OBSALL: true,
+  PHOTO: true,
+  GALERYRATES: {
+    select: {
+      ID: true,
+      URL: true,
+    },
+  },
+  MESSAGE: true,
+  CREATEDAT: true,
+  UPDATEDAT: true,
+  VERSIONCHECKIN: {
+    select: {
+      JSON_CHECKIN: true,
+    }
+  }
+}

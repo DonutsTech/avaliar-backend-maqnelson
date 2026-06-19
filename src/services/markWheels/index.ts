@@ -1,10 +1,18 @@
-import type { CreateMarkWheelsDto } from "../../@types/interface/createMarkWheels.dto";
+import type { CreateMarkWheels } from "../../@types/interface/markWheels";
 import { markWheelsModel } from "../../models/markWheels";
 import { uuid } from "../../utils/uuid";
 import { deletAccents } from "../../utils/word";
 
 class MarkWheelsService {
-  async create(body: CreateMarkWheelsDto) {
+  async countMarkWheels() {
+    try {
+      return await markWheelsModel.count({});
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async create(body: CreateMarkWheels) {
     try {
       body.NAME = deletAccents(body.NAME.toUpperCase());
 
@@ -14,21 +22,21 @@ class MarkWheelsService {
         return existMarkWheels;
       }
 
-      if (body.UUID && body.UUID !== "") {
-        const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUID);
+      if (body.UUIDAPP && body.UUIDAPP !== "") {
+        const existMarkWheelsForUuid = await this.existMarkWheelsForUuid(body.UUIDAPP);
 
         if (existMarkWheelsForUuid) {
           return existMarkWheelsForUuid;
         }
       }
 
-      if (body.UUID === "") {
-        body.UUID = await uuid();
+      if (body.UUIDAPP === "") {
+        body.UUIDAPP = await uuid();
       }
 
       const createMarkWheels = await markWheelsModel.create({
         NAME: body.NAME,
-        UUIDAPP: body.UUID
+        UUIDAPP: body.UUIDAPP
       });
 
       return createMarkWheels;

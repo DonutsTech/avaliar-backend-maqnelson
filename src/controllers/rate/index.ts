@@ -1,22 +1,22 @@
 import type { NextFunction, Request, Response } from "express";
-import type { CreateRateCheckinDto } from "../../@types/interface/createRate.dto";
+import type { CreateRateForm } from "../../@types/interface/rate";
 import { rateService } from "../../services/rate";
 
 class RateController {
-  async createRateCheckin(request: Request, response: Response, next: NextFunction) {
+  async createRateForm(request: Request, response: Response, next: NextFunction) {
     try {
-      const body: { rate: CreateRateCheckinDto[] } = request.body;
-      const create = await rateService.createRateCheckin(body);
+      const body: { rate: CreateRateForm[] } = request.body;
+      const create = await rateService.createRate(body);
       return response.status(201).json(create);
     } catch (error) {
       next(error);
     }
   }
 
-  async filterRateCheckinEmailVend(request: Request, response: Response, next: NextFunction) {
+  async filterRateForminEmailVend(request: Request, response: Response, next: NextFunction) {
     try {
       const param: { cEmail: string } = request.query as any;
-      const filter = await rateService.filterRateCheckinEmailVend(param.cEmail);
+      const filter = await rateService.filterRateForminEmailVend(param.cEmail);
       return response.status(200).json(filter);
     } catch (error) {
       next(error);
@@ -34,7 +34,7 @@ class RateController {
     }
   }
 
-  async filterAll(request: Request, response: Response, next: NextFunction) {
+  async filterAll(_request: Request, response: Response, next: NextFunction) {
     try {
       const rates = await rateService.filterAll();
       return response.status(200).json(rates);

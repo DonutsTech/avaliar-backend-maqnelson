@@ -1,11 +1,11 @@
 import type { NextFunction, Request, Response } from "express";
-import type { CreateUserDto } from "../../@types/interface/createUser.dto";
+import type { CreateUser } from "../../@types/interface/user";
 import { userService } from "../../services/user";
 
 class UserController {
   async createUser(request: Request, response: Response, next: NextFunction) {
     try {
-      const body: CreateUserDto = request.body;
+      const body: CreateUser = request.body;
       const create = await userService.createUser(body);
       return response.status(201).json(create);
     } catch (error) {
