@@ -9,6 +9,16 @@ export const s3 = new S3Client({
   },
 });
 
+console.log('S3 Client initialized with region:', process.env.AWS_REGION);
+console.log(
+  'S3 Client initialized with accessKeyId:',
+  process.env.AWS_ACCESS_KEY_ID ? '****' : 'Not Set',
+);
+console.log(
+  'S3 Client initialized with secretAccessKey:',
+  process.env.AWS_SECRET_ACCESS_KEY ? '****' : 'Not Set',
+);
+
 function extractKeyFromUrl(url: string): string {
   const urlObject = new URL(url);
   return urlObject.pathname.substring(1);
@@ -37,21 +47,23 @@ export async function deleteFileFromS3(url: string): Promise<void> {
   await s3.send(command);
 }
 
-export async function uploadFileToS3(file: Express.Multer.File): Promise<string> {
+export async function uploadFileToS3(
+  file: Express.Multer.File,
+): Promise<string> {
   try {
     const comand = new Upload({
       client: s3,
       params: {
-     Bucket: process.env.BUCKET_NAME!,
+        Bucket: process.env.BUCKET_NAME!,
         Key: `${getFolderByMimeType(file.mimetype)}/${file.originalname}`,
         Body: file.buffer,
         ContentType: file.mimetype,
       },
-    })
+    });
 
     const result = await comand.done();
 
-    return result.Location || "";
+    return result.Location || '';
   } catch (error) {
     console.error('Error uploading file to S3:', error);
     throw error;
