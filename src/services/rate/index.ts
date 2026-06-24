@@ -31,6 +31,7 @@ const RATE_FORM_SELECT: Prisma.RateSelect = {
   TYPE: true,
   VALUE: true,
   STATUS: true,
+  PHOTO: true,
 };
 const RATE_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
@@ -90,6 +91,8 @@ const RATE_SELECT: Prisma.RateSelect = {
       JSON_CHECKIN: true,
     },
   },
+  PHOTO: true,
+  MESSAGE: true,
 };
 
 class RateService {

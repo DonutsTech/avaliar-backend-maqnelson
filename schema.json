@@ -788,7 +788,7 @@
               "LABEL": "Vida útil",
               "VALUE": "",
               "PLACEHOLDER": "",
-              "REQUIRED": false,
+              "REQUIRED": true,
               "MULTIPLE": false,
               "MIN": null,
               "MAX": null,
@@ -1349,7 +1349,7 @@
               "LABEL": "Quantidade de Válvulas de controle remoto",
               "VALUE": "",
               "PLACEHOLDER": "",
-              "REQUIRED": false,
+              "REQUIRED": true,
               "MULTIPLE": false,
               "BONDTYPE": "VALUES",
               "MIN": null,
@@ -2876,7 +2876,7 @@
               "BONDTYPE": "ICONS",
               "MAX": null,
               "MIN": null,
-               "EMUNS": [
+              "EMUNS": [
                 {
                   "NAME": "intacto",
                   "TITLE": "intacto"
