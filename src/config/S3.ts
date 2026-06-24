@@ -9,16 +9,6 @@ export const s3 = new S3Client({
   },
 });
 
-console.log('S3 Client initialized with region:', process.env.AWS_REGION);
-console.log(
-  'S3 Client initialized with accessKeyId:',
-  process.env.AWS_ACCESS_KEY_ID ? '****' : 'Not Set',
-);
-console.log(
-  'S3 Client initialized with secretAccessKey:',
-  process.env.AWS_SECRET_ACCESS_KEY ? '****' : 'Not Set',
-);
-
 function extractKeyFromUrl(url: string): string {
   const urlObject = new URL(url);
   return urlObject.pathname.substring(1);

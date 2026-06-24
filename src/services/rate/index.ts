@@ -1,7 +1,11 @@
-import type { CreateRateForm, RateForminSelect, RateSelect } from "../../@types/interface/rate";
-import type { Prisma } from "../../generated/prisma/browser";
-import { rateModel } from "../../models/rate";
-import { versionForminService } from "../versionForm";
+import type {
+  CreateRateForm,
+  RateForminSelect,
+  RateSelect,
+} from '../../@types/interface/rate';
+import type { Prisma } from '../../generated/prisma/browser';
+import { rateModel } from '../../models/rate';
+import { versionForminService } from '../versionForm';
 
 const RATE_FORM_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
@@ -27,7 +31,7 @@ const RATE_FORM_SELECT: Prisma.RateSelect = {
   TYPE: true,
   VALUE: true,
   STATUS: true,
-}
+};
 const RATE_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
   ID: true,
@@ -84,15 +88,15 @@ const RATE_SELECT: Prisma.RateSelect = {
   VERSIONCHECKIN: {
     select: {
       JSON_CHECKIN: true,
-    }
-  }
-}
+    },
+  },
+};
 
 class RateService {
   async existById(id: number) {
     try {
       if (!(await rateModel.count({ ID: id }))) {
-        throw new Error("Avaliação não encontrada");
+        throw new Error('Avaliação não encontrada');
       }
     } catch (error) {
       throw error;
@@ -106,10 +110,16 @@ class RateService {
       for (const item of body.rate) {
         await versionForminService.existID(item.IDVERSIONCHECKIN);
 
-        const existUuid = await rateModel.findBy<RateForminSelect>({ where: { UUIDAPP: item.UUIDAPP }, select: RATE_FORM_SELECT });
+        const existUuid = await rateModel.findBy<RateForminSelect>({
+          where: { UUIDAPP: item.UUIDAPP },
+          select: RATE_FORM_SELECT,
+        });
 
         if (existUuid) {
-        const updateRate = await this.updateRate(existUuid.ID, { ...item, STATUS: "EM ANDAMENTO" });
+          const updateRate = await this.updateRate(existUuid.ID, {
+            ...item,
+            STATUS: 'EM ANDAMENTO',
+          });
 
           newArray.push(updateRate);
           continue;
@@ -138,7 +148,8 @@ class RateService {
               ADDRESSCLI: item.ADDRESSCLI,
               PHONECLI: item.PHONECLI,
               EMAILCLI: item.EMAILCLI,
-              VERSIONCHECKIN: {connect: { ID: item.IDVERSIONCHECKIN }},
+              PHOTO: item.PHOTO,
+              VERSIONCHECKIN: { connect: { ID: item.IDVERSIONCHECKIN } },
             },
             select: RATE_FORM_SELECT,
           });
@@ -159,7 +170,7 @@ class RateService {
       const recusados = await rateModel.findAll<RateSelect>({
         where: {
           EMAILVEND: email,
-          STATUS: "RECUSADO",
+          STATUS: 'RECUSADO',
         },
         select: RATE_SELECT,
       });
@@ -174,11 +185,11 @@ class RateService {
         where: {
           EMAILVEND: email,
           NOT: {
-            STATUS: "RECUSADO",
+            STATUS: 'RECUSADO',
           },
         },
         orderBy: {
-          CREATEDAT: "desc",
+          CREATEDAT: 'desc',
         },
         take: faltantes,
         select: RATE_SELECT,
@@ -206,30 +217,35 @@ class RateService {
     try {
       await this.existById(id);
 
-      const rate = await rateModel.update<RateForminSelect>(id, {
-        UUIDAPP: data.UUIDAPP,
-        CODVEND: data.CODVEND,
-        FILIAL: data.FILIAL,
-        NAMEVEND: data.NAMEVEND,
-        EMAILVEND: data.EMAILVEND,
-        RESULT: data.RESULT,
-        TYPE: data.TYPE,
-        MARK: data.MARK,
-        MODEL: data.MODEL,
-        CHASSI: data.CHASSI,
-        VALUE: data.VALUE,
-        DATE: data.DATE,
-        CODCLI: data.CODCLI,
-        LJCLI: data.LJCLI,
-        CODPROS: data.CODPROS,
-        LJPROS: data.LJPROS,
-        NAMECLI: data.NAMECLI,
-        ADDRESSCLI: data.ADDRESSCLI,
-        PHONECLI: data.PHONECLI,
-        EMAILCLI: data.EMAILCLI,
-        STATUS: data.STATUS,
-        VERSIONCHECKIN: {connect: { ID: data.IDVERSIONCHECKIN }},
-      }, RATE_FORM_SELECT);
+      const rate = await rateModel.update<RateForminSelect>(
+        id,
+        {
+          UUIDAPP: data.UUIDAPP,
+          CODVEND: data.CODVEND,
+          FILIAL: data.FILIAL,
+          NAMEVEND: data.NAMEVEND,
+          EMAILVEND: data.EMAILVEND,
+          RESULT: data.RESULT,
+          TYPE: data.TYPE,
+          MARK: data.MARK,
+          MODEL: data.MODEL,
+          CHASSI: data.CHASSI,
+          VALUE: data.VALUE,
+          DATE: data.DATE,
+          CODCLI: data.CODCLI,
+          LJCLI: data.LJCLI,
+          CODPROS: data.CODPROS,
+          LJPROS: data.LJPROS,
+          NAMECLI: data.NAMECLI,
+          ADDRESSCLI: data.ADDRESSCLI,
+          PHONECLI: data.PHONECLI,
+          EMAILCLI: data.EMAILCLI,
+          STATUS: data.STATUS,
+          PHOTO: data.PHOTO,
+          VERSIONCHECKIN: { connect: { ID: data.IDVERSIONCHECKIN } },
+        },
+        RATE_FORM_SELECT,
+      );
 
       return rate;
     } catch (error) {
