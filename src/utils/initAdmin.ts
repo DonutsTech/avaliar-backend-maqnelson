@@ -1,6 +1,6 @@
-import { Role } from "../enums/role.enum";
-import { userModel } from "../models/user";
-import { userService } from "../services/user";
+import { Role } from '../enums/role.enum';
+import { userModel } from '../models/user';
+import { userService } from '../services/user';
 
 export async function initADM() {
   try {
@@ -8,17 +8,17 @@ export async function initADM() {
 
     if (!admin) {
       await userService.createUser({
-        ROLE: Role.ADMIN,
+        ROLE: Role.adm,
         EMAIL: 'paulofanini@maqnelson.com.br',
         PASSWORD: process.env.ADMIN_PASSWORD || '8CK[)026H]}v',
       });
       await userService.createUser({
-        ROLE: Role.ADMIN,
+        ROLE: Role.adm,
         EMAIL: 'reginaldosantos@maqnelsonagricola.com.br',
         PASSWORD: process.env.ADMIN_PASSWORD || '8CK[)026H]}v',
       });
       await userService.createUser({
-        ROLE: Role.USER,
+        ROLE: Role.user,
         EMAIL: 'cem@cem.com.br',
         PASSWORD: process.env.ADMIN_PASSWORD || '8CK[)026H]}v',
       });
