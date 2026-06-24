@@ -3,8 +3,9 @@ import type {
   RateForminSelect,
   RateSelect,
 } from '../../@types/interface/rate';
-import type { Prisma } from '../../generated/prisma/browser';
+import type { Prisma, Rate, User } from '../../generated/prisma/browser';
 import { rateModel } from '../../models/rate';
+import { prisma } from '../../prisma';
 import { versionForminService } from '../versionForm';
 
 const RATE_FORM_SELECT: Prisma.RateSelect = {
@@ -33,6 +34,7 @@ const RATE_FORM_SELECT: Prisma.RateSelect = {
   STATUS: true,
   PHOTO: true,
 };
+
 const RATE_SELECT: Prisma.RateSelect = {
   UUIDAPP: true,
   ID: true,
@@ -169,7 +171,6 @@ class RateService {
 
   async filterRateForminEmailVend(email: string) {
     try {
-      console.log(email);
       const recusados = await rateModel.findAll<RateSelect>({
         where: {
           EMAILVEND: email,
@@ -211,6 +212,154 @@ class RateService {
       });
 
       return rates;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateLimitTennForHomeUser(email: string): Promise<{
+    rates: Rate[];
+    result: { STATUS: string; _count: { STATUS: number } }[];
+  }> {
+    try {
+      const result = await prisma.rate.groupBy({
+        by: ['STATUS'],
+        where: {
+          EMAILVEND: email,
+        },
+        _count: {
+          STATUS: true,
+        },
+      });
+
+      const rates = (await rateModel.findAll({
+        where: {
+          EMAILVEND: email,
+        },
+        orderBy: {
+          CREATEDAT: 'desc',
+        },
+        take: 10,
+      })) as Rate[];
+
+      return { rates, result };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateLimitTennForHomeAll(): Promise<{
+    rates: Rate[];
+    result: { STATUS: string; _count: { STATUS: number } }[];
+  }> {
+    try {
+      const result = await prisma.rate.groupBy({
+        by: ['STATUS'],
+        _count: {
+          STATUS: true,
+        },
+      });
+
+      const rates = (await rateModel.findAll({
+        orderBy: {
+          CREATEDAT: 'desc',
+        },
+        take: 10,
+      })) as Rate[];
+
+      return { rates, result };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateLimitTennForHome(
+    email: string,
+    user: User,
+  ): Promise<{
+    rates: Rate[];
+    result: { STATUS: string; _count: { STATUS: number } }[];
+  }> {
+    try {
+      if (user.ROLE === 'USER') {
+        return this.getRateLimitTennForHomeUser(email);
+      }
+
+      return this.getRateLimitTennForHomeAll();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateUserForWebPages(email: string, page: number, limit: number) {
+    try {
+      const [rates, total] = await Promise.all([
+        prisma.rate.findMany({
+          where: {
+            EMAILVEND: email,
+          },
+          orderBy: {
+            CREATEDAT: 'desc',
+          },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        prisma.rate.count({
+          where: {
+            EMAILVEND: email,
+          },
+        }),
+      ]);
+
+      return {
+        rates,
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateAllForWebPages(page: number, limit: number) {
+    try {
+      const [rates, total] = await Promise.all([
+        prisma.rate.findMany({
+          orderBy: {
+            CREATEDAT: 'desc',
+          },
+          skip: (page - 1) * limit,
+          take: limit,
+        }),
+        prisma.rate.count(),
+      ]);
+
+      return {
+        rates,
+        total,
+        page,
+        limit,
+        totalPages: Math.ceil(total / limit),
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRateForWebPages(
+    email: string,
+    page: number,
+    limit: number,
+    user: User,
+  ) {
+    try {
+      if (user.ROLE === 'USER') {
+        return this.getRateUserForWebPages(email, page, limit);
+      }
+
+      return this.getRateAllForWebPages(page, limit);
     } catch (error) {
       throw error;
     }

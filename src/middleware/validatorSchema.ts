@@ -30,7 +30,6 @@ export const schemaValidator = (path: string): RequestHandler => {
       const { error, value } = schema.validate(req.body, validationOptions);
 
       if (error) {
-        console.error('Validation error:', error.details);
         throw new CustomError('Validation failed', StatusCodes.BAD_REQUEST);
       }
 
