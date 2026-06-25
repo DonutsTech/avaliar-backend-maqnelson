@@ -23,16 +23,10 @@ class RateRouter {
       rateController.filterAll,
     );
     router.get(
-      '/web/home/rate',
-      isAuthenticate,
-      validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
-      rateController.getRateLimitTennForHome,
-    );
-    router.get(
       '/web/rate',
       isAuthenticate,
       validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
-      rateController.getRateForWebPages,
+      rateController.getRateForWeb,
     );
     router.post(
       '/app/rate',

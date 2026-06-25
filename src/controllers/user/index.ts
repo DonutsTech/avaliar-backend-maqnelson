@@ -1,6 +1,6 @@
-import type { NextFunction, Request, Response } from "express";
-import type { CreateUser } from "../../@types/interface/user";
-import { userService } from "../../services/user";
+import type { NextFunction, Request, Response } from 'express';
+import type { CreateUser } from '../../@types/interface/user';
+import { userService } from '../../services/user';
 
 class UserController {
   async createUser(request: Request, response: Response, next: NextFunction) {
@@ -22,10 +22,14 @@ class UserController {
     }
   }
 
-  async getUserByEmail(request: Request, response: Response, next: NextFunction) {
+  async getUserByEmail(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) {
     try {
-      const { email } = request.params as { email: string };
-      const user = await userService.getUserByEmail(email);
+      const param: { cEmail: string } = request.query as any;
+      const user = await userService.getUserByEmail(param.cEmail);
       return response.status(200).json(user);
     } catch (error) {
       next(error);

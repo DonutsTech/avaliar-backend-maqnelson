@@ -52,25 +52,7 @@ class RateController {
     }
   }
 
-  async getRateLimitTennForHome(
-    request: Request,
-    response: Response,
-    next: NextFunction,
-  ) {
-    try {
-      const param: { cEmail: string } = request.query as any;
-      const user = request.user as User;
-      const rates = await rateService.getRateLimitTennForHome(
-        param.cEmail,
-        user,
-      );
-      return response.status(200).json(rates);
-    } catch (error) {
-      next(error);
-    }
-  }
-
-  async getRateForWebPages(
+  async getRateForWeb(
     request: Request,
     response: Response,
     next: NextFunction,
@@ -79,12 +61,7 @@ class RateController {
       const param: { cEmail: string; page: number; limit: number } =
         request.query as any;
       const user = request.user as User;
-      const rates = await rateService.getRateForWebPages(
-        param.cEmail,
-        param.page,
-        param.limit,
-        user,
-      );
+      const rates = await rateService.getRateForWeb(param.cEmail, user);
       return response.status(200).json(rates);
     } catch (error) {
       next(error);

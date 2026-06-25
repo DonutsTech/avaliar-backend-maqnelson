@@ -22,7 +22,7 @@ class UserRouter {
       validatorRole([Role.adm]),
       userController.getUsers,
     );
-    router.get('/users/:email', isAuthenticate, userController.getUserByEmail);
+    router.get('web/users', isAuthenticate, userController.getUserByEmail);
   }
 }
 

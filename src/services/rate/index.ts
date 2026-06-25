@@ -217,149 +217,57 @@ class RateService {
     }
   }
 
-  async getRateLimitTennForHomeUser(email: string): Promise<{
-    rates: Rate[];
-    result: { STATUS: string; _count: { STATUS: number } }[];
-  }> {
+  async groupByStatus(
+    email: string | undefined,
+  ): Promise<{ STATUS: string; _count: { STATUS: number } }[]> {
     try {
       const result = await prisma.rate.groupBy({
         by: ['STATUS'],
-        where: {
-          EMAILVEND: email,
-        },
+        ...(email && {
+          where: {
+            EMAILVEND: email,
+          },
+        }),
         _count: {
           STATUS: true,
         },
       });
 
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async getRatesAll(email: string | undefined): Promise<Rate[]> {
+    try {
       const rates = (await rateModel.findAll({
-        where: {
-          EMAILVEND: email,
-        },
-        orderBy: {
-          CREATEDAT: 'desc',
-        },
-        take: 10,
-      })) as Rate[];
-
-      return { rates, result };
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getRateLimitTennForHomeAll(): Promise<{
-    rates: Rate[];
-    result: { STATUS: string; _count: { STATUS: number } }[];
-  }> {
-    try {
-      const result = await prisma.rate.groupBy({
-        by: ['STATUS'],
-        _count: {
-          STATUS: true,
-        },
-      });
-
-      const rates = (await rateModel.findAll({
-        orderBy: {
-          CREATEDAT: 'desc',
-        },
-        take: 10,
-      })) as Rate[];
-
-      return { rates, result };
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getRateLimitTennForHome(
-    email: string,
-    user: User,
-  ): Promise<{
-    rates: Rate[];
-    result: { STATUS: string; _count: { STATUS: number } }[];
-  }> {
-    try {
-      if (user.ROLE === 'USER') {
-        return this.getRateLimitTennForHomeUser(email);
-      }
-
-      return this.getRateLimitTennForHomeAll();
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getRateUserForWebPages(email: string, page: number, limit: number) {
-    try {
-      const [rates, total] = await Promise.all([
-        prisma.rate.findMany({
-          where: {
-            EMAILVEND: email,
-          },
-          orderBy: {
-            CREATEDAT: 'desc',
-          },
-          skip: (page - 1) * limit,
-          take: limit,
-        }),
-        prisma.rate.count({
+        ...(email && {
           where: {
             EMAILVEND: email,
           },
         }),
-      ]);
+      })) as Rate[];
 
-      return {
-        rates,
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      };
+      return rates;
     } catch (error) {
       throw error;
     }
   }
 
-  async getRateAllForWebPages(page: number, limit: number) {
-    try {
-      const [rates, total] = await Promise.all([
-        prisma.rate.findMany({
-          orderBy: {
-            CREATEDAT: 'desc',
-          },
-          skip: (page - 1) * limit,
-          take: limit,
-        }),
-        prisma.rate.count(),
-      ]);
-
-      return {
-        rates,
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      };
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  async getRateForWebPages(
-    email: string,
-    page: number,
-    limit: number,
-    user: User,
-  ) {
+  async getRateForWeb(email: string, user: User) {
     try {
       if (user.ROLE === 'USER') {
-        return this.getRateUserForWebPages(email, page, limit);
+        const rates = await this.getRatesAll(email);
+        const groupByStatus = await this.groupByStatus(email);
+
+        return { rates, groupStatus: groupByStatus };
       }
 
-      return this.getRateAllForWebPages(page, limit);
+      const rates = await this.getRatesAll(undefined);
+      const groupByStatus = await this.groupByStatus(undefined);
+
+      return { rates, groupStatus: groupByStatus };
     } catch (error) {
       throw error;
     }
