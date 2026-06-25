@@ -3,7 +3,7 @@ import type {
   RateForminSelect,
   RateSelect,
 } from '../../@types/interface/rate';
-import type { Prisma, Rate, User } from '../../generated/prisma/browser';
+import type { Prisma, User } from '../../generated/prisma/browser';
 import { rateModel } from '../../models/rate';
 import { prisma } from '../../prisma';
 import { versionForminService } from '../versionForm';
@@ -239,15 +239,19 @@ class RateService {
     }
   }
 
-  async getRatesAll(email: string | undefined): Promise<Rate[]> {
+  async getRatesAll(email: string | undefined) {
     try {
-      const rates = (await rateModel.findAll({
+      const rates = await rateModel.findAll({
         ...(email && {
           where: {
             EMAILVEND: email,
           },
         }),
-      })) as Rate[];
+        include: {
+          GALERYRATES: true,
+          VERSIONCHECKIN: true,
+        },
+      });
 
       return rates;
     } catch (error) {
