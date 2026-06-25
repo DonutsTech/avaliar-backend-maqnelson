@@ -28,6 +28,12 @@ class RateRouter {
       validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
       rateController.getRateForWeb,
     );
+    router.get(
+      '/web/rate/countstatus',
+      isAuthenticate,
+      validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
+      rateController.getCountStatusRates,
+    );
     router.post(
       '/app/rate',
       isAuthenticate,

@@ -67,6 +67,21 @@ class RateController {
       next(error);
     }
   }
+
+  async getCountStatusRates(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const param: { cEmail: string } = request.query as any;
+      const user = request.user as User;
+      const rates = await rateService.countStatusForWeb(param.cEmail, user);
+      return response.status(200).json(rates);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 export const rateController = new RateController();

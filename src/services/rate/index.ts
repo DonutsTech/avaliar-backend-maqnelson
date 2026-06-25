@@ -259,19 +259,35 @@ class RateService {
     }
   }
 
+  async countStatusForWeb(email: string, user: User) {
+    try {
+      if (user.ROLE === 'USER') {
+        const groupByStatus = await this.groupByStatus(email);
+
+        return groupByStatus;
+      }
+
+      const groupByStatus = await this.groupByStatus(undefined);
+
+      return {
+        status: groupByStatus,
+      };
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getRateForWeb(email: string, user: User) {
     try {
       if (user.ROLE === 'USER') {
         const rates = await this.getRatesAll(email);
-        const groupByStatus = await this.groupByStatus(email);
 
-        return { rates, groupStatus: groupByStatus };
+        return { rates };
       }
 
       const rates = await this.getRatesAll(undefined);
-      const groupByStatus = await this.groupByStatus(undefined);
 
-      return { rates, groupStatus: groupByStatus };
+      return { rates };
     } catch (error) {
       throw error;
     }
