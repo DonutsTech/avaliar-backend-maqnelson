@@ -217,9 +217,9 @@ class RateService {
     }
   }
 
-  async groupByStatus(
-    email: string | undefined,
-  ): Promise<{ STATUS: string; _count: { STATUS: number } }[]> {
+  async groupByStatus(email: string | undefined): Promise<{
+    statuscount: { STATUS: string; _count: { STATUS: number } }[];
+  }> {
     try {
       const result = await prisma.rate.groupBy({
         by: ['STATUS'],
@@ -233,7 +233,7 @@ class RateService {
         },
       });
 
-      return result;
+      return { statuscount: result };
     } catch (error) {
       throw error;
     }
@@ -253,7 +253,7 @@ class RateService {
         },
       });
 
-      return rates;
+      return { rates: rates };
     } catch (error) {
       throw error;
     }
@@ -270,7 +270,7 @@ class RateService {
       const groupByStatus = await this.groupByStatus(undefined);
 
       return {
-        status: groupByStatus,
+        groupstatus: groupByStatus,
       };
     } catch (error) {
       throw error;
