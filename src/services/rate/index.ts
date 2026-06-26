@@ -262,16 +262,10 @@ class RateService {
   async countStatusForWeb(email: string, user: User) {
     try {
       if (user.ROLE === 'USER') {
-        const groupByStatus = await this.groupByStatus(email);
-
-        return groupByStatus;
+        return await this.groupByStatus(email);
       }
 
-      const groupByStatus = await this.groupByStatus(undefined);
-
-      return {
-        groupstatus: groupByStatus,
-      };
+      return await this.groupByStatus(undefined);
     } catch (error) {
       throw error;
     }
@@ -280,14 +274,10 @@ class RateService {
   async getRateForWeb(email: string, user: User) {
     try {
       if (user.ROLE === 'USER') {
-        const rates = await this.getRatesAll(email);
-
-        return { rates };
+        return await this.getRatesAll(email);
       }
 
-      const rates = await this.getRatesAll(undefined);
-
-      return { rates };
+      return await this.getRatesAll(undefined);
     } catch (error) {
       throw error;
     }
