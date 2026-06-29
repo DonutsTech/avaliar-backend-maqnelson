@@ -120,8 +120,11 @@ model Rate {
   STATUS String @default("EM ANDAMENTO")
   MESSAGE String? @default("")
   TYPE String? @default("")
+  YEAR String? @default("")
   MARK String? @default("")
+  MARK_WEB String? @default("")
   MODEL String? @default("")
+  MODEL_WEB String? @default("")
   CHASSI String? @default("")
   VALUE String? @default("")
   CODVEND String? @default("")
@@ -160,8 +163,11 @@ model Rate {
   WHO String? @default("")
   OBSALL String? @default("")
   SYNC Boolean @default(false)
+  ACCEPTED String? @default("")
+  APPROVED String? @default("")
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
+
   GALERYRATES GaleryRate[] @relation("RateGaleryByUuid")
 
   @@map("rate")

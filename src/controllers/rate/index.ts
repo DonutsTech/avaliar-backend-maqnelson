@@ -1,5 +1,9 @@
 import type { NextFunction, Request, Response } from 'express';
-import type { CreateRateForm } from '../../@types/interface/rate';
+import type {
+  CreateRateForm,
+  PutRateFinance,
+  PutRateStatus,
+} from '../../@types/interface/rate';
 import { User } from '../../generated/prisma/browser';
 import { rateService } from '../../services/rate';
 
@@ -78,6 +82,36 @@ class RateController {
       const user = request.user as User;
       const rates = await rateService.countStatusForWeb(param.cEmail, user);
       return response.status(200).json(rates);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async putRateStatus(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = request.params;
+      const body = request.body as PutRateStatus;
+      const update = await rateService.putRateStatus(Number(id), body);
+      return response.status(200).json(update);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async putRateFinance(
+    request: Request,
+    response: Response,
+    next: NextFunction,
+  ) {
+    try {
+      const { id } = request.params;
+      const body = request.body as PutRateFinance;
+      const update = await rateService.putRateFinance(Number(id), body);
+      return response.status(200).json(update);
     } catch (error) {
       next(error);
     }

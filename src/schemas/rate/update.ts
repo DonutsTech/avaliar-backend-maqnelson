@@ -1,15 +1,18 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 const updateRate = Joi.object({
-  UUIDAPP: Joi.string().allow("").optional(),
+  UUIDAPP: Joi.string().allow('').optional(),
   IDVERSIONCHECKIN: Joi.string().optional(),
   RESULT: Joi.string().optional(),
   STATUS: Joi.string().max(250).optional(),
-  MESSAGE: Joi.string().allow("").optional(),
+  MESSAGE: Joi.string().allow('').optional(),
   TYPE: Joi.string().max(250).optional(),
+  MARK_WEB: Joi.string().max(250).optional(),
   MARK: Joi.string().max(250).optional(),
+  MODEL_WEB: Joi.string().max(250).optional(),
   MODEL: Joi.string().max(250).optional(),
   CHASSI: Joi.string().max(250).optional(),
+  YEAR: Joi.string().max(250).optional(),
   VALUE: Joi.string().max(250).optional(),
   CODVEND: Joi.string().max(250).optional(),
   FILIAL: Joi.string().max(250).optional(),

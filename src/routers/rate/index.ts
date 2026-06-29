@@ -47,6 +47,20 @@ class RateRouter {
       validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
       rateController.filterRateForminEmailVend,
     );
+    router.put(
+      '/web/rate/:id/status',
+      isAuthenticate,
+      validatorRole([Role.adm, Role.analyst, Role.finance, Role.user]),
+      schemaValidator('rate/putStatus'),
+      rateController.putRateStatus,
+    );
+    router.put(
+      '/web/rate/:id/finance',
+      isAuthenticate,
+      validatorRole([Role.adm, Role.finance]),
+      schemaValidator('rate/putFinance'),
+      rateController.putRateFinance,
+    );
   }
 }
 

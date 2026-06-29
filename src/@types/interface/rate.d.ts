@@ -9,9 +9,12 @@ export interface CreateRateForm {
   RESULT: string;
   TYPE: string;
   MARK: string;
+  MARK_WEB: string;
   MODEL: string;
+  MODEL_WEB: string;
   CHASSI: string;
   VALUE: string;
+  YEAR: string;
   DATE: string;
   CODCLI: string;
   LJCLI: string;
@@ -34,8 +37,11 @@ export interface CreateRate {
   STATUS: string;
   MESSAGE?: string;
   TYPE: string;
+  YEAR: string;
   MARK: string;
+  MARK_WEB: string;
   MODEL: string;
+  MODEL_WEB: string;
   CHASSI: string;
   VALUE: string;
   CODVEND: string;
@@ -78,90 +84,128 @@ export interface CreateRate {
 export type UpdateRate = Partial<CreateRate>;
 
 export type RateForminSelect = {
-  UUIDAPP: true,
-  ID: true,
-  ADDRESSCLI: true,
-  CHASSI: true,
-  CODCLI: true,
-  CODPROS: true,
-  CODVEND: true,
-  DATE: true,
-  EMAILCLI: true,
-  EMAILVEND: true,
-  FILIAL: true,
-  IDVERSIONCHECKIN: true,
-  LJCLI: true,
-  LJPROS: true,
-  MARK: true,
-  MODEL: true,
-  NAMECLI: true,
-  NAMEVEND: true,
-  PHONECLI: true,
-  RESULT: true,
-  TYPE: true,
-  VALUE: true,
-  STATUS: true,
-  PHOTO: true,
-}
+  UUIDAPP: true;
+  ID: true;
+  ADDRESSCLI: true;
+  CHASSI: true;
+  CODCLI: true;
+  CODPROS: true;
+  CODVEND: true;
+  DATE: true;
+  EMAILCLI: true;
+  EMAILVEND: true;
+  YAER: true;
+  FILIAL: true;
+  IDVERSIONCHECKIN: true;
+  LJCLI: true;
+  LJPROS: true;
+  MARK: true;
+  MARK_WEB: true;
+  MODEL: true;
+  MODEL_WEB: true;
+  NAMECLI: true;
+  NAMEVEND: true;
+  PHONECLI: true;
+  RESULT: true;
+  TYPE: true;
+  VALUE: true;
+  STATUS: true;
+  PHOTO: true;
+  MESSAGE: true;
+};
 
 export type RateSelect = {
-  UUIDAPP: true,
-  ID: true,
-  ADDRESSCLI: true,
-  CHASSI: true,
-  CODCLI: true,
-  CODPROS: true,
-  CODVEND: true,
-  DATE: true,
-  EMAILCLI: true,
-  EMAILVEND: true,
-  FILIAL: true,
-  IDVERSIONCHECKIN: true,
-  LJCLI: true,
-  LJPROS: true,
-  MARK: true,
-  MODEL: true,
-  NAMECLI: true,
-  NAMEVEND: true,
-  PHONECLI: true,
-  RESULT: true,
-  TYPE: true,
-  VALUE: true,
-  STATUS: true,
-  VALUE1YEAR: true,
-  VALUE2YEAR: true,
-  VALUE3YEAR: true,
-  VALUE4YEAR: true,
-  TAXA: true,
-  VALUEVIEW: true,
-  VALUERATE: true,
-  VALIDITY: true,
-  VALUESUG: true,
-  FILIAL_WEB: true,
-  CANAL: true,
-  RESSED: true,
-  MODALITY: true,
-  VALUEBY: true,
-  VALUENEG: true,
-  STOKE: true,
-  REASON: true,
-  OBSREASON: true,
-  INDICATOR: true,
-  WHO: true,
-  OBSALL: true,
-  PHOTO: true,
+  UUIDAPP: true;
+  ID: true;
+  ADDRESSCLI: true;
+  CHASSI: true;
+  CODCLI: true;
+  CODPROS: true;
+  CODVEND: true;
+  DATE: true;
+  EMAILCLI: true;
+  YAER: true;
+  EMAILVEND: true;
+  FILIAL: true;
+  IDVERSIONCHECKIN: true;
+  LJCLI: true;
+  LJPROS: true;
+  MARK: true;
+  MODEL: true;
+  NAMECLI: true;
+  NAMEVEND: true;
+  PHONECLI: true;
+  RESULT: true;
+  TYPE: true;
+  VALUE: true;
+  STATUS: true;
+  VALUE1YEAR: true;
+  VALUE2YEAR: true;
+  VALUE3YEAR: true;
+  VALUE4YEAR: true;
+  TAXA: true;
+  VALUEVIEW: true;
+  VALUERATE: true;
+  VALIDITY: true;
+  VALUESUG: true;
+  FILIAL_WEB: true;
+  CANAL: true;
+  RESSED: true;
+  MODALITY: true;
+  VALUEBY: true;
+  VALUENEG: true;
+  STOKE: true;
+  REASON: true;
+  OBSREASON: true;
+  INDICATOR: true;
+  WHO: true;
+  OBSALL: true;
+  PHOTO: true;
   GALERYRATES: {
     select: {
-      ID: true,
-      URL: true,
-    },
-  },
-  MESSAGE: true,
-  CREATEDAT: true,
-  UPDATEDAT: true,
+      ID: true;
+      URL: true;
+    };
+  };
+  MESSAGE: true;
+  CREATEDAT: true;
+  UPDATEDAT: true;
   VERSIONCHECKIN: {
     select: {
-      JSON_CHECKIN: true,
-    }
-  }
+      JSON_CHECKIN: true;
+    };
+  };
+  MODEL_WEB: true;
+  MARK_WEB: true;
+  MESSAGE: true;
+  YEAR: true;
+};
+
+export interface PutRateStatus {
+  STATUS: string;
+  ACCEPTED: string;
+  APPROVED: string;
+  MESSAGE: string;
+}
+
+export interface PutRateFinance {
+  CANAL: string;
+  FILIAL_WEB: string;
+  VALUE1YEAR: string;
+  VALUE2YEAR: string;
+  VALUE3YEAR: string;
+  VALUE4YEAR: string;
+  TAXA: string;
+  STOKE: boolean;
+  OBSREASON: string;
+  VALUEBY: string;
+  VALUENEG: string;
+  RESSED: boolean;
+  WHO: string;
+  INDICATOR: boolean;
+  VALUERATE: string;
+  VALUESUG: string;
+  VALIDITY: string;
+  VALUEVIEW: string;
+  MODALITY: string;
 }
