@@ -5,6 +5,7 @@ const putStatus = Joi.object({
   ACCEPTED: Joi.string().allow('').max(250).optional(),
   APPROVED: Joi.string().allow('').max(250).optional(),
   MESSAGE: Joi.string().allow('').max(250).optional(),
+  WHO: Joi.string().max(250).optional(),
 });
 
 export default putStatus;

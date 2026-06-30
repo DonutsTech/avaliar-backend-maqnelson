@@ -166,6 +166,7 @@ class RateService {
               EMAILCLI: item.EMAILCLI,
               PHOTO: item.PHOTO,
               YEAR: item.YEAR,
+              HISTORY: `{ DATE:${new Date().toISOString()}, WHO:${item.NAMEVEND}, STATUS: EM ANDAMENTO, MESSAGE: Iniciada a avaliação}`,
               VERSIONCHECKIN: { connect: { ID: item.IDVERSIONCHECKIN } },
             },
             select: RATE_FORM_SELECT,
@@ -302,6 +303,15 @@ class RateService {
     try {
       await this.existById(id);
 
+      const status = await rateModel.findBy<{ HISTORY: true; STATUS: true }>({
+        where: { ID: id },
+        select: { HISTORY: true, STATUS: true },
+      });
+
+      if (!status) {
+        throw new Error('Avaliação não encontrada');
+      }
+
       const rate = await rateModel.update<RateForminSelect>(
         id,
         {
@@ -331,6 +341,11 @@ class RateService {
           MODEL_WEB: data.MODEL_WEB,
           YEAR: data.YEAR,
           MARK_WEB: data.MARK_WEB,
+          ...(status.STATUS !== data.STATUS
+            ? {
+                HISTORY: `${status.HISTORY || ''}, {DATE:${new Date().toISOString()}, WHO:${data.NAMEVEND}, STATUS:${data.STATUS}, MESSAGE: 'Alteração de status'}`,
+              }
+            : {}),
           VERSIONCHECKIN: { connect: { ID: data.IDVERSIONCHECKIN } },
         },
         RATE_FORM_SELECT,
@@ -363,12 +378,22 @@ class RateService {
     try {
       await this.existById(id);
 
+      const rate = await rateModel.findBy<{ HISTORY: true }>({
+        where: { ID: id },
+        select: { HISTORY: true },
+      });
+
+      if (!rate) {
+        throw new Error('Avaliação não encontrada');
+      }
+
       await rateModel.update<RateForminSelect>(
         id,
         {
           STATUS: data.STATUS,
           ...(data.ACCEPTED !== '' && { ACCEPTED: data.ACCEPTED }),
           ...(data.APPROVED !== '' && { APPROVED: data.APPROVED }),
+          HISTORY: `${rate.HISTORY || ''}, { DATE:${new Date().toISOString()}, WHO:${data.WHO}, STATUS: ${data.STATUS}, MESSAGE: ${data.MESSAGE}}`,
           MESSAGE: data.MESSAGE,
         },
         RATE_FORM_SELECT,

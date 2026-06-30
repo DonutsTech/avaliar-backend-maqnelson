@@ -186,6 +186,7 @@ export interface PutRateStatus {
   ACCEPTED: string;
   APPROVED: string;
   MESSAGE: string;
+  WHO: string;
 }
 
 export interface PutRateFinance {

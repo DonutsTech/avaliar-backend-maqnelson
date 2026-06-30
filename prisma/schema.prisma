@@ -165,6 +165,7 @@ model Rate {
   SYNC Boolean @default(false)
   ACCEPTED String? @default("")
   APPROVED String? @default("")
+  HISTORY String? @default("")
   CREATEDAT DateTime @default(now())
   UPDATEDAT DateTime @updatedAt
 
