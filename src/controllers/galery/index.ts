@@ -74,7 +74,7 @@ class GaleryController {
   async deleteGalery(request: Request, response: Response, next: NextFunction) {
     try {
       const { id } = request.params as { id: string };
-      const deleteGalery = await galeryService.deleteGalery(id);
+      const deleteGalery = await galeryService.deleteGaleryId(id);
       return response.status(200).json(deleteGalery);
     } catch (error) {
       next(error);
