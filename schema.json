@@ -101,6 +101,26 @@
           "INPUTS": [
             {
               "TYPE": "number",
+              "NAME": "year_veiculo",
+              "LABEL": "Ano de Fabricação",
+              "VALUE": "",
+              "PLACEHOLDER": "",
+              "REQUIRED": true,
+              "MULTIPLE": false,
+              "MIN": null,
+              "MAX": null,
+              "BONDTYPE": "",
+              "EMUNS": []
+            }
+          ]
+        },
+        {
+          "NAME": "simple",
+          "TITLE": "",
+          "QUESTION": "",
+          "INPUTS": [
+            {
+              "TYPE": "number",
               "NAME": "horimetro_veiculo",
               "LABEL": "Horimetro",
               "VALUE": "",
@@ -644,7 +664,7 @@
               "BONDTYPE": "DUPLO RIGHT",
               "EMUNS": [
                 {
-                  "NAME": "marca pneu",
+                  "NAME": "marca pneus",
                   "TITLE": "Marca"
                 }
               ]

@@ -380,7 +380,7 @@ class RateService {
     try {
       await this.existById(id);
 
-      await rateModel.update<RateForminSelect>(id, {
+      await rateModel.update(id, {
         CANAL: data.CANAL,
         FILIAL_WEB: data.FILIAL_WEB,
         VALUE1YEAR: data.VALUE1YEAR,
