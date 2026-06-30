@@ -242,11 +242,11 @@ class GaleryService {
     }
   }
 
-  async deleteGalery(uuid: string) {
+  async deleteGaleryId(id: string) {
     try {
       const deleteGaleryRate = await prisma.galeryRate.delete({
         where: {
-          UUIDAPP: uuid,
+          ID: Number(id),
         },
       });
 
