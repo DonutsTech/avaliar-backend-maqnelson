@@ -363,12 +363,16 @@ class RateService {
     try {
       await this.existById(id);
 
-      await rateModel.update(id, {
-        STATUS: data.STATUS,
-        ...(data.ACCEPTED !== '' && { ACCEPTED: data.ACCEPTED }),
-        ...(data.APPROVED !== '' && { APPROVED: data.APPROVED }),
-        MESSAGE: data.MESSAGE,
-      });
+      await rateModel.update<RateForminSelect>(
+        id,
+        {
+          STATUS: data.STATUS,
+          ...(data.ACCEPTED !== '' && { ACCEPTED: data.ACCEPTED }),
+          ...(data.APPROVED !== '' && { APPROVED: data.APPROVED }),
+          MESSAGE: data.MESSAGE,
+        },
+        RATE_FORM_SELECT,
+      );
 
       return { success: true };
     } catch (error) {
@@ -380,27 +384,31 @@ class RateService {
     try {
       await this.existById(id);
 
-      await rateModel.update(id, {
-        CANAL: data.CANAL,
-        FILIAL_WEB: data.FILIAL_WEB,
-        VALUE1YEAR: data.VALUE1YEAR,
-        VALUE2YEAR: data.VALUE2YEAR,
-        VALUE3YEAR: data.VALUE3YEAR,
-        VALUE4YEAR: data.VALUE4YEAR,
-        TAXA: data.TAXA,
-        STOKE: data.STOKE,
-        OBSREASON: data.OBSREASON,
-        VALUEBY: data.VALUEBY,
-        VALUENEG: data.VALUENEG,
-        RESSED: data.RESSED,
-        WHO: data.WHO,
-        INDICATOR: data.INDICATOR,
-        VALUERATE: data.VALUERATE,
-        VALUESUG: data.VALUESUG,
-        VALIDITY: data.VALIDITY,
-        VALUEVIEW: data.VALUEVIEW,
-        MODALITY: data.MODALITY,
-      });
+      await rateModel.update<RateForminSelect>(
+        id,
+        {
+          CANAL: data.CANAL,
+          FILIAL_WEB: data.FILIAL_WEB,
+          VALUE1YEAR: data.VALUE1YEAR,
+          VALUE2YEAR: data.VALUE2YEAR,
+          VALUE3YEAR: data.VALUE3YEAR,
+          VALUE4YEAR: data.VALUE4YEAR,
+          TAXA: data.TAXA,
+          STOKE: data.STOKE,
+          OBSREASON: data.OBSREASON,
+          VALUEBY: data.VALUEBY,
+          VALUENEG: data.VALUENEG,
+          RESSED: data.RESSED,
+          WHO: data.WHO,
+          INDICATOR: data.INDICATOR,
+          VALUERATE: data.VALUERATE,
+          VALUESUG: data.VALUESUG,
+          VALIDITY: data.VALIDITY,
+          VALUEVIEW: data.VALUEVIEW,
+          MODALITY: data.MODALITY,
+        },
+        RATE_FORM_SELECT,
+      );
 
       return { success: true };
     } catch (error) {
