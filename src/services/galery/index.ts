@@ -207,6 +207,8 @@ class GaleryService {
         );
       }
 
+      file.originalname = `${await uuid()}${item.NAME}`;
+
       const url = await this.createGalery(file);
 
       const gallery = await prisma.galeryRate.create({
