@@ -95,6 +95,18 @@ class UserService {
       throw error;
     }
   }
+
+  async deleteUser(id: string) {
+    try {
+      await this.existId(id);
+
+      const user = await userModel.delete(id);
+
+      return user;
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export const userService = new UserService();

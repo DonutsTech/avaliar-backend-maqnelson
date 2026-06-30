@@ -343,7 +343,7 @@ class RateService {
           MARK_WEB: data.MARK_WEB,
           ...(status.STATUS !== data.STATUS
             ? {
-                HISTORY: `${status.HISTORY || ''}, {DATE:${new Date().toISOString()}, WHO:${data.NAMEVEND}, STATUS:${data.STATUS}, MESSAGE: 'Alteração de status'}`,
+                HISTORY: `${status.HISTORY || ''} {DATE:${new Date().toISOString()}, WHO:${data.NAMEVEND}, STATUS:${data.STATUS}, MESSAGE: 'Alteração de status'}`,
               }
             : {}),
           VERSIONCHECKIN: { connect: { ID: data.IDVERSIONCHECKIN } },
@@ -378,10 +378,12 @@ class RateService {
     try {
       await this.existById(id);
 
-      const rate = await rateModel.findBy<{ HISTORY: true }>({
-        where: { ID: id },
-        select: { HISTORY: true },
-      });
+      const rate = await rateModel.findBy<{ HISTORY: true; GALERYRATES: true }>(
+        {
+          where: { ID: id },
+          select: { HISTORY: true, GALERYRATES: true },
+        },
+      );
 
       if (!rate) {
         throw new Error('Avaliação não encontrada');
@@ -393,11 +395,27 @@ class RateService {
           STATUS: data.STATUS,
           ...(data.ACCEPTED !== '' && { ACCEPTED: data.ACCEPTED }),
           ...(data.APPROVED !== '' && { APPROVED: data.APPROVED }),
-          HISTORY: `${rate.HISTORY || ''}, { DATE:${new Date().toISOString()}, WHO:${data.WHO}, STATUS: ${data.STATUS}, MESSAGE: ${data.MESSAGE}}`,
+          HISTORY: `${rate.HISTORY || ''} { DATE:${new Date().toISOString()}, WHO:${data.WHO}, STATUS: ${data.STATUS}, MESSAGE: ${data.MESSAGE}}`,
           MESSAGE: data.MESSAGE,
         },
         RATE_FORM_SELECT,
       );
+
+      const galery = rate.GALERYRATES.some(doc =>
+        ['cnd', 'nf'].includes(doc.NAME),
+      );
+
+      if (galery === false && data.STATUS === 'APROVADO') {
+        await rateModel.update<RateForminSelect>(
+          id,
+          {
+            STATUS: 'PENDENTE',
+            HISTORY: `${rate.HISTORY || ''} { DATE:${new Date().toISOString()}, WHO:${data.WHO}, STATUS: 'PENDENTE', MESSAGE: Documentos pendentes: CND e NF - Para liberar utilize o sistema web}`,
+            MESSAGE: `Documentos pendentes: CND e NF - Para liberar utilize o sistema web`,
+          },
+          RATE_FORM_SELECT,
+        );
+      }
 
       return { success: true };
     } catch (error) {

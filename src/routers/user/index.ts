@@ -23,6 +23,12 @@ class UserRouter {
       userController.getUsers,
     );
     router.get('/web/users', isAuthenticate, userController.getUserByEmail);
+    router.delete(
+      '/users/:id',
+      isAuthenticate,
+      validatorRole([Role.adm]),
+      userController.deleteUser,
+    );
   }
 }
 
