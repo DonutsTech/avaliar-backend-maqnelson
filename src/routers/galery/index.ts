@@ -1,5 +1,9 @@
 import type { Router } from 'express';
-import { imageUpload, videoUpload } from '../../config/multerConfig';
+import {
+  documentUpload,
+  imageUpload,
+  videoUpload,
+} from '../../config/multerConfig';
 import { galeryController } from '../../controllers/galery';
 import { Role } from '../../enums/role.enum';
 import { isAuthenticate, validatorRole } from '../../middleware';
@@ -20,7 +24,13 @@ class GaleryRouter {
       videoUpload.array('videos'),
       galeryController.createGaleryVideo,
     );
-    //router.post("/galery/pdf", isAuthenticate, validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']), schemaValidator("galery/create"), documentUpload.single('') , galeryController.createGalery);
+    router.post(
+      '/galery/pdf',
+      isAuthenticate,
+      validatorRole(['ADMIN', 'ANALISTA', 'DOCUMENTADOR', 'USER']),
+      documentUpload.single('pdf'),
+      galeryController.createGaleryPdf,
+    );
     router.get(
       '/galery/:id',
       isAuthenticate,

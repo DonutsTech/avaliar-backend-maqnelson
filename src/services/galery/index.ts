@@ -1,9 +1,14 @@
 import { StatusCodes } from 'http-status-codes';
-import type { CreateGalery, GaleryPrisma } from '../../@types/interface/galery';
+import type {
+  CreateGalery,
+  CreateGaleryForWeb,
+  GaleryPrisma,
+} from '../../@types/interface/galery';
 import { deleteFileFromS3, uploadFileToS3 } from '../../config/S3';
 import { CustomError } from '../../error';
 import { galeryModel } from '../../models/galery';
 import { prisma } from '../../prisma';
+import { uuid } from '../../utils/uuid';
 import { rateService } from '../rate';
 
 const selectGalery: GaleryPrisma = {
@@ -98,7 +103,6 @@ class GaleryService {
         }
 
         const file = await this.createGalery(fileUpload);
-        console.log('File uploaded to S3:', file);
 
         if (
           existingGaleryRate &&
@@ -179,6 +183,49 @@ class GaleryService {
     }
   }
 
+  async createGaleryForWeb(
+    file: Express.Multer.File | undefined,
+    body: string,
+  ) {
+    try {
+      if (!file) {
+        throw new CustomError('Nenhum arquivo enviado', 400);
+      }
+
+      const galery = JSON.parse((body as any).metadata) as CreateGaleryForWeb[];
+
+      if (!galery || galery.length === 0) {
+        throw new CustomError('Dados de galeria estão faltando', 400);
+      }
+
+      const item = galery[0];
+
+      if (!item || !item.ID_RATE || !item.NAME || !item.URL) {
+        throw new CustomError(
+          'Dados de galeria incompletos: ID_RATE, NAME e URL são obrigatórios',
+          400,
+        );
+      }
+
+      const url = await this.createGalery(file);
+
+      const gallery = await prisma.galeryRate.create({
+        data: {
+          UUIDAPP: await uuid(),
+          NAME: item.NAME,
+          URL: url,
+          RATE: {
+            connect: { ID: item.ID_RATE },
+          },
+        },
+      });
+
+      return gallery;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async getAllGaleryForRate(uuid: string) {
     try {
       const findMany = await prisma.galeryRate.findMany({
@@ -200,6 +247,8 @@ class GaleryService {
           UUIDAPP: uuid,
         },
       });
+
+      await deleteFileFromS3(deleteGaleryRate.URL);
 
       return deleteGaleryRate;
     } catch (error) {
